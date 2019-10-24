@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html>
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>KN Garments</title>
+
+    <!-- Base CSS -->
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="{% static 'KNGarment_Order_TrackPro_App/style.css' %}">
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+    
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <!-- Base Script -->
+    
+    
+    
+    
+    
+    <!-- Popper.JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    
+    
+    
+    <!--jQuery-->
+    <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+    
+    <!-- jQuery Custom Scroller CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+    
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+    
+    <!-- Script from Child Template Head -->
+    {% block headscript %}
+    {% endblock headscript %}
+
+    <!-- Block for CSS -->
+	{% block stylesheets %}
+	{% endblock stylesheets %}
+    
+</head>
+
+<body>
+    <div class="wrapper">
+
+        <!-- SIDEBAR  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>KN Garments</h3>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="{% url 'KNGarment_Order_TrackPro_App:add_new_order_form' %}">Add New Order</a>
+                </li>
+                <li>
+                    <a href="{% url 'KNGarment_Order_TrackPro_App:current_order' %}">Current Orders</a>
+                </li>
+                <li>
+                    <a href="{% url 'KNGarment_Order_TrackPro_App:delivered_order' %}">Delivered Orders</a>
+                </li>
+                <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Track Orders</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="{% url 'KNGarment_Order_TrackPro_App:track_order_registered_order' %}">Registered Ordered</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'KNGarment_Order_TrackPro_App:track_order_fabric_order' %}">Fabric Ordered</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'KNGarment_Order_TrackPro_App:track_order_stiching_order' %}">Stiching</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'KNGarment_Order_TrackPro_App:track_order_washing_order' %}">Washing</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'KNGarment_Order_TrackPro_App:track_order_finishing_order' %}">Finished</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'KNGarment_Order_TrackPro_App:track_order_dispatched_order' %}">Dispatched</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="active">
+                    <a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Payments</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu1">
+                        <li>
+                            <a href="{% url 'KNGarment_Order_TrackPro_App:payment_pending' %}">Pending Orders</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'KNGarment_Order_TrackPro_App:payment_paid' %}">Paid Orders</a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="active">
+                    <a href="#homeSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Reports</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu2">
+                        <li>
+                            <a href="{% url 'KNGarment_Order_TrackPro_App:add_new_order_form' %}">Job Worker - Balance Report</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'KNGarment_Order_TrackPro_App:reports_stockreport' %}">Stock Report</a>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <ul class="list-unstyled CTAs">
+                    <li>
+                        <a href="{% url 'KNGarment_Order_TrackPro_App:add_new_order_form' %}" class="btn btn-light">
+                            <font color="#7386D5">Logout</font>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'KNGarment_Order_TrackPro_App:report_error' %}" class="article">Report Error</a>
+                    </li>
+                </ul>
+            </ul>
+        </nav>
+            {% block content %}
+            {% endblock %}
+        </div>
+
+
+    </div>
+
+    <!--SIDEBAR ENDS HERE-->
+
+    {% block script %}
+    {% endblock %}
+    
+     <script type="text/javascript">
+        $(document).ready(function() {
+            $("#sidebar").mCustomScrollbar({
+                theme: "minimal"
+            });
+
+            $('#sidebarCollapse').on('click', function() {
+                $('#sidebar, #content').toggleClass('active');
+                $('.collapse.in').toggleClass('in');
+                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+            });
+        });
+    </script>
+
+    {% block extrascript %}
+    {% endblock %}
+
+</body>
+
+</html>

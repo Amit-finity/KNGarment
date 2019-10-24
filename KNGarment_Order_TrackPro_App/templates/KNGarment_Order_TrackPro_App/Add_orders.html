@@ -1,0 +1,391 @@
+{% extends 'KNGarment_Order_TrackPro_App/base.html' %}
+{% load static %}
+
+{% block content %}
+        <!-- PAGE CONTENT  -->
+        <div id="content">
+            <div class="container-fluid">
+                <button type="button" id="sidebarCollapse" class="btn" style="background-color: #87c241;color: white">
+                    <i class="fas fa-align-left"></i>
+                </button>
+                <hr>
+                <h2>Add New Order</h2>
+                <hr>
+                <form action={% url 'KNGarment_Order_TrackPro_App:add_new_order_form_submit' %} method="post">
+                {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="order_order_number">Order Number</label>
+                            <input type="number" min="1" class="form-control" id="order_order_number" name="order_order_number">
+                        </div>
+                        <div class="col">
+                            <label for="order_order_type">Order Type</label><br>
+                            <select id="order_order_type" name="order_order_type" class="form-control">
+                                <option>Mens</option>
+                                <option>Ladies</option>
+                                <option>Boys Denim</option>
+                                <option>Girls Denim</option>
+                                <option>Girls Cotton</option>
+                                <option>Ethenic</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col">
+                            <label for="order_order_brands">Brands</label><br>
+                            <select id="order_order_brands" name="order_order_brands" class="form-control">
+                                <option>DJ & C</option>
+                                <option>Pink & Blue</option>
+                                <option>Lee Cooper</option>
+
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="order_order_style_number">Style Number</label><br>
+                            <input type="text" class="form-control" id="order_order_style_number" name="order_order_style_number">
+                        </div>
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col">
+                            <label for="order_order_fit">Fit</label><br>
+                            <select id="order_order_fit" name="order_order_fit" class="form-control">
+                                <option>Slim</option>
+                                <option>Skinny</option>
+                                <option>Mid Waist</option>
+
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="order_order_quantity">Quantity</label>
+                            <input type="number" min="1" class="form-control" id="order_order_quantity" name="order_order_quantity">
+                        </div>
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col">
+                            <label for="order_order_date">Order Date</label><br>
+                            <input type="date" class="form-control" id="order_order_date" name="order_order_date">
+                        </div>
+                        <div class="col">
+                            <label for="order_delivery_date">Delivery Date</label>
+                            <input type="date" class="form-control" id="order_delivery_date" name="order_delivery_date">
+                        </div>
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col">
+                            <label for="order_order_category">Category</label><br>
+                            <input type="text" class="form-control" id="order_order_category" name="order_order_category">
+                        </div>
+                        <div class="col">
+                            <label for="order_order_remark">Notes</label>
+                            <input type="text" class="form-control" id="order_order_remark" name="order_order_remark">
+                        </div>
+                    </div><br>
+                    <!--   Checkbox Start-->
+                    <div class="form-row">
+                        <label>Cutting Ratio:</label>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="mensnladies_details" class="radio-inline">Mens or Ladies</label>
+                            <input type="radio" id="mensnladies_details_checkbox" name="ratio" value="1">
+                        </div>
+
+                        <div class="col">
+                            <label for="kids_details" class="radio-inline">Kids</label>
+                            <input type="radio" id="kids_details_checkbox" name="ratio" value="2">
+                        </div>
+
+                        <div class="col">
+                            <label for="ethenic_details" class="radio-inline">Ethenic</label>
+                            <input type="radio" id="ethenic_checkbox" name="ratio" value="3">
+                        </div>
+                    </div>
+                    <!--   Checkbox Ends-->
+
+                    <!-- Checkbox Forms start      -->
+
+
+                    <!--  mens or ladies form-->
+                    <div id="mensnladies_details_form" style="display: none">
+                        <hr>
+                        <h2>Mens or Ladies</h2>
+                        <hr>
+
+                        <div class="container">
+                            <div class="form-row">
+                                <div class="col"><label>Size</label><br><br>
+                                    <label>Ratio</label><br><br>
+                                    <label>Quantity</label>
+                                </div>
+                                <div class="col">
+                                    <label for="size_26">26</label><br><br>
+                                    <input class="form-control" type="text" id="ratio_26" name="ratio_26"><br>
+                                    <input class="form-control" min="1" type="number" id="quantity_26" name="quantity_26">
+                                </div>
+                                <div class="col">
+                                    <label for="size_28">28</label><br><br>
+                                    <input class="form-control" type="text" id="ratio_27" name="ratio_28"><br>
+                                    <input class="form-control" min="1" type="number" id="quantity_28" name="quantity_28">
+
+                                </div>
+                                <div class="col">
+                                    <label for="size_30">30</label><br><br>
+                                    <input class="form-control" type="text" id="ratio_30" name="ratio_30"><br>
+                                    <input class="form-control" min="1" type="number" id="quantity_30" name="quantity_30">
+                                </div>
+                                <div class="col">
+                                    <label for="size_32">32</label><br><br>
+                                    <input class="form-control" type="text" id="ratio_32" name="ratio_32"><br>
+                                    <input class="form-control" min="1" type="number" id="quantity_32" name="quantity_32">
+                                </div>
+                                <div class="col">
+                                    <label for="size_34">34</label><br><br>
+                                    <input class="form-control" type="text" id="ratio_34" name="ratio_34"><br>
+                                    <input class="form-control" min="1" type="number" id="quantity_34" name="quantity_34">
+                                </div>
+                            </div>
+                        </div><br>
+                        <div class="container">
+                            <div class="form-row">
+                                <div class="col"><label>Size</label><br><br>
+                                   <label>Ratio</label><br><br>
+                                    <label>Quantity</label>
+                                </div>
+                                <div class="col">
+                                    <label for="size_36">36</label><br><br>
+                                    <input class="form-control" type="text" id="ratio_36" name="ratio_36"><br>
+                                    <input class="form-control" min="1" type="number" id="quantity_36" name="quantity_36">
+
+                                </div>
+                                <div class="col">
+                                    <label for="size_38">38</label><br><br>
+                                    <input class="form-control" type="text" id="ratio_38" name="ratio_38"><br>
+                                    <input class="form-control" min="1" type="number" id="quantity_38" name="quantity_38">
+                                </div>
+                                <div class="col">
+                                    <label for="size_40">40</label><br><br>
+                                    <input class="form-control" type="text" id="ratio_40" name="ratio_40"><br>
+                                    <input class="form-control" min="1" type="number" id="quantity_40" name="quantity_40">
+                                </div>
+                                <div class="col">
+                                    <label for="size_42">42</label><br><br>
+                                    <input class="form-control" type="text" id="ratio_42" name="ratio_42"><br>
+                                    <input class="form-control" min="1" type="number" id="quantity_42" name="quantity_42">
+                                </div>
+                                <div class="col">
+                                    <label for="size_44">44</label><br><br>
+                                    <input class="form-control" type="text" id="ratio_44" name="ratio_44"><br>
+                                    <input class="form-control" min="1" type="number" id="quantity_44" name="quantity_44">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  mens or ladies form-->
+
+
+
+
+                    <!--    kids form       -->
+                    <div id="kids_details_form" style="display: none">
+                        <hr>
+                        <h2>Kids</h2>
+                        <hr>
+                        <div class="container">
+                            <div class="form-row">
+                                <div class="col"><label>Age</label><br><br>
+                                    <label>Ratio</label><br><br>
+                                    <label>Quantity</label>
+                                </div>
+                                <div class="col">
+                                    <label for="2_years">2 Years</label><br><br>
+                                    <input class="form-control" type="text" id="ratio_2" name="ratio_2"><br>
+                                    <input class="form-control" min="1" type="number" id="2_years" name="2_years">
+                                </div>
+                                <div class="col">
+                                    <label for="3_4_years">3-4 Years</label><br><br>
+                                    <input class="form-control" type="text" id="ratio_3_4" name="ratio_3_4"><br>
+                                    <input class="form-control" min="1" type="number" id="3_4_years" name="3_4_years">
+                                </div>
+                                <div class="col">
+                                    <label for="5_6_years">5-6 Years</label><br><br>
+                                    <input class="form-control" type="text" id="ratio_5_6" name="ratio_5_6"><br>
+                                    <input class="form-control" min="1" type="number" id="5_6_years" name="5_6_years">
+                                </div>
+                                <div class="col">
+                                    <label for="7_8_years">7-8 Years</label><br><br>
+                                    <input class="form-control" type="text" id="ratio_7_8" name="ratio_7_8"><br>
+                                    <input class="form-control" min="1" type="number" id="5_6_years" name="5_6_years">
+                                </div>
+                                <div class="col">
+                                    <label for="9_10_years">9-10 Years</label><br><br>
+                                    <input class="form-control" type="text" id="ratio_9_10" name="ratio_9_10"><br>
+                                    <input class="form-control" min="1" type="number" id="9_10_years" name="9_10_years">
+                                </div>
+                                <div class="col">
+                                    <label for="11_12_years">11-12 Years</label><br><br>
+                                    <input class="form-control" type="text" id="ratio_11_12" name="ratio_11_12"><br>
+                                    <input class="form-control" min="1" type="number" id="11_12_years" name="11_12_years">
+                                </div>
+                            </div>
+                        </div><br>
+                        <div class="container">
+                            <div class="form-row">
+                                <div class="col"><label>Age</label><br><br>
+                                    <label>Ratio</label><br><br>
+                                    <label>Quantity</label>
+                                </div>
+
+                                <div class="col">
+                                    <label for="13_14_years">13-14 Years</label><br><br>
+                                    <input class="form-control" type="text" id="ratio_13_14" name="ratio_13_14"><br>
+                                    <input class="form-control" min="1" type="number" id="13_14_years" name="13_14_years">
+                                </div>
+                                <div class="col">
+                                    <label for="15_16_years">15-16 Years</label><br><br>
+                                    <input class="form-control" type="text" id="ratio_15_16" name="ratio_15_16"><br>
+                                    <input class="form-control" min="1" type="number" id="15_16_years" name="15_16_years">
+                                </div>
+                                <div class="col">
+                                    <label for="2_3_years">2-3 Years</label><br><br>
+                                    <input class="form-control" type="text" id="ratio_2_3" name="ratio_2_3"><br>
+                                    <input class="form-control" min="1" type="number" id="2_3_years" name="2_3_years">
+                                </div>
+                                <div class="col">
+                                    <label for="4_5_years">4-5 Years</label><br><br>
+                                    <input class="form-control" type="text" id="ratio_4_5" name="ratio_4_5"><br>
+                                    <input class="form-control" min="1" type="number" id="4_5_years" name="4_5_years">
+                                </div>
+                                <div class="col">
+                                    <label for="6_7_years">6-7 Years</label><br><br>
+                                    <input class="form-control" type="text" id="ratio_6_7" name="ratio_6_7"><br>
+                                    <input class="form-control" min="1" type="number" id="6_7_years" name="6_7_years">
+                                </div>
+                                <div class="col">
+                                    <label for="8_9_years">8-9 Years</label><br><br>
+                                    <input class="form-control" type="text" id="ratio_8_9" name="ratio_8_9"><br>
+                                    <input class="form-control" min="1" type="number" id="8_9_years" name="8_9_years">
+                                </div>
+                                <div class="col">
+                                    <label for="10_11_years">10-11 Years</label><br><br>
+                                    <input class="form-control" type="text" id="ratio_10_11" name="ratio_10_11"><br>
+                                    <input class="form-control" min="1" type="number" id="10_11_years" name="10_11_years">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  Kids Form  End    -->
+
+                    <!--   Ethenics form strat -->
+                    <div id="ethenic_details_form" style="display: none">
+                        <hr>
+                        <h2>Ethenic</h2>
+                        <hr>
+                        <div class="container">
+                            <div class="form-row">
+                                <div class="col"><label>Size</label><br><br>
+                                    <label>Ratio</label><br><br>
+                                    <label>Quantity</label>
+                                </div>
+                                <div class="col">
+                                    <label for="xs">XS</label><br><br>
+                                    <input class="form-control" type="text" id="ratio_xs" name="ratio_xs"><br>
+                                    <input class="form-control" min="1" type="number" id="xs_size" name="xs_size">
+                                </div>
+                                <div class="col">
+                                    <label for="s">S</label><br><br>
+                                    <input class="form-control" type="text" id="ratio_s" name="ratio_s"><br>
+                                    <input class="form-control" min="1" type="number" id="s_size" name="s_size">
+                                </div>
+                                <div class="col">
+                                    <label for="M">M</label><br><br>
+                                    <input class="form-control" type="text" id="ratio_m" name="ratio_m"><br>
+                                    <input class="form-control" min="1" type="number" id="m_size" name="m_size">
+                                </div>
+                                <div class="col">
+                                    <label for="l">L</label><br><br>
+                                    <input class="form-control" type="text" id="ratio_l" name="ratio_l"><br>
+                                    <input class="form-control" min="1" type="number" id="l_size" name="l_size">
+                                </div>
+                            </div>
+                        </div><br>
+                        <div class="container">
+                            <div class="form-row">
+                                <div class="col"><label>Size</label><br><br>
+                                    <label>Ratio</label><br><br>
+                                    <label>Quantity</label>
+                                </div>
+                                <div class="col">
+                                    <label for="xl">XL</label><br><br>
+                                    <input class="form-control" type="text" id="ratio_xl" name="ratio_xl"><br>
+                                    <input class="form-control" min="1" type="number" id="xl_size" name="xl_size">
+                                </div>
+                                <div class="col">
+                                    <label for="xxl">XXL</label><br><br>
+                                    <input class="form-control" type="text" id="ratio_xxl" name="ratio_xxl"><br>
+                                    <input class="form-control" min="1" type="number" id="xxl_size" name="xxl_size">
+                                </div>
+                                <div class="col">
+                                    <label for="xxxl">XXXL</label><br><br>
+                                    <input class="form-control" type="text" id="ratio_xxl" name="ratio_xxl"><br>
+                                    <input class="form-control" min="1" type="number" id="xxxl_size" name="xxxl_size">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--   Ethenics form End -->
+
+                    <!-- Checkbox Forms Ends    -->
+
+                    <br>
+                    <br>
+                    <div class="form-row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-block" style="background-color: #87c241;color: white">Save Order Details And Add Processes</button>
+                        </div>
+                    </div>
+                </form>
+                <!--     Main  Form End-->
+            </div>
+        </div>
+    </div>
+    <!--PAGE CONTENT ENDS HERE-->
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#mensnladies_details_checkbox').change(function() {
+                $('#mensnladies_details_form').fadeToggle();
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#kids_details_checkbox').change(function() {
+                $('#kids_details_form').fadeToggle();
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#ethenic_checkbox').change(function() {
+                $('#ethenic_details_form').fadeToggle();
+            });
+        });
+    </script>
+<!--PAGE CONTENT ENDS HERE-->
+{% endblock content %}
+
+{% block script %}
+
+        
+{% endblock %}
+{% block extrascript %}
+
+
+{% endblock %}
