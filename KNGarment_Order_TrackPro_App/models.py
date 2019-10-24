@@ -145,7 +145,7 @@ class Dispatch(models.Model):
     dispatch_bill_number = models.IntegerField()
     dispatch_bill_file = models.FileField()
     dispatch_payment_status = models.CharField(max_length=920)
-    dispatch_order_date_of_entry = models.DateField(default=timezone.now)
+    dispatch_order_date_of_entry = models.DateTimeField(default=timezone.now)
     
     def __str__(self):
         return str(self.pk)

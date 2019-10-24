@@ -89,5 +89,9 @@ path('add_new_stiching_form_submit/', views.add_new_stiching_form_submit, name='
 
 path('add_new_washing_order_form_submit/', views.add_new_washing_order_form_submit, name='add_new_washing_order_form_submit'),
 
+path('add_new_finishing_order_form_submit/', views.add_new_finishing_order_form_submit, name='add_new_finishing_order_form_submit'),
+
+path('add_new_dispatch_order_form_submit/', views.add_new_dispatch_order_form_submit, name='add_new_dispatch_order_form_submit'),
+
 ]
 

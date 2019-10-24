@@ -302,55 +302,56 @@
             <hr>
             <h2>Finishing Details</h2>
             <hr>
-            <form action="Order_Details_2.html" method="post">
+            <form action={% url 'KNGarment_Order_TrackPro_App:add_new_finishing_order_form_submit' %} method="post">
+                {% csrf_token %}
                 <div class="form-row">
                     <div class="col">
-                        <label for="finishing_name">Finishing Name</label>
-                        <input type="text" class="form-control" id="finishing_name">
+                        <label for="process_vendor_name">Finishing Name</label>
+                         <input type="text" class="form-control" id="process_vendor_name" name="process_vendor_name">
                     </div>
                     <div class="col">
-                        <label for="finishing_location">Finishing Location</label>
-                        <input type="text" class="form-control" id="finishing_location">
+                        <label for="process_vendor_location">Finishing Location</label>
+                           <input type="text" class="form-control" id="process_vendor_location" name="process_vendor_location">
                     </div>
                 </div>
                 <div class="form-row">
 
                     <div class="col">
-                        <label for="recieved_quantity">Received Quantity</label>
-                        <input type="number" min="1" class="form-control" id="recieved_quantity">
+                        <label for="process_received_quantity">Received Quantity</label>
+                        <input type="number" min="1" class="form-control" id="process_received_quantity" name="process_received_quantity">
                     </div>
                     <div class="col">
-                        <label for="received_date">Received Date</label><br>
-                        <input type="date" class="form-control" id="received_date">
-                    </div>
-                </div>
-                <div class="form-row">
-
-                    <div class="col">
-                        <label for="rate">Rate</label>
-                        <input type="number" min="1" class="form-control" id="rate">
-                    </div>
-                    <div class="col">
-                        <label for="delivery_date">Delivery Date</label><br>
-                        <input type="date" class="form-control" id="delivery_date">
+                        <label for="process_received_date">Received Date</label><br>
+                        <input type="date" class="form-control" id="process_received_date" name="process_received_date">
                     </div>
                 </div>
                 <div class="form-row">
 
                     <div class="col">
-                        <label for="delivery_quantity">Delivery Quantity</label><br>
-                        <input type="number" min="1" class="form-control" id="delivery_quantity">
+                        <label for="finishing_rate">Rate</label>
+                        <input type="number" min="1" class="form-control" id="finishing_rate" name="finishing_rate">
+                    </div>
+                    <div class="col">
+                        <label for="process_delivery_date">Delivery Date</label><br>
+                        <input type="date" class="form-control" id="process_delivery_date" name="process_delivery_date">
+                    </div>
+                </div>
+                <div class="form-row">
+
+                    <div class="col">
+                        <label for="finishing_delivery_quantity">Delivery Quantity</label><br>
+                        <input type="number" min="1" class="form-control" id="finishing_delivery_quantity" name="finishing_delivery_quantity">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="col">
-                        <label for="finishing_bill_no">Bill Number </label><br>
-                        <input type="number" min="1" class="form-control" id="finishing_bill_no">
+                        <label for="process_bill_number">Bill Number </label><br>
+                        <input type="number" min="1" class="form-control" id="process_bill_number" name="process_bill_number">
                     </div>
                     <div class="col">
-                        <label for="finishing_bill_file">Bill File</label><br>
-                        <input type="file" class="form-control" id="finishing_bill_file">
+                        <label for="process_bill_file">Bill File</label><br>
+                        <input type="file" class="form-control" id="process_bill_file" name="process_bill_file">
                     </div>
                 </div>
                 <br>
@@ -368,45 +369,46 @@
             <hr>
             <h2>Dispatch Details</h2>
             <hr>
-            <form action="Order_Details_2.html" method="post">
+            <form action={% url 'KNGarment_Order_TrackPro_App:add_new_dispatch_order_form_submit' %} method="post">
+                {% csrf_token %}
                 <div class="form-row">
                     <div class="col">
-                        <label for="recieved_quantity">Received Quantity</label>
-                        <input type="number" min="1" class="form-control" id="recieved_quantity">
+                        <label for="dispatch_received_quantity">Received Quantity</label>
+                        <input type="number" min="1" class="form-control" id="dispatch_received_quantity" name="dispatch_received_quantity">
                     </div>
                     <div class="col">
-                        <label for="received_date">Received Date</label><br>
-                        <input type="date" class="form-control" id="received_date">
+                        <label for="dispatch_received_date">Received Date</label><br>
+                        <input type="date" class="form-control" id="dispatch_received_date" name="dispatch_received_date">
                     </div>
                 </div>
                 <div class="form-row">
 
                     <div class="col">
-                        <label for="dispatch_quantity">Dispatch Quantity</label>
-                        <input type="number" min="1" class="form-control" id="dispatch_quantity">
+                        <label for="dispatch_dispatch_quantity">Dispatch Quantity</label>
+                        <input type="number" min="1" class="form-control" id="dispatch_dispatch_quantity" name="dispatch_dispatch_quantity">
                     </div>
                     <div class="col">
-                        <label for="balance_quantity">Balance Quantity</label>
-                        <input type="number" min="1" class="form-control" id="balance_quantity">
+                        <label for="dispatch_balance_quantity">Balance Quantity</label>
+                        <input type="number" min="1" class="form-control" id="dispatch_balance_quantity" name="dispatch_balance_quantity">
                     </div>
 
                 </div>
                 <div class="form-row">
 
                     <div class="col">
-                        <label for="rejected_quantity">Rejected Quantity</label>
-                        <input type="number" min="1" class="form-control" id="rejected_quantity">
+                        <label for="dispatch_rejected_quantity">Rejected Quantity</label>
+                        <input type="number" min="1" class="form-control" id="dispatch_rejected_quantity" name="dispatch_rejected_quantity">
                     </div>
                     <div class="col">
-                        <label for="finishing_bill_no">Bill Number </label><br>
-                        <input type="number" min="1" class="form-control" id="finishing_bill_no">
+                        <label for="dispatch_bill_number">Bill Number </label><br>
+                        <input type="number" min="1" class="form-control" id="dispatch_bill_number" name="dispatch_bill_number">
                     </div>
                 </div>
                 <div class="form-row">
 
                     <div class="col">
-                        <label for="finishing_bill_file">Bill File</label><br>
-                        <input type="file" class="form-control" id="finishing_bill_file" placeholder="Import PDF File">
+                        <label for="dispatch_bill_file">Bill File</label><br>
+                        <input type="file" class="form-control" id="dispatch_bill_file" name="dispatch_bill_file" placeholder="Import PDF File">
                     </div>
                 </div>
 

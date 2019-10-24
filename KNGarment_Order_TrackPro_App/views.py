@@ -207,6 +207,54 @@ def add_new_washing_order_form_submit(request):
         
         return HttpResponseRedirect(reverse('KNGarment_Order_TrackPro_App:track_order_details',kwargs={'pk': Order_object.pk}))
 
+def add_new_finishing_order_form_submit(request):
+    if request.method == "POST":
+        # Get all data relating to that order.
+        process_vendor_name = request.POST['process_vendor_name']
+        process_vendor_location = request.POST['process_vendor_location']
+        process_received_quantity = request.POST['process_received_quantity']
+        process_received_date = request.POST['process_received_date']
+        finishing_rate = request.POST['finishing_rate']
+        process_delivery_date = request.POST['process_delivery_date']
+        finishing_delivery_quantity = request.POST['finishing_delivery_quantity']
+        process_bill_number = request.POST['process_bill_number']
+        process_bill_file = request.POST['process_bill_file']
+        Finishing.objects.create(process_vendor_name = process_vendor_name,
+                                        process_vendor_location = process_vendor_location,
+                                        process_received_quantity = process_received_quantity,
+                                        process_received_date = process_received_date,
+                                        finishing_rate = finishing_rate,
+                                        process_delivery_date = process_delivery_date,
+                                        finishing_delivery_quantity = finishing_delivery_quantity,
+                                        process_bill_number = process_bill_number,
+                                        process_bill_file = process_bill_file,
+                                        process_vendor_id=Vendor.objects.latest('pk'),
+                                        process_order_id=Orders.objects.latest('pk'))
+        Order_object = Orders.objects.latest('order_order_date_of_entry')
+        
+        return HttpResponseRedirect(reverse('KNGarment_Order_TrackPro_App:track_order_details',kwargs={'pk': Order_object.pk}))
+
+def add_new_dispatch_order_form_submit(request):
+    if request.method == "POST":
+        # Get all data relating to that order.
+        dispatch_received_quantity = request.POST['dispatch_received_quantity']
+        dispatch_received_date = request.POST['dispatch_received_date']
+        dispatch_dispatch_quantity = request.POST['dispatch_dispatch_quantity']
+        dispatch_balance_quantity = request.POST['dispatch_balance_quantity']
+        dispatch_rejected_quantity = request.POST['dispatch_rejected_quantity']
+        dispatch_bill_number = request.POST['dispatch_bill_number']
+        dispatch_bill_file = request.POST['dispatch_bill_file']
+        Dispatch.objects.create(dispatch_received_quantity = dispatch_received_quantity,
+                                        dispatch_received_date = dispatch_received_date,
+                                        dispatch_dispatch_quantity = dispatch_dispatch_quantity,
+                                        dispatch_balance_quantity = dispatch_balance_quantity,
+                                        dispatch_rejected_quantity = dispatch_rejected_quantity,
+                                        dispatch_bill_number = dispatch_bill_number,
+                                        dispatch_bill_file = dispatch_bill_file)
+        dispatch_object = Dispatch.objects.latest('dispatch_order_date_of_entry') 
+        
+        return HttpResponseRedirect(reverse('KNGarment_Order_TrackPro_App:track_order_details',kwargs={'pk': dispatch_object.pk}))
+
 
 
 
