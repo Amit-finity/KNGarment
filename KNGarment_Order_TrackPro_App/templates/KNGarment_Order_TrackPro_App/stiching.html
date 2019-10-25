@@ -28,8 +28,12 @@
                             <tr>
                                 <th>Job Worker Name</th>
                                 <th> Job Worker Location</th>
-                                <th>Average</th>
-                                <th>Rate</th>
+                                <th>Average1</th>
+                                <th>Rate1</th>
+                                <th>Average2</th>
+                                <th>Rate2</th>
+                                <th>Average3</th>
+                                <th>Rate3</th>
                                 <th>Delivery Date</th>
                                 <th>Opening Fabric Stock</th>
                                 <th>Opening Stock Date</th>
@@ -45,44 +49,31 @@
                             </tr>
                         </thead>
                         <tbody>
+                        {% for stiching in stiching_order%}
                             <tr>
-                                <td>aaaaa</td>
-                                <td>mumbai</td>
-                                <td>18</td>
-                                <td>700</td>
-                                <td>12-09-2019</td>
-                                <td>111</td>
-                                <td>10-09-2019</td>
-                                <td>23-09-2019</td>
-                                <td>23</td>
-                                <td>23-09-2019</td>
-                                <td>20</td>
-                                <td>19</td>
-                                <td>111</td>
-                                <td>PDF</td>
-                                <td>Stiching</td>
+                                <td>{{stiching.process_vendor_name}}</td>
+                                <td>{{stiching.process_vendor_location}}</td>
+                                <td>{{stiching.stiching_average_one}}</td>
+                                <td>{{stiching.stiching_rate_one}}</td>
+                                <td>{{stiching.stiching_average_two}}</td>
+                                <td>{{stiching.stiching_rate_two}}</td>
+                                <td>{{stiching.stiching_average_three}}</td>
+                                <td>{{stiching.stiching_rate_three}}</td>
+                                <td>{{stiching.process_delivery_date}}</td>
+                                <td>{{stiching.stiching_opening_fabric_stock}}</td>
+                                <td>{{stiching.stiching_opening_stock_date}}</td>
+                                <td>{{stiching.process_received_date}}</td>
+                                <td>{{stiching.process_bill_number}}</td>
+                                <td>{{stiching.stiching_fabric_bill_date}}</td>
+                                <td>{{stiching.process_received_quantity}}</td>
+                                <td>{{stiching.stiching_fabric_used}}</td>
+                                <td>{{stiching.stiching_fabric_bill_number}}</td>
+                                <td>{{stiching.process_bill_file}}</td>
+                                <td>{{stiching.process_bill_file}}</td>
                                 <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Update</button></td>
 
                             </tr> 
-                            <tr>
-                                <td>bbbb</td>
-                                <td>mumbai</td>
-                                <td>18</td>
-                                <td>600</td>
-                                <td>15-09-2019</td>
-                                <td>121</td>
-                                <td>11-09-2019</td>
-                                <td>21-09-2019</td>
-                                <td>22</td>
-                                <td>20-09-2019</td>
-                                <td>22</td>
-                                <td>19</td>
-                                <td>112</td>
-                                <td>PDF</td>
-                                <td>Stiching</td>
-                                <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Update</button></td>
-
-                            </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>

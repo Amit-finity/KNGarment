@@ -40,20 +40,22 @@
                             </tr>
                         </thead>
                         <tbody>
+                        {% for finishing in finishing_order %}
                             <tr>
-                                <td>ssssss</td>
-                                <td>mumbai</td>
-                                <td>11111</td>
-                                <td>22-09-2019</td>
-                                <td>1111</td>
-                                <td>12-09-2019</td>
-                                <td>1111</td>
-                                <td>2206</td>
-                                <td>PDF</td>
-                                <td>Finishing</td>
+                                <td>{{finishing.process_vendor_name}}</td>
+                                <td>{{finishing.process_vendor_location}}</td>
+                                <td>{{finishing.process_received_quantity}}</td>
+                                <td>{{finishing.process_received_date}}</td>
+                                <td>{{finishing.finishing_rate}}</td>
+                                <td>{{finishing.process_delivery_date}}</td>
+                                <td>{{finishing.finishing_delivery_quantity}}</td>
+                                <td>{{finishing.process_bill_number}}</td>
+                                <td>{{finishing.process_bill_file}}</td>
+                                <td>{{finishing.process_bill_file}}</td>
                                 <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Update</button></td>
 
                             </tr>
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>

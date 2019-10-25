@@ -153,3 +153,65 @@ class Dispatch(models.Model):
     class Meta:
         verbose_name_plural = "Dispatch Orders List"
         verbose_name = "Dispatch Order"
+
+class Order_Mens_Or_Ladies(models.Model):
+    order_mens_or_ladies_size_26_quantity = models.CharField(max_length=920,blank=True)
+    order_mens_or_ladies_size_28_quantity = models.CharField(max_length=920,blank=True)
+    order_mens_or_ladies_size_30_quantity = models.CharField(max_length=920,blank=True)
+    order_mens_or_ladies_size_32_quantity = models.CharField(max_length=920,blank=True)
+    order_mens_or_ladies_size_34_quantity = models.CharField(max_length=920,blank=True)
+    order_mens_or_ladies_size_36_quantity = models.CharField(max_length=920,blank=True)
+    order_mens_or_ladies_size_38_quantity = models.CharField(max_length=920,blank=True)
+    order_mens_or_ladies_size_40_quantity = models.CharField(max_length=920,blank=True)
+    order_mens_or_ladies_size_42_quantity = models.CharField(max_length=920,blank=True)
+    order_mens_or_ladies_size_44_quantity = models.CharField(max_length=920,blank=True)
+    order_mens_or_ladies_order_id = models.ForeignKey(Orders, on_delete = models.CASCADE,blank=True)
+
+    def __str__(self):
+        return str(self.pk)
+    
+    class Meta:
+        verbose_name_plural = "Mens Or Ladies Orders List"
+        verbose_name = "Mens Or Ladies Order"
+
+class Order_Kids(models.Model):
+    order_kids_age_2_years = models.CharField(max_length=920,blank=True)
+    order_kids_age_3to4_years = models.CharField(max_length=920,blank=True)
+    order_kids_age_5to6_years = models.CharField(max_length=920,blank=True)
+    order_kids_age_7to8_years = models.CharField(max_length=920,blank=True)
+    order_kids_age_9to10_years = models.CharField(max_length=920,blank=True)
+    order_kids_age_11to12_years = models.CharField(max_length=920,blank=True)
+    order_kids_age_13to14_years = models.CharField(max_length=920,blank=True)
+    order_kids_age_15to16_years = models.CharField(max_length=920,blank=True)
+    order_kids_age_2to3_years = models.CharField(max_length=920,blank=True)
+    order_kids_age_4to5_years = models.CharField(max_length=920,blank=True)
+    order_kids_age_6to7_years = models.CharField(max_length=920,blank=True)
+    order_kids_age_8to9_years = models.CharField(max_length=920,blank=True)
+    order_kids_age_10to11_years = models.CharField(max_length=920,blank=True)
+    order_kids_order_id = models.ForeignKey(Orders, on_delete = models.CASCADE,blank=True)
+
+    def __str__(self):
+        return str(self.pk)
+    
+    class Meta:
+        verbose_name_plural = "Kids Orders List"
+        verbose_name = "Kids Order"
+
+class Order_Ethenic(models.Model):
+    order_ethenic_size_XS = models.CharField(max_length=920,blank=True)
+    order_ethenic_size_S = models.CharField(max_length=920,blank=True)
+    order_ethenic_size_M = models.CharField(max_length=920,blank=True)
+    order_ethenic_size_L = models.CharField(max_length=920,blank=True)
+    order_ethenic_size_XL = models.CharField(max_length=920,blank=True)
+    order_ethenic_size_XXL = models.CharField(max_length=920,blank=True)
+    order_ethenic_size_XXXL = models.CharField(max_length=920,blank=True)
+    order_ethenic_order_id = models.ForeignKey(Orders, on_delete = models.CASCADE,blank=True)
+
+    def __str__(self):
+        return str(self.pk)
+    
+    class Meta:
+        verbose_name_plural = "Ethenic Orders List"
+        verbose_name = "Ethenic Order"
+
+

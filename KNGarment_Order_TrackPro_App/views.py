@@ -13,7 +13,7 @@ from django.utils import timezone
 #from bootstrap_modal_forms.generic import (BSModalCreateView,BSModalUpdateView,BSModalReadView,BSModalDeleteView)
 
 #Project Imports
-from KNGarment_Order_TrackPro_App.models import Client,Vendor,Orders,Process,Fabric_Order,Stiching,Washing,Finishing,Dispatch
+from KNGarment_Order_TrackPro_App.models import Client,Vendor,Orders,Process,Fabric_Order,Stiching,Washing,Finishing,Dispatch,Order_Mens_Or_Ladies,Order_Kids,Order_Ethenic
 #from payment.forms import GroupdescriptionForm, GroupdescriptionForm_UpdateForm, Client_UpdateForm, Vendor_UpdateForm,AddAirticket, AddVisacost,AddHotel,AddRestaurant,AddEntrances,AddSapsan,AddGuide,AddTransport,DateForm,ServiceForm_UpdateForm,CustomUserForm,AddAllservices
 
 # Create your views here.
@@ -24,8 +24,14 @@ def add_new_order_form(request):
 def add_processes(request,pk):
     fabric_bill_numbers = Fabric_Order.objects.all()
     order_object = Orders.objects.get(pk=pk)
+    order_mens_or_ladies_object = Order_Mens_Or_Ladies.objects.get(order_mens_or_ladies_order_id=pk)
+    order_kids_object = Order_Kids.objects.get(order_kids_order_id=pk)
+    order_ethenic_object = Order_Ethenic.objects.get(order_ethenic_order_id=pk)
     data = {'orders':order_object,
-            'fabric_bill_numbers':fabric_bill_numbers}
+            'fabric_bill_numbers':fabric_bill_numbers,
+            'order_mens_or_ladies':order_mens_or_ladies_object,
+            'order_kids':order_kids_object,
+            'order_ethenic':order_ethenic_object}
     return render(request,'KNGarment_Order_TrackPro_App/add_processes.html',data)
 
 def current_order(request):
@@ -38,24 +44,52 @@ def track_order_registered_order(request):
     return render(request,'KNGarment_Order_TrackPro_App/Order_registered.html')
 
 def track_order_details(request,pk):
+    fabric_bill_numbers = Fabric_Order.objects.all()
+    fabric_object = Fabric_Order.objects.get(process_order_id=pk)
+    stiching_object = Stiching.objects.get(process_order_id=pk)
+    washing_object = Washing.objects.get(process_order_id=pk)
+    finishing_object = Finishing.objects.get(process_order_id=pk)
+    dispatch_object = Dispatch.objects.latest('dispatch_order_date_of_entry')
     order_object = Orders.objects.get(pk=pk)
-    data = {'orders':order_object}
+    order_mens_or_ladies_object = Order_Mens_Or_Ladies.objects.get(order_mens_or_ladies_order_id=pk)
+    order_kids_object = Order_Kids.objects.get(order_kids_order_id=pk)
+    order_ethenic_object = Order_Ethenic.objects.get(order_ethenic_order_id=pk)
+    data = {'orders':order_object,
+            'fabric_bill_numbers':fabric_bill_numbers,
+            'order_mens_or_ladies':order_mens_or_ladies_object,
+            'order_kids':order_kids_object,
+            'order_ethenic':order_ethenic_object,
+            'fabric':fabric_object,
+            'stiching':stiching_object,
+            'washing':washing_object,
+            'finishing':finishing_object,
+            'dispatch':dispatch_object}
     return render(request,'KNGarment_Order_TrackPro_App/Order_Details_2.html',data)
 
 def track_order_fabric_order(request):
-    return render(request,'KNGarment_Order_TrackPro_App/fabric_order.html')
+    fabric_order_objects = Fabric_Order.objects.all()
+    data = {'fabric_order':fabric_order_objects}
+    return render(request,'KNGarment_Order_TrackPro_App/fabric_order.html',data)
 
 def track_order_stiching_order(request):
-    return render(request,'KNGarment_Order_TrackPro_App/stiching.html')
+    stiching_order_objects = Stiching.objects.all()
+    data = {'stiching_order':stiching_order_objects}
+    return render(request,'KNGarment_Order_TrackPro_App/stiching.html',data)
 
 def track_order_washing_order(request):
-    return render(request,'KNGarment_Order_TrackPro_App/Washing.html')
+    washing_order_objects = Washing.objects.all()
+    data = {'washing_order':washing_order_objects}
+    return render(request,'KNGarment_Order_TrackPro_App/Washing.html',data)
 
 def track_order_finishing_order(request):
-    return render(request,'KNGarment_Order_TrackPro_App/Finishing.html')
+    finishing_order_objects = Finishing.objects.all()
+    data = {'finishing_order':finishing_order_objects}
+    return render(request,'KNGarment_Order_TrackPro_App/Finishing.html',data)
 
 def track_order_dispatched_order(request):
-    return render(request,'KNGarment_Order_TrackPro_App/dispatch.html')
+    dispatch_order_objects = Dispatch.objects.all()
+    data = {'dispatch_order':dispatch_order_objects}
+    return render(request,'KNGarment_Order_TrackPro_App/dispatch.html',data)
 
 def payment_pending(request):
     return render(request,'KNGarment_Order_TrackPro_App/pending_order.html')
@@ -102,7 +136,7 @@ def add_new_order_form_submit(request):
         order_delivery_date = request.POST['order_delivery_date']
         order_order_category = request.POST['order_order_category']
         order_order_remark = request.POST['order_order_remark']
-        Orders.objects.create(order_order_number = order_order_number,
+        order_object = Orders.objects.create(order_order_number = order_order_number,
                                         order_order_type = order_order_type,
                                         order_order_brands = order_order_brands,
                                         order_order_style_number = order_order_style_number,
@@ -115,7 +149,80 @@ def add_new_order_form_submit(request):
                                         order_client_id = Client.objects.latest('pk'))
         orders_latest_object = Orders.objects.latest('order_order_date_of_entry') 
 
+        if request.POST.get('mens_or_ladies_checkbox', False) == 'mensorladies':            
+            quantity_26 = request.POST['quantity_26']
+            quantity_28 = request.POST['quantity_28']
+            quantity_30 = request.POST['quantity_30']
+            quantity_32 = request.POST['quantity_32']
+            quantity_34 = request.POST['quantity_34']
+            quantity_36 = request.POST['quantity_36']
+            quantity_38 = request.POST['quantity_38']
+            quantity_40 = request.POST['quantity_40']
+            quantity_42 = request.POST['quantity_42']
+            quantity_44 = request.POST['quantity_44']
+
+            Order_Mens_Or_Ladies.objects.create(order_mens_or_ladies_size_26_quantity = quantity_26,
+            order_mens_or_ladies_size_28_quantity = quantity_28,
+            order_mens_or_ladies_size_30_quantity = quantity_30,
+            order_mens_or_ladies_size_32_quantity = quantity_32,
+            order_mens_or_ladies_size_34_quantity = quantity_34,
+            order_mens_or_ladies_size_36_quantity = quantity_36,
+            order_mens_or_ladies_size_38_quantity = quantity_38,
+            order_mens_or_ladies_size_40_quantity = quantity_40,
+            order_mens_or_ladies_size_42_quantity = quantity_42,
+            order_mens_or_ladies_size_44_quantity = quantity_44,
+            order_mens_or_ladies_order_id = Orders.objects.latest('order_order_date_of_entry'))
+        
+        if request.POST.get('kids_checkbox', False) == 'kids': 
+            order_kids_age_2_years = request.POST['2_years']
+            order_kids_age_3to4_years = request.POST['3_4_years']
+            order_kids_age_5to6_years = request.POST['5_6_years']
+            order_kids_age_7to8_years = request.POST['7_8_years']
+            order_kids_age_9to10_years = request.POST['9_10_years']
+            order_kids_age_11to12_years = request.POST['11_12_years']
+            order_kids_age_13to14_years = request.POST['13_14_years']
+            order_kids_age_15to16_years = request.POST['15_16_years']
+            order_kids_age_2to3_years = request.POST['2_3_years']
+            order_kids_age_4to5_years = request.POST['4_5_years']
+            order_kids_age_6to7_years = request.POST['6_7_years']
+            order_kids_age_8to9_years = request.POST['8_9_years']
+            order_kids_age_10to11_years = request.POST['10_11_years']
+
+            Order_Kids.objects.create(order_kids_age_2_years = order_kids_age_2_years,
+            order_kids_age_3to4_years = order_kids_age_3to4_years,
+            order_kids_age_5to6_years = order_kids_age_5to6_years,
+            order_kids_age_7to8_years = order_kids_age_7to8_years,
+            order_kids_age_9to10_years = order_kids_age_9to10_years,
+            order_kids_age_11to12_years = order_kids_age_11to12_years,
+            order_kids_age_13to14_years = order_kids_age_13to14_years,
+            order_kids_age_15to16_years = order_kids_age_15to16_years,
+            order_kids_age_2to3_years = order_kids_age_2to3_years,
+            order_kids_age_4to5_years = order_kids_age_4to5_years,
+            order_kids_age_6to7_years = order_kids_age_6to7_years,
+            order_kids_age_8to9_years = order_kids_age_8to9_years,
+            order_kids_age_10to11_years = order_kids_age_10to11_years,
+            order_kids_order_id = Orders.objects.latest('order_order_date_of_entry'))
+
+        if request.POST.get('ethenic_checkbox', False) == 'ethenic':
+            order_ethenic_size_XS = request.POST['xs_size']
+            order_ethenic_size_S = request.POST['s_size']
+            order_ethenic_size_M = request.POST['m_size']
+            order_ethenic_size_L = request.POST['l_size']
+            order_ethenic_size_XL = request.POST['xl_size']
+            order_ethenic_size_XXL = request.POST['xxl_size']
+            order_ethenic_size_XXXL = request.POST['xxxl_size']
+
+            Order_Ethenic.objects.create(order_ethenic_size_XS = order_ethenic_size_XS,
+            order_ethenic_size_S = order_ethenic_size_S,
+            order_ethenic_size_M = order_ethenic_size_M,
+            order_ethenic_size_L = order_ethenic_size_L,
+            order_ethenic_size_XL = order_ethenic_size_XL,
+            order_ethenic_size_XXL = order_ethenic_size_XXL,
+            order_ethenic_size_XXXL = order_ethenic_size_XXXL,
+            order_ethenic_order_id = Orders.objects.latest('order_order_date_of_entry'))
+
     return HttpResponseRedirect(reverse('KNGarment_Order_TrackPro_App:add_processes',kwargs={'pk': orders_latest_object.pk}))
+
 
 def add_new_fabric_order_form_submit(request):
     if request.method == "POST":

@@ -91,18 +91,18 @@
 
                     <div class="form-row">
                         <div class="col">
-                            <label for="mensnladies_details" class="radio-inline">Mens or Ladies</label>
-                            <input type="radio" id="mensnladies_details_checkbox" name="ratio" value="1">
+                            <label for="mens_or_ladies_checkbox" class="checkbox-inline">Mens or Ladies</label>
+                            <input type="checkbox" id="mens_or_ladies_checkbox" name="mens_or_ladies_checkbox" value="mensorladies">
                         </div>
 
                         <div class="col">
-                            <label for="kids_details" class="radio-inline">Kids</label>
-                            <input type="radio" id="kids_details_checkbox" name="ratio" value="2">
+                            <label for="kids_checkbox" class="checkbox-inline">Kids</label>
+                            <input type="checkbox" id="kids_checkbox" name="kids_checkbox" value="kids">
                         </div>
 
                         <div class="col">
-                            <label for="ethenic_details" class="radio-inline">Ethenic</label>
-                            <input type="radio" id="ethenic_checkbox" name="ratio" value="3">
+                            <label for="ethenic_checkbox" class="ckeckbox-inline">Ethenic</label>
+                            <input type="checkbox" id="ethenic_checkbox" name="ethenic_checkbox" value="ethenic">
                         </div>
                     </div>
                     <!--   Checkbox Ends-->
@@ -219,7 +219,7 @@
                                 <div class="col">
                                     <label for="7_8_years">7-8 Years</label><br><br>
                                     <input class="form-control" type="text" id="ratio_7_8" name="ratio_7_8"><br>
-                                    <input class="form-control" min="1" type="number" id="5_6_years" name="5_6_years">
+                                    <input class="form-control" min="1" type="number" id="7_8_years" name="7_8_years">
                                 </div>
                                 <div class="col">
                                     <label for="9_10_years">9-10 Years</label><br><br>
@@ -357,7 +357,7 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#mensnladies_details_checkbox').change(function() {
+            $('#mens_or_ladies_checkbox').change(function() {
                 $('#mensnladies_details_form').fadeToggle();
             });
         });
@@ -365,7 +365,7 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#kids_details_checkbox').change(function() {
+            $('#kids_checkbox').change(function() {
                 $('#kids_details_form').fadeToggle();
             });
         });

@@ -38,18 +38,20 @@
                             </tr>
                         </thead>
                         <tbody>
+                        {% for dispatch in dispatch_order %}
                             <tr>
-                                <td>100</td>
-                                <td>26-0-2019</td>
-                                <td>18</td>
-                                <td>70</td>
-                                <td>12</td>
-                                <td>111</td>
-                                <td>PDF</td>
-                                <td>Dispatched</td>
+                                <td>{{dispatch.dispatch_received_quantity}}</td>
+                                <td>{{dispatch.dispatch_received_date}}</td>
+                                <td>{{dispatch.dispatch_dispatch_quantity}}</td>
+                                <td>{{dispatch.dispatch_balance_quantity}}</td>
+                                <td>{{dispatch.dispatch_rejected_quantity}}</td>
+                                <td>{{dispatch.dispatch_bill_number}}</td>
+                                <td>{{dispatch.dispatch_bill_file}}</td>
+                                <td>{{dispatch.dispatch_bill_file}}</td>
                                 <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Update</button></td>
 
                             </tr> 
+                            {% endfor %}
                             <tr>
                                 <td>200</td>
                                 <td>26-0-2019</td>

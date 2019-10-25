@@ -34,16 +34,18 @@
                             </tr>
                         </thead>
                         <tbody>
+                        {% for fabric in fabric_order %}
                             <tr>
-                                <td>1</td>
-                                <td>aaaa</td>
-                                <td>10000</td>
-                                <td>22-08-2019</td>
-                                <td>fabric Ordered</td>
+                                <td>{{fabric.fabric_order_sort_number}}</td>
+                                <td>{{fabric.process_vendor_name}}</td>
+                                <td>{{fabric.fabric_order_quantity}}</td>
+                                <td>{{fabric.process_delivery_date}}</td>
+                                <td>{{fabric.process_delivery_date}}</td>
                                 
                                 <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Update</button></td>
 
                             </tr>
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>

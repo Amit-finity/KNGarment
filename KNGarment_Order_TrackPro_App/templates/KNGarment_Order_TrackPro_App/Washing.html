@@ -32,7 +32,6 @@
                                 <th>Received Date</th>
                                 <th>Process</th>
                                 <th>Rate</th>
-                                <th>Order Date</th>
                                 <th>Delivery Date</th>
                                 <th>Bill Number</th>
                                 <th>Bill File</th>
@@ -41,21 +40,22 @@
                             </tr>
                         </thead>
                         <tbody>
+                        {% for washing in washing_order %}
                             <tr>
-                                <td>ssss</td>
-                                <td>mumbai</td>
-                                <td>1000</td>
-                                <td>22-11-2019</td>
-                                <td>aaaaa</td>
-                                <td>123</td>
-                                <td>06-09-2019</td>
-                                <td>08-11-2019</td>
-                                <td>1111</td>
-                                <td>PDF</td>
-                                <td>Washing</td>
+                                <td>{{washing.process_vendor_name}}</td>
+                                <td>{{washing.process_vendor_location}}</td>
+                                <td>{{washing.process_received_quantity}}</td>
+                                <td>{{washing.process_received_date}}</td>
+                                <td>{{washing.washing_process_name}}</td>
+                                <td>{{washing.washing_rate}}</td>
+                                <td>{{washing.process_delivery_date}}</td>
+                                <td>{{washing.process_bill_number}}</td>
+                                <td>{{washing.process_bill_file}}</td>
+                                <td>{{washing.process_bill_file}}</td>
                                 <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Update</button></td>
 
                             </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
