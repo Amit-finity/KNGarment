@@ -424,9 +424,9 @@ class PaidOrderUpdateView(BSModalUpdateView):
     success_message = 'Success: Entry was updated.'
     success_url = reverse_lazy('KNGarment_Order_TrackPro_App:payment_paid')
 
-""" def user_list(request):
+"""def user_list(request):
     user_role = request.user.user_role
     users = CustomUser.objects.all()
     #userrole = request.user.user_role
     data = { 'users' : users,'user_role':user_role }
-    return render(request,'payment/userlist.html',data) """
+    return render(request,'payment/userlist.html',data)"""
