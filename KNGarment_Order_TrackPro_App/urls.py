@@ -112,5 +112,31 @@ path('finishing_order_update/<int:pk>',views.FinishingOrderUpdateView.as_view(),
 # Dispatch Order - Update
 path('dispatch_order_update/<int:pk>',views.DispatchOrderUpdateView.as_view(), name='dispatch_order_update'),
 
+# Pending Order - Update
+path('pending_order_update/<int:pk>',views.PendingOrderUpdateView.as_view(), name='pending_order_update'),
+
+# Paid Order - Update
+path('paid_order_update/<int:pk>',views.PaidOrderUpdateView.as_view(), name='paid_order_update'),
+
+
+# ------- Portal Users URls ---------
+#< -----Users list Urls ------>
+#path('users/', views.user_list, name='userlist'),
+#</-----Users list Urls------>
+
+
+#< -----Add Users Urls ------>
+#path('add_users/',views.Add_UsersView.as_view(),name='add_users'),
+#</-----Add Users Urls ------>
+
+#< -----Delete Users Urls ------>
+#path('userdelete/<int:pk>',views.UserDeleteView.as_view(),name='userdelete'),
+#</-----Delete Users Urls ------>
+
+#< -----Update Users Urls ------>
+#path('userupdate/<int:pk>',views.UserUpdateView.as_view(),name='userupdate'),
+#</-----Update Users Urls ------>
+# </------- Portal Users URls ---------
+
 ]
 

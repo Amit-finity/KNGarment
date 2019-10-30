@@ -45,4 +45,9 @@ class Update_DispatchOrder(BSModalForm):
         'dispatch_rejected_quantity',
         'dispatch_bill_number',
         'dispatch_bill_file',
-        'dispatch_payment_status')    
+        'dispatch_payment_status')
+
+class Update_Process_payment_status(BSModalForm):
+    class Meta:
+        model= Process
+        fields= ('process_payment_status',)  

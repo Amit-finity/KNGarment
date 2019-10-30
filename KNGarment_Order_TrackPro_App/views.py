@@ -14,7 +14,7 @@ from bootstrap_modal_forms.generic import (BSModalCreateView,BSModalUpdateView,B
 
 #Project Imports
 from KNGarment_Order_TrackPro_App.models import Client,Vendor,Orders,Process,Fabric_Order,Stiching,Washing,Finishing,Dispatch,Order_Mens_Or_Ladies,Order_Kids,Order_Ethenic
-from KNGarment_Order_TrackPro_App.forms import Update_FabricOrder,Update_StichingOrder,Update_WashingOrder,Update_FinishingOrder,Update_DispatchOrder 
+from KNGarment_Order_TrackPro_App.forms import Update_FabricOrder,Update_StichingOrder,Update_WashingOrder,Update_FinishingOrder,Update_DispatchOrder,Update_Process_payment_status 
 
 # Create your views here.
 
@@ -100,10 +100,14 @@ def track_order_dispatched_order(request):
     return render(request,'KNGarment_Order_TrackPro_App/dispatch.html',data)
 
 def payment_pending(request):
-    return render(request,'KNGarment_Order_TrackPro_App/pending_order.html')
+    process_objects = Process.objects.all().filter(process_payment_status=2)
+    data = {'processes':process_objects}
+    return render(request,'KNGarment_Order_TrackPro_App/pending_order.html',data)
 
 def payment_paid(request):
-    return render(request,'KNGarment_Order_TrackPro_App/paid_order.html')
+    process_objects = Process.objects.all().filter(process_payment_status=1)
+    data = {'processes':process_objects}
+    return render(request,'KNGarment_Order_TrackPro_App/paid_order.html',data)
 
 def reports_job_worker_balancereport(request):
     return render(request,'KNGarment_Order_TrackPro_App/job_worker_bal_report.html')
@@ -405,3 +409,24 @@ class DispatchOrderUpdateView(BSModalUpdateView):
     form_class = Update_DispatchOrder
     success_message = 'Success: Entry was updated.'
     success_url = reverse_lazy('KNGarment_Order_TrackPro_App:track_order_dispatched_order')
+    
+class PendingOrderUpdateView(BSModalUpdateView):
+    model = Process
+    template_name = 'KNGarment_Order_TrackPro_App/update_order.html'
+    form_class = Update_Process_payment_status
+    success_message = 'Success: Entry was updated.'
+    success_url = reverse_lazy('KNGarment_Order_TrackPro_App:payment_pending')
+
+class PaidOrderUpdateView(BSModalUpdateView):
+    model = Process
+    template_name = 'KNGarment_Order_TrackPro_App/update_order.html'
+    form_class = Update_Process_payment_status
+    success_message = 'Success: Entry was updated.'
+    success_url = reverse_lazy('KNGarment_Order_TrackPro_App:payment_paid')
+
+""" def user_list(request):
+    user_role = request.user.user_role
+    users = CustomUser.objects.all()
+    #userrole = request.user.user_role
+    data = { 'users' : users,'user_role':user_role }
+    return render(request,'payment/userlist.html',data) """
