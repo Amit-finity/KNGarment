@@ -33,6 +33,10 @@ path('logout/', views.user_sign_out, name='logout'),
 #add_new_order Form URL
 path("", views.add_new_order_form, name = 'add_new_order_form'),
 
+#update_order_detail URL
+path("update_order_detail/",views.update_order_detail,name='update_order_detail'),
+
+
 #add_processes URL
 path('add_processes/<int:pk>', views.add_processes, name = 'add_processes'),
 
@@ -92,6 +96,21 @@ path('add_new_washing_order_form_submit/', views.add_new_washing_order_form_subm
 path('add_new_finishing_order_form_submit/', views.add_new_finishing_order_form_submit, name='add_new_finishing_order_form_submit'),
 
 path('add_new_dispatch_order_form_submit/', views.add_new_dispatch_order_form_submit, name='add_new_dispatch_order_form_submit'),
+
+# Fabric Order - Update
+path('fabric_order_update/<int:pk>',views.FabricOrderUpdateView.as_view(), name='fabric_order_update'),
+
+# Stiching Order - Update
+path('stiching_order_update/<int:pk>',views.StichingOrderUpdateView.as_view(), name='stiching_order_update'),
+
+# Washing Order - Update
+path('washing_order_update/<int:pk>',views.WashingOrderUpdateView.as_view(), name='washing_order_update'),
+
+# Finishing Order - Update
+path('finishing_order_update/<int:pk>',views.FinishingOrderUpdateView.as_view(), name='finishing_order_update'),
+
+# Dispatch Order - Update
+path('dispatch_order_update/<int:pk>',views.DispatchOrderUpdateView.as_view(), name='dispatch_order_update'),
 
 ]
 

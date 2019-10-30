@@ -10,16 +10,22 @@ from django.utils import timezone
 #import json
 #from django.contrib.auth.hashers import make_password
 #from django.core.mail import send_mail
-#from bootstrap_modal_forms.generic import (BSModalCreateView,BSModalUpdateView,BSModalReadView,BSModalDeleteView)
+from bootstrap_modal_forms.generic import (BSModalCreateView,BSModalUpdateView,BSModalReadView,BSModalDeleteView)
 
 #Project Imports
 from KNGarment_Order_TrackPro_App.models import Client,Vendor,Orders,Process,Fabric_Order,Stiching,Washing,Finishing,Dispatch,Order_Mens_Or_Ladies,Order_Kids,Order_Ethenic
-#from payment.forms import GroupdescriptionForm, GroupdescriptionForm_UpdateForm, Client_UpdateForm, Vendor_UpdateForm,AddAirticket, AddVisacost,AddHotel,AddRestaurant,AddEntrances,AddSapsan,AddGuide,AddTransport,DateForm,ServiceForm_UpdateForm,CustomUserForm,AddAllservices
+from KNGarment_Order_TrackPro_App.forms import Update_FabricOrder,Update_StichingOrder,Update_WashingOrder,Update_FinishingOrder,Update_DispatchOrder 
 
 # Create your views here.
 
 def add_new_order_form(request):
     return render(request,'KNGarment_Order_TrackPro_App/Add_orders.html')
+
+def update_order_detail(request):
+    orders = Orders.objects.all()
+    data = {'orders':orders}
+    return render(request,'KNGarment_Order_TrackPro_App/update_orders_detail.html',data)
+
 
 def add_processes(request,pk):
     fabric_bill_numbers = Fabric_Order.objects.all()
@@ -70,6 +76,8 @@ def track_order_fabric_order(request):
     fabric_order_objects = Fabric_Order.objects.all()
     data = {'fabric_order':fabric_order_objects}
     return render(request,'KNGarment_Order_TrackPro_App/fabric_order.html',data)
+
+
 
 def track_order_stiching_order(request):
     stiching_order_objects = Stiching.objects.all()
@@ -362,7 +370,38 @@ def add_new_dispatch_order_form_submit(request):
         
         return HttpResponseRedirect(reverse('KNGarment_Order_TrackPro_App:track_order_details',kwargs={'pk': dispatch_object.pk}))
 
+#Update View
+class FabricOrderUpdateView(BSModalUpdateView):
+    model = Fabric_Order
+    template_name = 'KNGarment_Order_TrackPro_App/update_order.html'
+    form_class = Update_FabricOrder
+    success_message = 'Success: Entry was updated.'
+    success_url = reverse_lazy('KNGarment_Order_TrackPro_App:track_order_fabric_order')
 
+class StichingOrderUpdateView(BSModalUpdateView):
+    model = Stiching
+    template_name = 'KNGarment_Order_TrackPro_App/update_order.html'
+    form_class = Update_StichingOrder
+    success_message = 'Success: Entry was updated.'
+    success_url = reverse_lazy('KNGarment_Order_TrackPro_App:track_order_stiching_order')
 
+class WashingOrderUpdateView(BSModalUpdateView):
+    model = Washing
+    template_name = 'KNGarment_Order_TrackPro_App/update_order.html'
+    form_class = Update_WashingOrder
+    success_message = 'Success: Entry was updated.'
+    success_url = reverse_lazy('KNGarment_Order_TrackPro_App:track_order_washing_order')
 
+class FinishingOrderUpdateView(BSModalUpdateView):
+    model = Finishing
+    template_name = 'KNGarment_Order_TrackPro_App/update_order.html'
+    form_class = Update_FinishingOrder
+    success_message = 'Success: Entry was updated.'
+    success_url = reverse_lazy('KNGarment_Order_TrackPro_App:track_order_finishing_order')
 
+class DispatchOrderUpdateView(BSModalUpdateView):
+    model = Dispatch
+    template_name = 'KNGarment_Order_TrackPro_App/update_order.html'
+    form_class = Update_DispatchOrder
+    success_message = 'Success: Entry was updated.'
+    success_url = reverse_lazy('KNGarment_Order_TrackPro_App:track_order_dispatched_order')

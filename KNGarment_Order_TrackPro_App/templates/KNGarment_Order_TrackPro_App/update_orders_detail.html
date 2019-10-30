@@ -12,12 +12,6 @@
 {% endblock stylesheets %}
 
 {% block content %}
-<!-- Modal for CURD Operation -->
-<div class="modal fade" tabindex="-1" role="dialog" id="modal">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content"></div>
-    </div>
-</div>
         <!-- PAGE CONTENT  -->
         <div id="content">
             <div class="container-fluid">
@@ -25,44 +19,61 @@
                     <i class="fas fa-align-left"></i>
                 </button>
                 <hr>
-                <h2>Fabric Order</h2>
+                <h2>Update Order Details</h2>
                 <hr>
                 <div>
+                {% if orders %}
                     <table id="test_table" class="display" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Sort Number</th>
-                                <th>Fabric Supplier</th>
-                                <th>Order Quantity</th>
+                                <th>Order Number</th>
+                                <th>Order Type</th>
+                                <th>Brands</th>
+                                <th>Style Number</th>
+                                <th>Fit</th>
+                                <th>Quantity</th>
+                                <th>Order Date</th>
                                 <th>Delivery Date</th>
+                                <th>Category</th>
+                                <th>Cutting Ratio</th>
                                 <th>Status</th>
                                 <th>Update Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                        {% for fabric in fabric_order %}
-                            <tr>
-                                <td>{{fabric.fabric_order_sort_number}}</td>
-                                <td>{{fabric.process_vendor_name}}</td>
-                                <td>{{fabric.fabric_order_quantity}}</td>
-                                <td>{{fabric.process_delivery_date}}</td>
-                                <td>{{fabric.process_delivery_date}}</td>
-                                
-                            <td>
-							<button type="button" class="update-order btn btn-sm btn-primary" data-id="{% url 'KNGarment_Order_TrackPro_App:fabric_order_update' pk=fabric.pk  %}">
-								<span class="fa fa-edit"></span>
-							</button>
-						</td>
+                            {% for order in orders %}
+                             <tr>
+                                <td>{{order.order_order_number}}</td>
+                                <td>{{order.order_order_type}}</td>
+                                <td>{{order.order_order_brands}}</td>
+                                <td>{{order.order_order_style_number}}</td>
+                                <td>{{order.order_order_fit}}</td>
+                                <td>{{order.order_order_quantity}}</td>
+                                <td>{{order.order_order_date}}</td>
+                                <td>{{order.order_delivery_date}}</td>
+                                <td>{{order.order_order_category}}</td>
+                                <td>{{order.order_order_category}}</td>
+                                <td>{{order.order_fit_sample_status}}</td>
+                                <td><button type="button" class="btn btn-sm btn-primary">
+                                <a href="{% url 'KNGarment_Order_TrackPro_App:add_processes' order.pk %}">
+                                    Update
+                                </a>
+                            </button></td>
                             </tr>
-                        {% endfor %}
+                            {% endfor %}
                         </tbody>
                     </table>
+                    {% else %}
+                        <p class="no-leads text-primary">No entry added yet.</p>
+                    {% endif %}
                 </div>
-            </div>
-        </div>
+
+                
+
+                    </div>
+                </div>
         <!--PAGE CONTENT ENDS HERE-->
 {% endblock content %}
-
 {% block script %}
 <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
@@ -79,24 +90,6 @@
 <script type="text/javascript">
 $(document).ready(function() {
     $('#test_table').DataTable();
-    });
-</script>
-<script type="text/javascript">
-    $(function() {
-        $(".update-order").each(function() {
-            $(this).modalForm({
-                formURL: $(this).data('id')
-            });
-        });
-         $(".delete-order").each(function() {
-			$(this).modalForm({
-				formURL: $(this).data('id')
-			});
-		});
-        
-      $(".read-order").each(function () {
-        $(this).modalForm({formURL: $(this).data('id')});
-      });
     });
 </script>
 
