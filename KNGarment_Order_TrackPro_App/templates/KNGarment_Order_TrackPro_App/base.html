@@ -110,6 +110,9 @@
 
                     </ul>
                 </li>
+                <li>
+                    <a href="{% url 'KNGarment_Order_TrackPro_App:userlist' %}">Portal Users</a>
+                </li>
                 <li class="active">
                     <a href="#homeSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Reports</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu2">
@@ -122,10 +125,6 @@
 
                     </ul>
                 </li>
-                {% comment %} <li>
-                    <a href="{% url 'KNGarment_Order_TrackPro_App:userlist' %}">Portal Users</a>
-                </li> {% endcomment %}
-
                 <ul class="list-unstyled CTAs">
                     <li>
                         <a href="{% url 'KNGarment_Order_TrackPro_App:add_new_order_form' %}" class="btn btn-light">

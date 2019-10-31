@@ -121,20 +121,20 @@ path('paid_order_update/<int:pk>',views.PaidOrderUpdateView.as_view(), name='pai
 
 # ------- Portal Users URls ---------
 #< -----Users list Urls ------>
-#path('users/', views.user_list, name='userlist'),
+path('users/', views.user_list, name='userlist'),
 #</-----Users list Urls------>
 
 
 #< -----Add Users Urls ------>
-#path('add_users/',views.Add_UsersView.as_view(),name='add_users'),
+path('add_users/',views.Add_UsersView.as_view(),name='add_users'),
 #</-----Add Users Urls ------>
 
 #< -----Delete Users Urls ------>
-#path('userdelete/<int:pk>',views.UserDeleteView.as_view(),name='userdelete'),
+path('userdelete/<int:pk>',views.UserDeleteView.as_view(),name='userdelete'),
 #</-----Delete Users Urls ------>
 
 #< -----Update Users Urls ------>
-#path('userupdate/<int:pk>',views.UserUpdateView.as_view(),name='userupdate'),
+path('userupdate/<int:pk>',views.UserUpdateView.as_view(),name='userupdate'),
 #</-----Update Users Urls ------>
 # </------- Portal Users URls ---------
 

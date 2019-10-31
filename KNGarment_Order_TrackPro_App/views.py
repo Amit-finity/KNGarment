@@ -13,8 +13,8 @@ from django.utils import timezone
 from bootstrap_modal_forms.generic import (BSModalCreateView,BSModalUpdateView,BSModalReadView,BSModalDeleteView)
 
 #Project Imports
-from KNGarment_Order_TrackPro_App.models import Client,Vendor,Orders,Process,Fabric_Order,Stiching,Washing,Finishing,Dispatch,Order_Mens_Or_Ladies,Order_Kids,Order_Ethenic
-from KNGarment_Order_TrackPro_App.forms import Update_FabricOrder,Update_StichingOrder,Update_WashingOrder,Update_FinishingOrder,Update_DispatchOrder,Update_Process_payment_status 
+from KNGarment_Order_TrackPro_App.models import Client,Vendor,Orders,Process,Fabric_Order,Stiching,Washing,Finishing,Dispatch,Order_Mens_Or_Ladies,Order_Kids,Order_Ethenic,CustomUser
+from KNGarment_Order_TrackPro_App.forms import Update_FabricOrder,Update_StichingOrder,Update_WashingOrder,Update_FinishingOrder,Update_DispatchOrder,Update_Process_payment_status,CustomUserForm 
 
 # Create your views here.
 
@@ -424,9 +424,34 @@ class PaidOrderUpdateView(BSModalUpdateView):
     success_message = 'Success: Entry was updated.'
     success_url = reverse_lazy('KNGarment_Order_TrackPro_App:payment_paid')
 
-"""def user_list(request):
+def user_list(request):
     user_role = request.user.user_role
     users = CustomUser.objects.all()
     #userrole = request.user.user_role
-    data = { 'users' : users,'user_role':user_role }
-    return render(request,'payment/userlist.html',data)"""
+    data = { 'users' : users}
+    return render(request,'KNGarment_Order_TrackPro_App/userlist.html',data)
+
+#< -----Update Users Views ------>
+class UserUpdateView(BSModalUpdateView):
+    model = CustomUser
+    template_name = 'KNGarment_Order_TrackPro_App/update_order.html'
+    form_class = CustomUserForm
+    success_message = 'Success: Entry was updated.'
+    success_url = reverse_lazy('KNGarment_Order_TrackPro_App:userlist')
+#</-----Update Users Views ------>
+
+#< -----Delete Users Views ------>
+class UserDeleteView(BSModalDeleteView):
+    model = CustomUser
+    template_name = 'KNGarment_Order_TrackPro_App/delete_entry.html'
+    success_message = 'Success: Entry was deleted.'
+    success_url = reverse_lazy('KNGarment_Order_TrackPro_App:userlist')
+#</-----Delete Users Views ------>
+
+#< -----Add Users Views ------>
+class Add_UsersView(BSModalCreateView):
+    template_name = 'KNGarment_Order_TrackPro_App/add_new_user.html'
+    form_class = CustomUserForm
+    success_message = 'Success: User was added.'
+    success_url = reverse_lazy('KNGarment_Order_TrackPro_App:userlist')
+#</-----Add Users Views ------>    

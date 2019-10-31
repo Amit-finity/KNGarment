@@ -1,6 +1,11 @@
 from django import forms
-from KNGarment_Order_TrackPro_App.models import Client,Vendor,Orders,Process,Fabric_Order,Stiching,Washing,Finishing,Dispatch,Order_Mens_Or_Ladies,Order_Kids,Order_Ethenic
+from KNGarment_Order_TrackPro_App.models import Client,Vendor,Orders,Process,Fabric_Order,Stiching,Washing,Finishing,Dispatch,Order_Mens_Or_Ladies,Order_Kids,Order_Ethenic,CustomUser
 from bootstrap_modal_forms.forms import BSModalForm
+
+class CustomUserForm(BSModalForm):
+    class Meta:
+        model = CustomUser
+        fields = ['user_role','username','email']
 
 class Update_FabricOrder(BSModalForm):
     class Meta:
