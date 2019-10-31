@@ -1,6 +1,6 @@
 #<---------Django Imported Libraries--------->
+from django.contrib.auth.models import AbstractUser
 from django.db import models
-#from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
 from datetime import datetime
 #</---------Django Imported Libraries--------->
@@ -8,6 +8,18 @@ from datetime import datetime
 #<---------External Libraries--------->
 from model_utils.managers import InheritanceManager
 #</---------External Libraries--------->
+
+#<---------Custom User Model --------->
+class CustomUser(AbstractUser):
+    '''Overrides the custom django user model'''
+    # Datafields
+    SUPER_ADMIN = 1
+    ADMIN = 2
+    ROLE_CHOICES = (
+      (ADMIN,'admin'),
+      (SUPER_ADMIN,'super_admin')
+    )
+    user_role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES,default=ADMIN,blank=True)
 
 #Client Model
 class Client(models.Model):
@@ -223,6 +235,10 @@ class Order_Ethenic(models.Model):
     class Meta:
         verbose_name_plural = "Ethenic Orders List"
         verbose_name = "Ethenic Order"
+
+
+
+
 
 
 

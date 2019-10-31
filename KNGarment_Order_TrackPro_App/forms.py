@@ -50,4 +50,4 @@ class Update_DispatchOrder(BSModalForm):
 class Update_Process_payment_status(BSModalForm):
     class Meta:
         model= Process
-        fields= ('process_payment_status',)  
+        fields= ('process_payment_status',)

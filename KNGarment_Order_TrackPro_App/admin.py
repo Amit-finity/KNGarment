@@ -1,5 +1,5 @@
 from django.contrib import admin
-from KNGarment_Order_TrackPro_App.models import Client,Vendor,Orders,Process,Fabric_Order,Stiching,Washing,Finishing,Dispatch,Order_Mens_Or_Ladies,Order_Kids,Order_Ethenic
+from KNGarment_Order_TrackPro_App.models import CustomUser,Client,Vendor,Orders,Process,Fabric_Order,Stiching,Washing,Finishing,Dispatch,Order_Mens_Or_Ladies,Order_Kids,Order_Ethenic
 
 # Register your models here.
 
@@ -71,7 +71,6 @@ class DispatchAdmin(admin.ModelAdmin):
     ]
 
 
-
 admin.site.register(Client,ClientAdmin)
 admin.site.register(Vendor,VendorAdmin)
 admin.site.register(Orders,OrdersAdmin)
@@ -84,3 +83,4 @@ admin.site.register(Dispatch,DispatchAdmin)
 admin.site.register(Order_Mens_Or_Ladies)
 admin.site.register(Order_Kids)
 admin.site.register(Order_Ethenic)
+admin.site.register(CustomUser)
