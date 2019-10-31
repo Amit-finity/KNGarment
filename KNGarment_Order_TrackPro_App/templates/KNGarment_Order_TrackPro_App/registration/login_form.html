@@ -4,36 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Login</title>
     <link rel="stylesheet" type="text/css" href={% static 'KNGarment_Order_TrackPro_App/css/bootstrap.min.css' %}>
     <link rel="stylesheet" type="text/css" href={% static 'KNGarment_Order_TrackPro_App/css/fontawesome-all.min.css' %}>
     <link rel="stylesheet" type="text/css" href={% static 'KNGarment_Order_TrackPro_App/css/iofrm-style.css' %}>
     <link rel="stylesheet" type="text/css" href={% static 'KNGarment_Order_TrackPro_App/css/iofrm-theme5.css' %}>
 </head>
-<body>
-    <div class="form-body" style="background-color: #243c46 !important;">
+<body style="background-color: #243c46 !important;">
         <div class="row">
             <div class="form-holder" style="background-color: #243c46 !important;">
                 <div class="form-content" style="background-color: #243c46 !important;">
                     <div class="form-items">
-                        <h3>Register</h3>
-                        <p>Enter your details to make a new account!</p>
+                        <h3>Login</h3>
+                        <p>Enter your username and password!</p>
                         <div class="page-links">
-                            <a href="login_form.html">Login</a><a href="register_form.html" class="active">Register</a>
+                            <a href="#" class="active">Login</a><a href="{% url 'KNGarment_Order_TrackPro_App:register' %}">Register</a>
                         </div>
-                        <form method="post" action="Add_orderd.html">
-                            <input class="form-control" type="text" name="name" placeholder="Full Name" required>
-                            <input class="form-control" type="email" name="email" placeholder="E-mail Address" required>
+                        {% if error_message %}
+					    <p style='color:red'>{{ error_message }}</p>
+					    {% endif %}
+                        <form method="post" action={% url 'KNGarment_Order_TrackPro_App:user_login' %}>
+                        {% csrf_token %}
+                            <input class="form-control" type="text" name="username" placeholder="Username" required>
                             <input class="form-control" type="password" name="password" placeholder="Password" required>
                             <div class="form-button">
-                                <button id="submit" type="submit" class="ibtn">Register</button>
+                                <button id="submit" type="submit" class="ibtn" style="background-color: #87c241;color: white">Login</button> <a href="forget_password.html">Forget password?</a>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 <script src="js/jquery.min.js"></script>
 <script src="js/popper.min.js"></script>
 <script src="js/bootstrap.min.js"></script>

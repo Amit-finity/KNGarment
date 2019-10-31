@@ -9,21 +9,20 @@ urlpatterns = [
 # --- Pages Urls ---
 # ------ Authentication URLs -----
 #Login
-path("user_login/" , views.user_login, name="user_login"),
+path("" , views.user_login, name="user_login"),
+
+#register URL
+path('register/', views.register, name = 'register'),
 
 #forget_password URL
 path('forget_password/', views.forget_password, name = 'forget_password'),
-
-# Logout
-#path('logout/', views.user_sign_out, name='logout'),
 
 #report_error URL
 path('report_error/', views.report_error, name = 'report_error'),
 #path('report_error_submit/', views.report_error_submit, name ='report_error_submit'),
 #path('report_error_success/', views.report_error_success, name ='report_error_success'),
 
-#register URL
-path('register/', views.register, name = 'register'),
+
 
 # Logout
 path('logout/', views.user_sign_out, name='logout'),
@@ -31,7 +30,7 @@ path('logout/', views.user_sign_out, name='logout'),
 
 # ------ Sidemenu Urls ------
 #add_new_order Form URL
-path("", views.add_new_order_form, name = 'add_new_order_form'),
+path("add_new_order_form/", views.add_new_order_form, name = 'add_new_order_form'),
 
 #update_order_detail URL
 path("update_order_detail/",views.update_order_detail,name='update_order_detail'),

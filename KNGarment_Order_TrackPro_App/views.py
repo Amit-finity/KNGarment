@@ -8,7 +8,7 @@ from django.utils import timezone
 #from django.contrib.auth.decorators import login_required
 #from django.utils.decorators import method_decorator
 #import json
-#from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password
 #from django.core.mail import send_mail
 from bootstrap_modal_forms.generic import (BSModalCreateView,BSModalUpdateView,BSModalReadView,BSModalDeleteView)
 
@@ -17,6 +17,48 @@ from KNGarment_Order_TrackPro_App.models import Client,Vendor,Orders,Process,Fab
 from KNGarment_Order_TrackPro_App.forms import Update_FabricOrder,Update_StichingOrder,Update_WashingOrder,Update_FinishingOrder,Update_DispatchOrder,Update_Process_payment_status,CustomUserForm 
 
 # Create your views here.
+# ------ Authentication Views -----
+# Login
+def user_login(request):
+    """Logs in a user if the credentials are valid and the user is active,
+    else redirects to the same page and displays an error message."""
+    if request.method == "POST":
+        username =  request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                return HttpResponseRedirect(reverse('KNGarment_Order_TrackPro_App:add_new_order_form'))
+        else:
+            return render(request, 'KNGarment_Order_TrackPro_App/registration/login_form.html',{'error_message': 'Username or Password Incorrect!'})
+
+    else:
+        return render(request, 'KNGarment_Order_TrackPro_App/registration/login_form.html')
+
+# Sign Up
+def register(request):
+    """Registers a user"""
+    if request.method == "POST":
+        username =  request.POST['username']
+        password = request.POST['password']
+        confirm_password = request.POST['confirm_password']
+        if password != confirm_password:
+            return render(request, 'KNGarment_Order_TrackPro_App/registration/register_form.html',{'error_message':'Passwords do not match!'})
+        if CustomUser.objects.filter(username = username).exists():
+            return render(request, 'KNGarment_Order_TrackPro_App/registration/register_form.html',{'error_message':'Username already exists!'})
+        else:
+            # Role 2 is for admin, 1 is for super admin.
+            user = CustomUser.objects.create(username=username, password= make_password(password), user_role=2)
+            login(request, user)
+            return HttpResponseRedirect(reverse('KNGarment_Order_TrackPro_App:add_new_order_form'))
+    else:
+        return render(request, 'KNGarment_Order_TrackPro_App/registration/register_form.html')
+
+# Logout
+def user_sign_out(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('KNGarment_Order_TrackPro_App:user_login'))
 
 def add_new_order_form(request):
     return render(request,'KNGarment_Order_TrackPro_App/Add_orders.html')
@@ -124,16 +166,6 @@ def report_error(request):
 def forget_password(request):
     return render(request,'KNGarment_Order_TrackPro_App/forget_password.html')
 
-def user_login(request):
-    return render(request,'KNGarment_Order_TrackPro_App/login_form.html')
-
-def register(request):
-    return render(request,'KNGarment_Order_TrackPro_App/register_form.html')
-
-# Logout
-def user_sign_out(request):
-    logout(request)
-    return HttpResponseRedirect(reverse('KNGarment_Order_TrackPro_App:user_login'))
 
 def add_new_order_form_submit(request):
     if request.method == "POST":

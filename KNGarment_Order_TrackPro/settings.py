@@ -128,3 +128,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 AUTH_USER_MODEL = 'KNGarment_Order_TrackPro_App.CustomUser'
 
+LOGIN_URL = '/user_login'
+

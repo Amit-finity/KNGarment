@@ -19,4 +19,5 @@ from django.urls import path,include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('KNGarment_Order_TrackPro_App.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
