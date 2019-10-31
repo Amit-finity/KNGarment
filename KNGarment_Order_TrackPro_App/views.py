@@ -83,7 +83,32 @@ def add_processes(request,pk):
     return render(request,'KNGarment_Order_TrackPro_App/add_processes.html',data)
 
 def current_order(request):
-    return render(request,'KNGarment_Order_TrackPro_App/Current.html')
+    #Order_list = [order.pk for order in Orders]
+    current_order_list = []
+    values1 = Fabric_Order.objects.filter(process_order_id__in=[1,2,3])
+    values2 = Stiching.objects.filter(process_order_id__in=[1,2,3])
+    values3 = Washing.objects.filter(process_order_id__in=[1,2,3])
+    values4 = Finishing.objects.filter(process_order_id__in=[1,2,3])
+    if values1.exists():
+        for x in values1:
+            data = {'process_order_id':x.process_order_id}
+            current_order_list.append(data)
+    if values2.exists():
+        for x in values2:
+            data = {'process_order_id':x.process_order_id}
+            current_order_list.append(data)
+    if values3.exists():
+        for x in values3:
+            data = {'process_order_id':x.process_order_id}
+            current_order_list.append(data)
+    if values4.exists():
+        for x in values4:
+            data = {'process_order_id':x.process_order_id}
+            current_order_list.append(data)
+    length = len(current_order_list)
+    for i in range(length):
+        data = {'current_order':current_order_list[i]}
+    return render(request,'KNGarment_Order_TrackPro_App/Current.html',data)
 
 def delivered_order(request):
     return render(request,'KNGarment_Order_TrackPro_App/delivered_orders.html')

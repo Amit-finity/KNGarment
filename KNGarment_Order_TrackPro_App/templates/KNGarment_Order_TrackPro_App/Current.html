@@ -25,113 +25,35 @@
                     <table id="test_table" class="display" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Order Number</th>
-                                <th>Order Type</th>
-                                <th>Brands</th>
-                                <th>Style Number</th>
-                                <th>Fit</th>
-                                <th>Quantity</th>
-                                <th>Order Date</th>
+                                <th>Vendor Name</th>
+                                <th>vendor Location</th>
+                                <th>Received Quantity</th>
+                                <th>Received Date</th>
                                 <th>Delivery Date</th>
-                                <th>Category</th>
-                                <th>Cutting Ratio</th>
-                                <th>Status</th>
-                                <th>Update Status</th>
+                                <th>Bill Number</th>
+                                <th>Bill file</th>
+                                
+                                <th>Update</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Mens</td>
-                                <td>Lee Cooper</td>
-                                <td>30</td>
-                                <td>Slim</td>
-                                <td>1000</td>
-                                <td>26-09-2019</td>
-                                <td>30-09-2019</td>
-                                <td>ssssssss</td>
-                                <td>Mens and Ladies</td>
-                                <td>Registered</td>
-                                <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Update</button></td>
-
-                            </tr>
-                             <tr>
-                               <td>2</td>
-                                <td>Mens</td>
-                                <td>Lee Cooper</td>
-                                <td>34</td>
-                                <td>Slim</td>
-                                <td>1000</td>
-                                <td>27-09-2019</td>
-                                <td>29-09-2019</td>
-                                <td>ssssaaaa</td>
-                                <td>Mens and Ladies</td>
-                                <td>Fabric Ordered</td>
-                                <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Update</button></td>
-
-                            </tr>
-                             <tr>
-                               <td>3</td>
-                                <td>Ladies</td>
-                                <td>Pink & Blue</td>
-                                <td>28</td>
-                                <td>Slim</td>
-                                <td>1000</td>
-                                <td>26-09-2019</td>
-                                <td>30-09-2019</td>
-                                <td>sssspppp</td>
-                                <td>Mens and Ladies</td>
-                                <td>Stiching</td>
-                                <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Update</button></td>
-
-                            </tr>
-                             <tr>
-                               <td>4</td>
-                                <td>Boys Denim</td>
-                                <td>Lee Cooper</td>
-                                <td>32</td>
-                                <td>Slim</td>
-                                <td>1000</td>
-                                <td>26-09-2019</td>
-                                <td>30-09-2019</td>
-                                <td>ssssccccc</td>
-                                <td>Mens and Ladies</td>
-                                <td>Washing</td>
-                                <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Update</button></td>
-
-                            </tr>
-                             <tr>
-                               <td>5</td>
-                                <td>Girls Denim</td>
-                                <td>DJ & c</td>
-                                <td>30</td>
-                                <td>Slim</td>
-                                <td>1000</td>
-                                <td>26-09-2019</td>
-                                <td>30-09-2019</td>
-                                <td>ssssvvvv</td>
-                                <td>Mens and Ladies</td>
-                                <td>Finishing</td>
-                                <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Update</button></td>
-
-                            </tr>
-                             <tr>
-                                <td>6</td>
-                                <td>Mens</td>
-                                <td>Lee Cooper</td>
-                                <td>30</td>
-                                <td>Slim</td>
-                                <td>1000</td>
-                                <td>26-09-2019</td>
-                                <td>30-09-2019</td>
-                                <td>ssssppppp</td>
-                                <td>Mens and Ladies</td>
-                                <td>Dispatch</td>
-                                <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Update</button></td>
-
-                            </tr>
-                            
-                        </tbody>
+                       <tbody>
+                    {% for current in current_order %}
+                    <tr>
+                        <td>{{current.process_vendor_name}}</td>
+                        <td>{{current.process_vendor_location}}</td>
+                        <td>{{current.process_received_quantity}}</td>
+                        <td>{{current.process_received_date}}</td>
+                        <td>{{current.process_delivery_date}}</td>
+                        <td>{{current.process_bill_number}}</td>
+                        <td>{{current.process_bill_file}}</td>
+                        <td>
+                            <button type="button" class="update-order btn btn-sm btn-primary" data-id="">
+                                <span class="fa fa-edit"></span>
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
                     </table>
                 </div>
 
