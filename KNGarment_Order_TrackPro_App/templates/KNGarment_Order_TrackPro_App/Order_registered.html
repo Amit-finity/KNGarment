@@ -28,7 +28,7 @@
                     <table id="test_table" class="display" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Order Number</th>
+                               <th>Order Number</th>
                                 <th>Order Type</th>
                                 <th>Brands</th>
                                 <th>Style Number</th>
@@ -37,28 +37,31 @@
                                 <th>Order Date</th>
                                 <th>Delivery Date</th>
                                 <th>Category</th>
-                                <th>Cutting Ratio</th>
                                 <th>Status</th>
                                 <th>Update Status</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Mens</td>
-                                <td>DJ & C</td>
-                                <td>32</td>
-                                <td>slim</td>
-                                <td>20000</td>
-                                <td>06-11-2019</td>
-                                <td>22-11-2019</td>
-                                <td>sssppppp</td>
-                                <td>Mens And Ladies</td>
-                                <td>Registered</td>
-                                <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Update</button></td>
-
-                            </tr>
-                        </tbody>
+                       <tbody>
+                    {% for registered in registered_order %}
+                    <tr>
+                        <td>{{registered.order_order_number}}</td>
+                        <td>{{registered.order_order_type}}</td>
+                        <td>{{registered.order_order_brands}}</td>
+                        <td>{{registered.order_order_style_number}}</td>
+                        <td>{{registered.order_order_fit}}</td>
+                        <td>{{registered.order_order_quantity}}</td>
+                        <td>{{registered.order_order_date}}</td>
+                        <td>{{registered.order_delivery_date}}</td>
+                        <td>{{registered.order_order_category}}</td>
+                        <td>{{registered.order_fit_sample_status}}</td>
+                        <td>
+                            <button type="button" class="update-order btn btn-sm btn-primary" data-id="">
+                                <span class="fa fa-edit"></span>
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
                     </table>
                 </div>
 

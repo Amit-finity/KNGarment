@@ -25,27 +25,32 @@
                     <table id="test_table" class="display" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Vendor Name</th>
-                                <th>vendor Location</th>
-                                <th>Received Quantity</th>
-                                <th>Received Date</th>
+                               <th>Order Number</th>
+                                <th>Order Type</th>
+                                <th>Brands</th>
+                                <th>Style Number</th>
+                                <th>Fit</th>
+                                <th>Quantity</th>
+                                <th>Order Date</th>
                                 <th>Delivery Date</th>
-                                <th>Bill Number</th>
-                                <th>Bill file</th>
-                                
-                                <th>Update</th>
+                                <th>Category</th>
+                                <th>Status</th>
+                                <th>Update Status</th>
                             </tr>
                         </thead>
                        <tbody>
                     {% for current in current_order %}
                     <tr>
-                        <td>{{current.process_vendor_name}}</td>
-                        <td>{{current.process_vendor_location}}</td>
-                        <td>{{current.process_received_quantity}}</td>
-                        <td>{{current.process_received_date}}</td>
-                        <td>{{current.process_delivery_date}}</td>
-                        <td>{{current.process_bill_number}}</td>
-                        <td>{{current.process_bill_file}}</td>
+                        <td>{{current.order_order_number}}</td>
+                        <td>{{current.order_order_type}}</td>
+                        <td>{{current.order_order_brands}}</td>
+                        <td>{{current.order_order_style_number}}</td>
+                        <td>{{current.order_order_fit}}</td>
+                        <td>{{current.order_order_quantity}}</td>
+                        <td>{{current.order_order_date}}</td>
+                        <td>{{current.order_delivery_date}}</td>
+                        <td>{{current.order_order_category}}</td>
+                        <td>{{current.order_fit_sample_status}}</td>
                         <td>
                             <button type="button" class="update-order btn btn-sm btn-primary" data-id="">
                                 <span class="fa fa-edit"></span>

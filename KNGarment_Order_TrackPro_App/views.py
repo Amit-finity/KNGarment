@@ -83,38 +83,81 @@ def add_processes(request,pk):
     return render(request,'KNGarment_Order_TrackPro_App/add_processes.html',data)
 
 def current_order(request):
-    #Order_list = [order.pk for order in Orders]
+    orders = Orders.objects.all()
     current_order_list = []
-    values1 = Fabric_Order.objects.filter(process_order_id__in=[1,2,3])
-    values2 = Stiching.objects.filter(process_order_id__in=[1,2,3])
-    values3 = Washing.objects.filter(process_order_id__in=[1,2,3])
-    values4 = Finishing.objects.filter(process_order_id__in=[1,2,3])
-    if values1.exists():
-        for x in values1:
-            data = {'process_order_id':x.process_order_id}
-            current_order_list.append(data)
-    if values2.exists():
-        for x in values2:
-            data = {'process_order_id':x.process_order_id}
-            current_order_list.append(data)
-    if values3.exists():
-        for x in values3:
-            data = {'process_order_id':x.process_order_id}
-            current_order_list.append(data)
-    if values4.exists():
-        for x in values4:
-            data = {'process_order_id':x.process_order_id}
-            current_order_list.append(data)
-    length = len(current_order_list)
-    for i in range(length):
-        data = {'current_order':current_order_list[i]}
+   
+    for order in orders:
+        length = 0
+        process_in_one_order = []
+        values1 = Fabric_Order.objects.filter(process_order_id=order.pk)
+        values2 = Stiching.objects.filter(process_order_id=order.pk)
+        values3 = Washing.objects.filter(process_order_id=order.pk)
+        values4 = Finishing.objects.filter(process_order_id=order.pk)
+        if values1.exists():
+            process_in_one_order.append(1)
+        if values2.exists():
+            process_in_one_order.append(2)
+        if values3.exists():
+            process_in_one_order.append(3)
+        if values4.exists():
+            process_in_one_order.append(4)
+        length = len(process_in_one_order)
+        if length > 0 and length < 4:
+            current_order_list.append(order.pk)
+    current_order_objects = Orders.objects.filter(pk__in=current_order_list)
+    data = {'current_order':current_order_objects}
     return render(request,'KNGarment_Order_TrackPro_App/Current.html',data)
 
 def delivered_order(request):
-    return render(request,'KNGarment_Order_TrackPro_App/delivered_orders.html')
+    orders = Orders.objects.all()
+    delivered_order_list = []
+    for order in orders:
+        process_in_one_order = []
+        length = 0
+        values1 = Fabric_Order.objects.filter(process_order_id=order.pk)
+        values2 = Stiching.objects.filter(process_order_id=order.pk)
+        values3 = Washing.objects.filter(process_order_id=order.pk)
+        values4 = Finishing.objects.filter(process_order_id=order.pk)
+        if values1.exists():
+            process_in_one_order.append(1)
+        if values2.exists():
+            process_in_one_order.append(2)
+        if values3.exists():
+            process_in_one_order.append(3)
+        if values4.exists():
+            process_in_one_order.append(4)
+        length = len(process_in_one_order)
+        if length == 4:
+            delivered_order_list.append(order.pk)
+    delivered_order_objects = Orders.objects.filter(pk__in=delivered_order_list)
+    data = {'delivered_order':delivered_order_objects,'length':length}
+    return render(request,'KNGarment_Order_TrackPro_App/delivered_orders.html',data)
 
 def track_order_registered_order(request):
-    return render(request,'KNGarment_Order_TrackPro_App/Order_registered.html')
+    orders = Orders.objects.all()
+    registered_order_list = []
+    
+    for order in orders:
+        length = 0
+        process_in_one_order = []
+        values1 = Fabric_Order.objects.filter(process_order_id=order.pk)
+        values2 = Stiching.objects.filter(process_order_id=order.pk)
+        values3 = Washing.objects.filter(process_order_id=order.pk)
+        values4 = Finishing.objects.filter(process_order_id=order.pk)
+        if values1.exists():
+            process_in_one_order.append(1)
+        if values2.exists():
+            process_in_one_order.append(2)
+        if values3.exists():
+            process_in_one_order.append(3)
+        if values4.exists():
+            process_in_one_order.append(4)
+        length = len(process_in_one_order)
+        if length == 0:
+            registered_order_list.append(order.pk)
+    registered_order_objects = Orders.objects.filter(pk__in=registered_order_list)
+    data = {'registered_order':registered_order_objects}
+    return render(request,'KNGarment_Order_TrackPro_App/Order_registered.html',data)
 
 def track_order_details(request,pk):
     fabric_bill_numbers = Fabric_Order.objects.all()

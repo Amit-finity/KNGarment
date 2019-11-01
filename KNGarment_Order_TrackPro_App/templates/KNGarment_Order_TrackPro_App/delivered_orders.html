@@ -20,13 +20,13 @@
                     <i class="fas fa-align-left"></i>
                 </button>
                 <hr>
-                <h2>Delivered</h2>
+                <h2>Delivered {{length}}</h2>
                 <hr>
                 <div>
                     <table id="test_table" class="display" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Order Number</th>
+                               <th>Order Number</th>
                                 <th>Order Type</th>
                                 <th>Brands</th>
                                 <th>Style Number</th>
@@ -39,64 +39,27 @@
                                 <th>Update Status</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Mens</td>
-                                <td>Lee Cooper</td>
-                                <td>34</td>
-                                <td>slim</td>
-                                <td>1234</td>
-                                <td>23-09-2019</td>
-                                <td>30-09-2019</td>
-                                <td>aaaaaaasss</td>
-                                <td>Upcoming Payment</td>
-                                <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Update</button></td>
-
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Ladies</td>
-                                <td>Lee Cooper</td>
-                                <td>34</td>
-                                <td>slim</td>
-                                <td>1234</td>
-                                <td>23-09-2019</td>
-                                <td>30-09-2019</td>
-                                <td>aadddaasss</td>
-                                <td>Upcoming Payment</td>
-                                <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Update</button></td>
-
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Boys Denim</td>
-                                <td>DJ & C</td>
-                                <td>30</td>
-                                <td>slim</td>
-                                <td>1234</td>
-                                <td>23-09-2019</td>
-                                <td>30-09-2019</td>
-                                <td>aaaaaaasss</td>
-                                <td>Upcoming Payment</td>
-                                <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Update</button></td>
-
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Girls Denim</td>
-                                <td>Lee Cooper</td>
-                                <td>34</td>
-                                <td>slim</td>
-                                <td>1234</td>
-                                <td>23-09-2019</td>
-                                <td>30-09-2019</td>
-                                <td>aaaaaaasss</td>
-                                <td>Upcoming Payment</td>
-                                <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Update</button></td>
-
-                            </tr>
-                        </tbody>
+                       <tbody>
+                    {% for delivered in delivered_order %}
+                    <tr>
+                        <td>{{delivered.order_order_number}}</td>
+                        <td>{{delivered.order_order_type}}</td>
+                        <td>{{delivered.order_order_brands}}</td>
+                        <td>{{delivered.order_order_style_number}}</td>
+                        <td>{{delivered.order_order_fit}}</td>
+                        <td>{{delivered.order_order_quantity}}</td>
+                        <td>{{delivered.order_order_date}}</td>
+                        <td>{{delivered.order_delivery_date}}</td>
+                        <td>{{delivered.order_order_category}}</td>
+                        <td>{{delivered.order_fit_sample_status}}</td>
+                        <td>
+                            <button type="button" class="update-order btn btn-sm btn-primary" data-id="">
+                                <span class="fa fa-edit"></span>
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
                     </table>
                 </div>
 
