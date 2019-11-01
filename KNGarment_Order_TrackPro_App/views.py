@@ -3,11 +3,9 @@ from django.views import generic
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib.auth import login, logout, authenticate
 from django.urls import reverse_lazy, reverse
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.utils import timezone
-
-#from django.contrib.auth.decorators import login_required
-#from django.utils.decorators import method_decorator
-#import json
 from django.contrib.auth.hashers import make_password
 #from django.core.mail import send_mail
 from bootstrap_modal_forms.generic import (BSModalCreateView,BSModalUpdateView,BSModalReadView,BSModalDeleteView)
@@ -60,15 +58,17 @@ def user_sign_out(request):
     logout(request)
     return HttpResponseRedirect(reverse('KNGarment_Order_TrackPro_App:user_login'))
 
+@login_required(login_url='/user_login')
 def add_new_order_form(request):
     return render(request,'KNGarment_Order_TrackPro_App/Add_orders.html')
 
+@login_required(login_url='/user_login')
 def update_order_detail(request):
     orders = Orders.objects.all()
     data = {'orders':orders}
     return render(request,'KNGarment_Order_TrackPro_App/update_orders_detail.html',data)
 
-
+@login_required(login_url='/user_login')
 def add_processes(request,pk):
     fabric_bill_numbers = Fabric_Order.objects.all()
     order_object = Orders.objects.get(pk=pk)
@@ -82,12 +82,13 @@ def add_processes(request,pk):
             'order_ethenic':order_ethenic_object}
     return render(request,'KNGarment_Order_TrackPro_App/add_processes.html',data)
 
+@login_required(login_url='/user_login')
 def all_orders(request):
     all_orders = Orders.objects.all()
     data = {'orders':all_orders}
     return render(request,'KNGarment_Order_TrackPro_App/All_Orders.html',data)
 
-
+@login_required(login_url='/user_login')
 def current_order(request):
     orders = Orders.objects.all()
     current_order_list = []
@@ -114,6 +115,7 @@ def current_order(request):
     data = {'current_order':current_order_objects}
     return render(request,'KNGarment_Order_TrackPro_App/Current.html',data)
 
+@login_required(login_url='/user_login')
 def delivered_order(request):
     orders = Orders.objects.all()
     delivered_order_list = []
@@ -139,6 +141,7 @@ def delivered_order(request):
     data = {'delivered_order':delivered_order_objects,'length':length}
     return render(request,'KNGarment_Order_TrackPro_App/delivered_orders.html',data)
 
+@login_required(login_url='/user_login')
 def track_order_registered_order(request):
     orders = Orders.objects.all()
     registered_order_list = []
@@ -165,6 +168,7 @@ def track_order_registered_order(request):
     data = {'registered_order':registered_order_objects}
     return render(request,'KNGarment_Order_TrackPro_App/Order_registered.html',data)
 
+@login_required(login_url='/user_login')
 def track_order_details(request,pk):
     fabric_bill_numbers = Fabric_Order.objects.all()
     fabric_object = Fabric_Order.objects.get(process_order_id=pk)
@@ -188,59 +192,70 @@ def track_order_details(request,pk):
             'dispatch':dispatch_object}
     return render(request,'KNGarment_Order_TrackPro_App/Order_Details_2.html',data)
 
+@login_required(login_url='/user_login')
 def track_order_fabric_order(request):
     fabric_order_objects = Fabric_Order.objects.all()
     data = {'fabric_order':fabric_order_objects}
     return render(request,'KNGarment_Order_TrackPro_App/fabric_order.html',data)
 
 
-
+@login_required(login_url='/user_login')
 def track_order_stiching_order(request):
     stiching_order_objects = Stiching.objects.all()
     data = {'stiching_order':stiching_order_objects}
     return render(request,'KNGarment_Order_TrackPro_App/stiching.html',data)
 
+@login_required(login_url='/user_login')
 def track_order_washing_order(request):
     washing_order_objects = Washing.objects.all()
     data = {'washing_order':washing_order_objects}
     return render(request,'KNGarment_Order_TrackPro_App/Washing.html',data)
 
+@login_required(login_url='/user_login')
 def track_order_finishing_order(request):
     finishing_order_objects = Finishing.objects.all()
     data = {'finishing_order':finishing_order_objects}
     return render(request,'KNGarment_Order_TrackPro_App/Finishing.html',data)
 
+@login_required(login_url='/user_login')
 def track_order_dispatched_order(request):
     dispatch_order_objects = Dispatch.objects.all()
     data = {'dispatch_order':dispatch_order_objects}
     return render(request,'KNGarment_Order_TrackPro_App/dispatch.html',data)
 
+@login_required(login_url='/user_login')
 def payment_pending(request):
     process_objects = Process.objects.all().filter(process_payment_status=2)
     data = {'processes':process_objects}
     return render(request,'KNGarment_Order_TrackPro_App/pending_order.html',data)
 
+@login_required(login_url='/user_login')
 def payment_paid(request):
     process_objects = Process.objects.all().filter(process_payment_status=1)
     data = {'processes':process_objects}
     return render(request,'KNGarment_Order_TrackPro_App/paid_order.html',data)
 
+@login_required(login_url='/user_login')
 def reports_job_worker_balancereport(request):
     return render(request,'KNGarment_Order_TrackPro_App/job_worker_bal_report.html')
 
+@login_required(login_url='/user_login')
 def reports_stockreport(request):
     return render(request,'KNGarment_Order_TrackPro_App/stock_report.html')
 
+@login_required(login_url='/user_login')
 def track_order_production_details(request):
     return render(request,'KNGarment_Order_TrackPro_App/Production.html')
 
+@login_required(login_url='/user_login')
 def report_error(request):
     return render(request,'KNGarment_Order_TrackPro_App/report_error.html')
 
+@login_required(login_url='/user_login')
 def forget_password(request):
     return render(request,'KNGarment_Order_TrackPro_App/forget_password.html')
 
-
+@login_required(login_url='/user_login')
 def add_new_order_form_submit(request):
     if request.method == "POST":
         # Get all data relating to that order.
@@ -341,7 +356,7 @@ def add_new_order_form_submit(request):
 
     return HttpResponseRedirect(reverse('KNGarment_Order_TrackPro_App:add_processes',kwargs={'pk': orders_latest_object.pk}))
 
-
+@login_required(login_url='/user_login')
 def add_new_fabric_order_form_submit(request):
     if request.method == "POST":
         # Get all data relating to that order.
@@ -359,6 +374,7 @@ def add_new_fabric_order_form_submit(request):
         
         return HttpResponseRedirect(reverse('KNGarment_Order_TrackPro_App:track_order_details',kwargs={'pk': Order_object.pk}))
 
+@login_required(login_url='/user_login')
 def add_new_stiching_form_submit(request):
     if request.method == "POST":
         # Get all data relating to that order.
@@ -403,6 +419,7 @@ def add_new_stiching_form_submit(request):
         
         return HttpResponseRedirect(reverse('KNGarment_Order_TrackPro_App:track_order_details',kwargs={'pk': Order_object.pk}))
 
+@login_required(login_url='/user_login')
 def add_new_washing_order_form_submit(request):
     if request.method == "POST":
         # Get all data relating to that order.
@@ -432,6 +449,7 @@ def add_new_washing_order_form_submit(request):
         
         return HttpResponseRedirect(reverse('KNGarment_Order_TrackPro_App:track_order_details',kwargs={'pk': Order_object.pk}))
 
+@login_required(login_url='/user_login')
 def add_new_finishing_order_form_submit(request):
     if request.method == "POST":
         # Get all data relating to that order.
@@ -459,6 +477,7 @@ def add_new_finishing_order_form_submit(request):
         
         return HttpResponseRedirect(reverse('KNGarment_Order_TrackPro_App:track_order_details',kwargs={'pk': Order_object.pk}))
 
+@login_required(login_url='/user_login')
 def add_new_dispatch_order_form_submit(request):
     if request.method == "POST":
         # Get all data relating to that order.
@@ -481,6 +500,7 @@ def add_new_dispatch_order_form_submit(request):
         return HttpResponseRedirect(reverse('KNGarment_Order_TrackPro_App:track_order_details',kwargs={'pk': dispatch_object.pk}))
 
 #Update View
+@method_decorator(login_required, name='dispatch')
 class FabricOrderUpdateView(BSModalUpdateView):
     model = Fabric_Order
     template_name = 'KNGarment_Order_TrackPro_App/update_order.html'
@@ -488,6 +508,7 @@ class FabricOrderUpdateView(BSModalUpdateView):
     success_message = 'Success: Entry was updated.'
     success_url = reverse_lazy('KNGarment_Order_TrackPro_App:track_order_fabric_order')
 
+@method_decorator(login_required, name='dispatch')
 class StichingOrderUpdateView(BSModalUpdateView):
     model = Stiching
     template_name = 'KNGarment_Order_TrackPro_App/update_order.html'
@@ -495,6 +516,7 @@ class StichingOrderUpdateView(BSModalUpdateView):
     success_message = 'Success: Entry was updated.'
     success_url = reverse_lazy('KNGarment_Order_TrackPro_App:track_order_stiching_order')
 
+@method_decorator(login_required, name='dispatch')
 class WashingOrderUpdateView(BSModalUpdateView):
     model = Washing
     template_name = 'KNGarment_Order_TrackPro_App/update_order.html'
@@ -502,6 +524,7 @@ class WashingOrderUpdateView(BSModalUpdateView):
     success_message = 'Success: Entry was updated.'
     success_url = reverse_lazy('KNGarment_Order_TrackPro_App:track_order_washing_order')
 
+@method_decorator(login_required, name='dispatch')
 class FinishingOrderUpdateView(BSModalUpdateView):
     model = Finishing
     template_name = 'KNGarment_Order_TrackPro_App/update_order.html'
@@ -509,6 +532,7 @@ class FinishingOrderUpdateView(BSModalUpdateView):
     success_message = 'Success: Entry was updated.'
     success_url = reverse_lazy('KNGarment_Order_TrackPro_App:track_order_finishing_order')
 
+@method_decorator(login_required, name='dispatch')
 class DispatchOrderUpdateView(BSModalUpdateView):
     model = Dispatch
     template_name = 'KNGarment_Order_TrackPro_App/update_order.html'
@@ -516,6 +540,7 @@ class DispatchOrderUpdateView(BSModalUpdateView):
     success_message = 'Success: Entry was updated.'
     success_url = reverse_lazy('KNGarment_Order_TrackPro_App:track_order_dispatched_order')
     
+@method_decorator(login_required, name='dispatch')
 class PendingOrderUpdateView(BSModalUpdateView):
     model = Process
     template_name = 'KNGarment_Order_TrackPro_App/update_order.html'
@@ -523,6 +548,7 @@ class PendingOrderUpdateView(BSModalUpdateView):
     success_message = 'Success: Entry was updated.'
     success_url = reverse_lazy('KNGarment_Order_TrackPro_App:payment_pending')
 
+@method_decorator(login_required, name='dispatch')
 class PaidOrderUpdateView(BSModalUpdateView):
     model = Process
     template_name = 'KNGarment_Order_TrackPro_App/update_order.html'
@@ -530,6 +556,7 @@ class PaidOrderUpdateView(BSModalUpdateView):
     success_message = 'Success: Entry was updated.'
     success_url = reverse_lazy('KNGarment_Order_TrackPro_App:payment_paid')
 
+@login_required(login_url='/user_login')
 def user_list(request):
     user_role = request.user.user_role
     users = CustomUser.objects.all()
@@ -538,6 +565,7 @@ def user_list(request):
     return render(request,'KNGarment_Order_TrackPro_App/userlist.html',data)
 
 #< -----Update Users Views ------>
+@method_decorator(login_required, name='dispatch')
 class UserUpdateView(BSModalUpdateView):
     model = CustomUser
     template_name = 'KNGarment_Order_TrackPro_App/update_order.html'
@@ -547,6 +575,7 @@ class UserUpdateView(BSModalUpdateView):
 #</-----Update Users Views ------>
 
 #< -----Delete Users Views ------>
+@method_decorator(login_required, name='dispatch')
 class UserDeleteView(BSModalDeleteView):
     model = CustomUser
     template_name = 'KNGarment_Order_TrackPro_App/delete_entry.html'
@@ -555,6 +584,7 @@ class UserDeleteView(BSModalDeleteView):
 #</-----Delete Users Views ------>
 
 #< -----Add Users Views ------>
+@method_decorator(login_required, name='dispatch')
 class Add_UsersView(BSModalCreateView):
     template_name = 'KNGarment_Order_TrackPro_App/add_new_user.html'
     form_class = CustomUserForm
