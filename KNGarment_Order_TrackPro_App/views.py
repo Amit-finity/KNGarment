@@ -82,6 +82,12 @@ def add_processes(request,pk):
             'order_ethenic':order_ethenic_object}
     return render(request,'KNGarment_Order_TrackPro_App/add_processes.html',data)
 
+def all_orders(request):
+    all_orders = Orders.objects.all()
+    data = {'orders':all_orders}
+    return render(request,'KNGarment_Order_TrackPro_App/All_Orders.html',data)
+
+
 def current_order(request):
     orders = Orders.objects.all()
     current_order_list = []

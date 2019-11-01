@@ -39,6 +39,9 @@ path("update_order_detail/",views.update_order_detail,name='update_order_detail'
 #add_processes URL
 path('add_processes/<int:pk>', views.add_processes, name = 'add_processes'),
 
+#all_orders URL
+path('all_orders/', views.all_orders, name = 'all_orders'),
+
 #current_order URL
 path('current_order/', views.current_order, name = 'current_order'),
 
