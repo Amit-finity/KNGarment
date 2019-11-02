@@ -35,8 +35,8 @@
                                 <th>Order Date</th>
                                 <th>Delivery Date</th>
                                 <th>Category</th>
-                                <th>Cutting Ratio</th>
-                                <th>Status</th>
+                                
+                               
                                 <th>Update Status</th>
                             </tr>
                         </thead>
@@ -52,8 +52,7 @@
                                 <td>{{order.order_order_date}}</td>
                                 <td>{{order.order_delivery_date}}</td>
                                 <td>{{order.order_order_category}}</td>
-                                <td>{{order.order_order_category}}</td>
-                                <td>{{order.order_fit_sample_status}}</td>
+                                
                                 <td><button type="button" class="btn btn-sm btn-primary">
                                 <a href="{% url 'KNGarment_Order_TrackPro_App:add_processes' order.pk %}">
                                     Update

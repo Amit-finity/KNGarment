@@ -32,6 +32,7 @@
             <table id="test_table" class="display" style="width:100%">
                 <thead>
                     <tr>
+                        <th>Order Process ID</th>
                         <th>Washer Name</th>
                         <th> Washer Location</th>
                         <th>Received Quantity</th>
@@ -48,6 +49,7 @@
                 <tbody>
                     {% for washing in washing_order %}
                     <tr>
+                        <td><a href="{% url 'KNGarment_Order_TrackPro_App:update_order_detail'%}"> {{washing.process_order_id}}</a></td>
                         <td>{{washing.process_vendor_name}}</td>
                         <td>{{washing.process_vendor_location}}</td>
                         <td>{{washing.process_received_quantity}}</td>

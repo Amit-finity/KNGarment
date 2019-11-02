@@ -12,7 +12,7 @@ from bootstrap_modal_forms.generic import (BSModalCreateView,BSModalUpdateView,B
 
 #Project Imports
 from KNGarment_Order_TrackPro_App.models import Client,Vendor,Orders,Process,Fabric_Order,Stiching,Washing,Finishing,Dispatch,Order_Mens_Or_Ladies,Order_Kids,Order_Ethenic,CustomUser
-from KNGarment_Order_TrackPro_App.forms import Update_FabricOrder,Update_StichingOrder,Update_WashingOrder,Update_FinishingOrder,Update_DispatchOrder,Update_Process_payment_status,CustomUserForm 
+from KNGarment_Order_TrackPro_App.forms import Update_Orders,Update_FabricOrder,Update_StichingOrder,Update_WashingOrder,Update_FinishingOrder,Update_DispatchOrder,Update_Process_payment_status,CustomUserForm 
 
 # Create your views here.
 # ------ Authentication Views -----
@@ -60,16 +60,20 @@ def user_sign_out(request):
 
 @login_required(login_url='/user_login')
 def add_new_order_form(request):
-    return render(request,'KNGarment_Order_TrackPro_App/Add_orders.html')
+    user_role = request.user.user_role
+    data = {'user_role':user_role}
+    return render(request,'KNGarment_Order_TrackPro_App/Add_orders.html',data)
 
 @login_required(login_url='/user_login')
 def update_order_detail(request):
+    user_role = request.user.user_role
     orders = Orders.objects.all()
-    data = {'orders':orders}
+    data = {'orders':orders,'user_role':user_role}
     return render(request,'KNGarment_Order_TrackPro_App/update_orders_detail.html',data)
 
 @login_required(login_url='/user_login')
 def add_processes(request,pk):
+    user_role = request.user.user_role
     order_data = {}
     one_object_of_model_order = Orders.objects.get(pk=pk)
     order_data['orders']
@@ -81,19 +85,19 @@ def add_processes(request,pk):
         order_data['order_kids_order']=Order_Kids.objects.get(order_ethenic_order_id=pk)
     order_kids_object = Order_Kids.objects.filter(order_kids_order_id=pk)
     order_ethenic_object = Order_Ethenic.objects.filter(order_ethenic_order_id=pk)
-    data = {
-            'order_data':order_data,
-            }
+    data = {'order_data':order_data,'user_role':user_role}
     return render(request,'KNGarment_Order_TrackPro_App/add_processes.html',data)
 
 @login_required(login_url='/user_login')
 def all_orders(request):
+    user_role = request.user.user_role
     all_orders = Orders.objects.all()
-    data = {'orders':all_orders}
+    data = {'orders':all_orders,'user_role':user_role}
     return render(request,'KNGarment_Order_TrackPro_App/All_Orders.html',data)
 
 @login_required(login_url='/user_login')
 def current_order(request):
+    user_role = request.user.user_role
     orders = Orders.objects.all()
     current_order_list = []
    
@@ -116,11 +120,12 @@ def current_order(request):
         if length > 0 and length < 4:
             current_order_list.append(order.pk)
     current_order_objects = Orders.objects.filter(pk__in=current_order_list)
-    data = {'current_order':current_order_objects}
+    data = {'current_order':current_order_objects,'user_role':user_role}
     return render(request,'KNGarment_Order_TrackPro_App/Current.html',data)
 
 @login_required(login_url='/user_login')
 def delivered_order(request):
+    user_role = request.user.user_role
     orders = Orders.objects.all()
     delivered_order_list = []
     for order in orders:
@@ -142,11 +147,12 @@ def delivered_order(request):
         if length == 4:
             delivered_order_list.append(order.pk)
     delivered_order_objects = Orders.objects.filter(pk__in=delivered_order_list)
-    data = {'delivered_order':delivered_order_objects,'length':length}
+    data = {'delivered_order':delivered_order_objects,'length':length,'user_role':user_role}
     return render(request,'KNGarment_Order_TrackPro_App/delivered_orders.html',data)
 
 @login_required(login_url='/user_login')
 def track_order_registered_order(request):
+    user_role = request.user.user_role
     orders = Orders.objects.all()
     registered_order_list = []
     
@@ -169,11 +175,12 @@ def track_order_registered_order(request):
         if length == 0:
             registered_order_list.append(order.pk)
     registered_order_objects = Orders.objects.filter(pk__in=registered_order_list)
-    data = {'registered_order':registered_order_objects}
+    data = {'registered_order':registered_order_objects,'user_role':user_role}
     return render(request,'KNGarment_Order_TrackPro_App/Order_registered.html',data)
 
 @login_required(login_url='/user_login')
 def track_order_details(request,pk):
+    user_role = request.user.user_role
     fabric_bill_numbers = Fabric_Order.objects.all()
     fabric_object = Fabric_Order.objects.get(process_order_id=pk)
     stiching_object = Stiching.objects.get(process_order_id=pk)
@@ -193,71 +200,89 @@ def track_order_details(request,pk):
             'stiching':stiching_object,
             'washing':washing_object,
             'finishing':finishing_object,
-            'dispatch':dispatch_object}
+            'dispatch':dispatch_object,
+            'user_role':user_role}
     return render(request,'KNGarment_Order_TrackPro_App/Order_Details_2.html',data)
 
 @login_required(login_url='/user_login')
 def track_order_fabric_order(request):
+    user_role = request.user.user_role
     fabric_order_objects = Fabric_Order.objects.all()
-    data = {'fabric_order':fabric_order_objects}
+    data = {'fabric_order':fabric_order_objects,'user_role':user_role}
     return render(request,'KNGarment_Order_TrackPro_App/fabric_order.html',data)
 
 
 @login_required(login_url='/user_login')
 def track_order_stiching_order(request):
+    user_role = request.user.user_role
     stiching_order_objects = Stiching.objects.all()
-    data = {'stiching_order':stiching_order_objects}
+    data = {'stiching_order':stiching_order_objects,'user_role':user_role}
     return render(request,'KNGarment_Order_TrackPro_App/stiching.html',data)
 
 @login_required(login_url='/user_login')
 def track_order_washing_order(request):
+    user_role = request.user.user_role
     washing_order_objects = Washing.objects.all()
-    data = {'washing_order':washing_order_objects}
+    data = {'washing_order':washing_order_objects,'user_role':user_role}
     return render(request,'KNGarment_Order_TrackPro_App/Washing.html',data)
 
 @login_required(login_url='/user_login')
 def track_order_finishing_order(request):
+    user_role = request.user.user_role
     finishing_order_objects = Finishing.objects.all()
-    data = {'finishing_order':finishing_order_objects}
+    data = {'finishing_order':finishing_order_objects,'user_role':user_role}
     return render(request,'KNGarment_Order_TrackPro_App/Finishing.html',data)
 
 @login_required(login_url='/user_login')
 def track_order_dispatched_order(request):
+    user_role = request.user.user_role
     dispatch_order_objects = Dispatch.objects.all()
-    data = {'dispatch_order':dispatch_order_objects}
+    data = {'dispatch_order':dispatch_order_objects,'user_role':user_role}
     return render(request,'KNGarment_Order_TrackPro_App/dispatch.html',data)
 
 @login_required(login_url='/user_login')
 def payment_pending(request):
+    user_role = request.user.user_role
     process_objects = Process.objects.all().filter(process_payment_status=2)
-    data = {'processes':process_objects}
+    data = {'processes':process_objects,'user_role':user_role}
     return render(request,'KNGarment_Order_TrackPro_App/pending_order.html',data)
 
 @login_required(login_url='/user_login')
 def payment_paid(request):
+    user_role = request.user.user_role
     process_objects = Process.objects.all().filter(process_payment_status=1)
-    data = {'processes':process_objects}
+    data = {'processes':process_objects,'user_role':user_role}
     return render(request,'KNGarment_Order_TrackPro_App/paid_order.html',data)
 
 @login_required(login_url='/user_login')
 def reports_job_worker_balancereport(request):
-    return render(request,'KNGarment_Order_TrackPro_App/job_worker_bal_report.html')
+    user_role = request.user.user_role
+    data = {'user_role':user_role}
+    return render(request,'KNGarment_Order_TrackPro_App/job_worker_bal_report.html',data)
 
 @login_required(login_url='/user_login')
 def reports_stockreport(request):
-    return render(request,'KNGarment_Order_TrackPro_App/stock_report.html')
+    user_role = request.user.user_role
+    data = {'user_role':user_role}
+    return render(request,'KNGarment_Order_TrackPro_App/stock_report.html',data)
 
 @login_required(login_url='/user_login')
 def track_order_production_details(request):
-    return render(request,'KNGarment_Order_TrackPro_App/Production.html')
+    user_role = request.user.user_role
+    data = {'user_role':user_role}
+    return render(request,'KNGarment_Order_TrackPro_App/Production.html',data)
 
 @login_required(login_url='/user_login')
 def report_error(request):
-    return render(request,'KNGarment_Order_TrackPro_App/report_error.html')
+    user_role = request.user.user_role
+    data = {'user_role':user_role}
+    return render(request,'KNGarment_Order_TrackPro_App/report_error.html',data)
 
 @login_required(login_url='/user_login')
 def forget_password(request):
-    return render(request,'KNGarment_Order_TrackPro_App/forget_password.html')
+    user_role = request.user.user_role
+    data = {'user_role':user_role}
+    return render(request,'KNGarment_Order_TrackPro_App/forget_password.html',data)
 
 @login_required(login_url='/user_login')
 def add_new_order_form_submit(request):
@@ -503,7 +528,65 @@ def add_new_dispatch_order_form_submit(request):
         
         return HttpResponseRedirect(reverse('KNGarment_Order_TrackPro_App:track_order_details',kwargs={'pk': dispatch_object.pk}))
 
+#pending_order_v2 view
+def pending_order_v2(request):
+    user_role = request.user.user_role
+    data = {'user_role':user_role}
+    return render(request,'KNGarment_Order_TrackPro_App/pending_order_v2.html',data)
+
+#paid_order_v2 view
+def paid_order_v2(request):
+    user_role = request.user.user_role
+    data = {'user_role':user_role}
+    return render(request,'KNGarment_Order_TrackPro_App/paid_order_v2.html',data)
+
 #Update View
+class RegisteredOrdersUpdateView(BSModalUpdateView):
+    model = Orders 
+    template_name = 'KNGarment_Order_TrackPro_App/update_order.html'
+    form_class = Update_Orders
+    success_message = 'Success: Entry was updated.'
+    success_url = reverse_lazy('KNGarment_Order_TrackPro_App:track_order_registered_order')
+
+#Delete View
+class RegisteredOrdersDeleteView(BSModalDeleteView):
+    model = Orders
+    template_name = 'KNGarment_Order_TrackPro_App/delete_entry.html'
+    success_message = 'Success: Entry was deleted.'
+    success_url = reverse_lazy('KNGarment_Order_TrackPro_App:track_order_registered_order')
+
+#Update View
+class CurrentOrdersUpdateView(BSModalUpdateView):
+    model = Orders 
+    template_name = 'KNGarment_Order_TrackPro_App/update_order.html'
+    form_class = Update_Orders
+    success_message = 'Success: Entry was updated.'
+    success_url = reverse_lazy('KNGarment_Order_TrackPro_App:current_order')
+
+#Delete View
+class CurrentOrdersDeleteView(BSModalDeleteView):
+    model = Orders
+    template_name = 'KNGarment_Order_TrackPro_App/delete_entry.html'
+    success_message = 'Success: Entry was deleted.'
+    success_url = reverse_lazy('KNGarment_Order_TrackPro_App:current_order')
+
+class DeliveredOrdersUpdateView(BSModalUpdateView):
+    model = Orders 
+    template_name = 'KNGarment_Order_TrackPro_App/update_order.html'
+    form_class = Update_Orders
+    success_message = 'Success: Entry was updated.'
+    success_url = reverse_lazy('KNGarment_Order_TrackPro_App:delivered_order')
+
+#Delete View
+class DeliveredOrdersDeleteView(BSModalDeleteView):
+    model = Orders
+    template_name = 'KNGarment_Order_TrackPro_App/delete_entry.html'
+    success_message = 'Success: Entry was deleted.'
+    success_url = reverse_lazy('KNGarment_Order_TrackPro_App:delivered_order')
+
+
+
+
 @method_decorator(login_required, name='dispatch')
 class FabricOrderUpdateView(BSModalUpdateView):
     model = Fabric_Order
@@ -565,7 +648,7 @@ def user_list(request):
     user_role = request.user.user_role
     users = CustomUser.objects.all()
     #userrole = request.user.user_role
-    data = { 'users' : users}
+    data = { 'users' : users,'user_role':user_role}
     return render(request,'KNGarment_Order_TrackPro_App/userlist.html',data)
 
 #< -----Update Users Views ------>

@@ -7,6 +7,22 @@ class CustomUserForm(BSModalForm):
         model = CustomUser
         fields = ['user_role','username','email']
 
+class Update_Orders(BSModalForm):
+    class Meta:
+        model = Orders
+        fields = ('order_order_number',
+        'order_order_type',
+        'order_order_brands',
+        'order_order_style_number',
+        'order_order_fit',
+        'order_order_quantity',
+        'order_order_date',
+        'order_delivery_date',
+        'order_order_category',
+        'order_fit_sample_submitted_date',
+        'order_pps_sample_submitted_date',
+        'order_order_remark')
+
 class Update_FabricOrder(BSModalForm):
     class Meta:
         model= Fabric_Order

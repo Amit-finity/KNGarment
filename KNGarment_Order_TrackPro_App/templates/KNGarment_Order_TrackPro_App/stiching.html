@@ -32,6 +32,7 @@
                     <table id="test_table" class="display" style="width:100%">
                         <thead>
                             <tr>
+                                <th>Order Process ID</th>
                                 <th>Job Worker Name</th>
                                 <th> Job Worker Location</th>
                                 <th>Average1</th>
@@ -57,6 +58,7 @@
                         <tbody>
                         {% for stiching in stiching_order%}
                             <tr>
+                                 <td><a href="{% url 'KNGarment_Order_TrackPro_App:update_order_detail'%}"> {{stiching.process_order_id}}</a></td>
                                 <td>{{stiching.process_vendor_name}}</td>
                                 <td>{{stiching.process_vendor_location}}</td>
                                 <td>{{stiching.stiching_average_one}}</td>

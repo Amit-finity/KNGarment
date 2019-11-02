@@ -75,6 +75,12 @@ path('payment_pending/', views.payment_pending, name = 'payment_pending'),
 #payment_paid URL
 path('payment_paid/', views.payment_paid, name = 'payment_paid'),
 
+#pending_order_v2 URL
+path('pending_order_v2/',views.pending_order_v2,name='pending_order_v2'),
+
+#paid_order_v2 URL
+path('paid_order_v2/',views.paid_order_v2,name='paid_order_v2'),
+
 #reports_job_worker_balancereport URL
 path('reports_job_worker_balancereport/', views.reports_job_worker_balancereport, name = 'reports_job_worker_balancereport'),
 
@@ -98,6 +104,24 @@ path('add_new_washing_order_form_submit/', views.add_new_washing_order_form_subm
 path('add_new_finishing_order_form_submit/', views.add_new_finishing_order_form_submit, name='add_new_finishing_order_form_submit'),
 
 path('add_new_dispatch_order_form_submit/', views.add_new_dispatch_order_form_submit, name='add_new_dispatch_order_form_submit'),
+
+#Registered Orders - Update
+path('registered_order_update/<int:pk>',views.RegisteredOrdersUpdateView.as_view(), name='registered_order_update'),
+
+#Registered Orders - Delete
+path('registered_order_delete/<int:pk>',views.RegisteredOrdersDeleteView.as_view(),name='registered_order_delete'),
+
+#Current Orders - Update
+path('current_order_update/<int:pk>',views.CurrentOrdersUpdateView.as_view(), name='current_order_update'),
+
+#Current Orders - Delete
+path('current_order_delete/<int:pk>',views.CurrentOrdersDeleteView.as_view(),name='current_order_delete'),
+
+#Delivered Orders - Update
+path('delivered_order_update/<int:pk>',views.DeliveredOrdersUpdateView.as_view(), name='delivered_order_update'),
+
+#Delivered Orders - Delete
+path('delivered_order_delete/<int:pk>',views.DeliveredOrdersDeleteView.as_view(),name='delivered_order_delete'),
 
 # Fabric Order - Update
 path('fabric_order_update/<int:pk>',views.FabricOrderUpdateView.as_view(), name='fabric_order_update'),

@@ -32,6 +32,7 @@
             <table id="test_table" class="display" style="width:100%">
                 <thead>
                     <tr>
+                        <th>Order Process ID</th>
                         <th>Finishing Name</th>
                         <th> Finishing Location</th>
                         <th>Received Quantity</th>
@@ -48,6 +49,7 @@
                 <tbody>
                     {% for finishing in finishing_order %}
                     <tr>
+                        <td><a href="{% url 'KNGarment_Order_TrackPro_App:update_order_detail'%}"> {{finishing.process_order_id}}</a></td>
                         <td>{{finishing.process_vendor_name}}</td>
                         <td>{{finishing.process_vendor_location}}</td>
                         <td>{{finishing.process_received_quantity}}</td>

@@ -1,4 +1,4 @@
-{% extends 'KNGarment_Order_TrackPro_App/base_v2.html' %}
+{% extends 'KNGarment_Order_TrackPro_App/base.html' %}
 {% load static %}
 
 {% block stylesheets %}
@@ -12,6 +12,12 @@
 {% endblock stylesheets %}
 
 {% block content %}
+<!-- Modal for CURD Operation -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content"></div>
+    </div>
+</div>
         <!-- PAGE CONTENT  -->
         <div id="content">
             <div class="container-fluid">
@@ -34,8 +40,11 @@
                                 <th>Order Date</th>
                                 <th>Delivery Date</th>
                                 <th>Category</th>
-                                <th>Status</th>
-                                <th>Update Status</th>
+                                
+                                <th>Update Order Detail</th>
+                                 {% if user_role == 1 %}
+                        <th class="text-center" scope="col">Delete</th>
+                        {% endif %}
                             </tr>
                         </thead>
                        <tbody>
@@ -50,58 +59,23 @@
                         <td>{{current.order_order_date}}</td>
                         <td>{{current.order_delivery_date}}</td>
                         <td>{{current.order_order_category}}</td>
-                        <td>{{current.order_fit_sample_status}}</td>
                         <td>
-                            <button type="button" class="update-order btn btn-sm btn-primary" data-id="">
+                            <button type="button" class="update-order btn btn-sm btn-primary" data-id="{% url 'KNGarment_Order_TrackPro_App:current_order_update' pk=current.pk  %}">
                                 <span class="fa fa-edit"></span>
                             </button>
                         </td>
+                        {% if user_role == 1 %}
+                        <td>
+                            <button type="button" class="delete-order btn btn-sm btn-danger" data-id="{% url 'KNGarment_Order_TrackPro_App:current_order_delete' pk=current.pk  %}">
+                                <span class="fa fa-trash"></span>
+                            </button>
+                        </td>
+                        {% endif %}
                     </tr>
                     {% endfor %}
                 </tbody>
                     </table>
                 </div>
-
-                <!-- Modal -->
-                <div class="container">
-                <div class="modal fade" id="myModal" role="dialog">
-                    <div class="modal-dialog modal-lg">
-
-                        <!-- Modal content-->
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">Update Status</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-
-                            </div>
-                            <div class="modal-body">
-                                
-                                 <div class="form-row">
-                                     <div class="col">
-                                         <label for="Pattern_type">Update Status</label><br>
-                                         <select id="Pattern_type" class="form-control">
-                                             <option>Registerd Ordered</option>
-                                             <option>Fabric Ordered</option>
-                                             <option>Production</option>
-                                             <option>Washing</option>
-                                             <option>Finishing</option>
-                                             <option>Delivery Ready</option>
-                                             <option>In Stock</option>
-                                             <option>Upcoming Payment</option>
-
-                                         </select>
-                                     </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default">Update</button>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                    </div>
-
 
             </div>
         </div>
@@ -125,5 +99,24 @@ $(document).ready(function() {
     $('#test_table').DataTable();
     });
 </script>
+<script type="text/javascript">
+    $(function() {
+        $(".update-order").each(function() {
+            $(this).modalForm({
+                formURL: $(this).data('id')
+            });
+        });
+        $(".delete-order").each(function() {
+            $(this).modalForm({
+                formURL: $(this).data('id')
+            });
+        });
 
+        $(".read-order").each(function() {
+            $(this).modalForm({
+                formURL: $(this).data('id')
+            });
+        });
+    });
+</script>
 {% endblock %}

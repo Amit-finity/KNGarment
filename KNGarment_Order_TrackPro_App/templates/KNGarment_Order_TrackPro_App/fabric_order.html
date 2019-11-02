@@ -31,6 +31,7 @@
                     <table id="test_table" class="display" style="width:100%">
                         <thead>
                             <tr>
+                                <th>Order Process ID</th>
                                 <th>Sort Number</th>
                                 <th>Fabric Supplier</th>
                                 <th>Order Quantity</th>
@@ -42,6 +43,7 @@
                         <tbody>
                         {% for fabric in fabric_order %}
                             <tr>
+                                <td><a href="{% url 'KNGarment_Order_TrackPro_App:update_order_detail'%}"> {{fabric.process_order_id}}</a></td>
                                 <td>{{fabric.fabric_order_sort_number}}</td>
                                 <td>{{fabric.process_vendor_name}}</td>
                                 <td>{{fabric.fabric_order_quantity}}</td>

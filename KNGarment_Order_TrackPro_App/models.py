@@ -15,12 +15,20 @@ class CustomUser(AbstractUser):
     # Datafields
     SUPER_ADMIN = 1
     ADMIN = 2
+    FABRIC_VENDOR = 3
+    STITCHING_VENDOR = 4
+    WASHING_VENDOR = 5
+    FINISHING_VENDOR = 6
     ROLE_CHOICES = (
       (ADMIN,'admin'),
-      (SUPER_ADMIN,'super_admin')
+      (SUPER_ADMIN,'super_admin'),
+      (FABRIC_VENDOR,'fabric_vendor'),
+      (STITCHING_VENDOR,'stitching_vendor'),
+      (WASHING_VENDOR,'washing_vendor'),
+      (FINISHING_VENDOR,'finishing_vendor')
     )
     user_role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES,default=ADMIN,blank=True)
-
+    
 #Client Model
 class Client(models.Model):
     client_id = models.IntegerField()
