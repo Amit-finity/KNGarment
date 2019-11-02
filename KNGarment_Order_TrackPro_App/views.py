@@ -70,16 +70,20 @@ def update_order_detail(request):
 
 @login_required(login_url='/user_login')
 def add_processes(request,pk):
-    fabric_bill_numbers = Fabric_Order.objects.all()
-    order_object = Orders.objects.get(pk=pk)
-    order_mens_or_ladies_object = Order_Mens_Or_Ladies.objects.get(order_mens_or_ladies_order_id=pk)
-    order_kids_object = Order_Kids.objects.get(order_kids_order_id=pk)
-    order_ethenic_object = Order_Ethenic.objects.get(order_ethenic_order_id=pk)
-    data = {'orders':order_object,
-            'fabric_bill_numbers':fabric_bill_numbers,
-            'order_mens_or_ladies':order_mens_or_ladies_object,
-            'order_kids':order_kids_object,
-            'order_ethenic':order_ethenic_object}
+    order_data = {}
+    one_object_of_model_order = Orders.objects.get(pk=pk)
+    order_data['orders']
+    if Order_Mens_Or_Ladies.objects.filter(order_mens_or_ladies_order_id=pk).exists():
+        order_data['order_mens_or_ladies']=Order_Mens_Or_Ladies.objects.filter(order_mens_or_ladies_order_id=pk)
+    if Order_Ethenic.objects.filter(order_ethenic_order_id=pk).exists():
+        order_data['order_ethenic']=Order_Ethenic.objects.filter(order_ethenic_order_id=pk)
+    if Order_Kids.objects.filter(order_kids_order_id=pk).exists():
+        order_data['order_kids_order']=Order_Kids.objects.get(order_ethenic_order_id=pk)
+    order_kids_object = Order_Kids.objects.filter(order_kids_order_id=pk)
+    order_ethenic_object = Order_Ethenic.objects.filter(order_ethenic_order_id=pk)
+    data = {
+            'order_data':order_data,
+            }
     return render(request,'KNGarment_Order_TrackPro_App/add_processes.html',data)
 
 @login_required(login_url='/user_login')
@@ -282,7 +286,7 @@ def add_new_order_form_submit(request):
                                         order_client_id = Client.objects.latest('pk'))
         orders_latest_object = Orders.objects.latest('order_order_date_of_entry') 
 
-        if request.POST.get('mens_or_ladies_checkbox', False) == 'mensorladies':            
+        if request.POST.get('mens_or_ladies_checkbox', False) == 'mens_or_ladies_checkbox':            
             quantity_26 = request.POST['quantity_26']
             quantity_28 = request.POST['quantity_28']
             quantity_30 = request.POST['quantity_30']
@@ -306,7 +310,7 @@ def add_new_order_form_submit(request):
             order_mens_or_ladies_size_44_quantity = quantity_44,
             order_mens_or_ladies_order_id = Orders.objects.latest('order_order_date_of_entry'))
         
-        if request.POST.get('kids_checkbox', False) == 'kids': 
+        if request.POST.get('kids_checkbox', False) == 'kids_checkbox': 
             order_kids_age_2_years = request.POST['2_years']
             order_kids_age_3to4_years = request.POST['3_4_years']
             order_kids_age_5to6_years = request.POST['5_6_years']
@@ -336,7 +340,7 @@ def add_new_order_form_submit(request):
             order_kids_age_10to11_years = order_kids_age_10to11_years,
             order_kids_order_id = Orders.objects.latest('order_order_date_of_entry'))
 
-        if request.POST.get('ethenic_checkbox', False) == 'ethenic':
+        if request.POST.get('ethenic_checkbox', False) == 'ethenic_checkbox':
             order_ethenic_size_XS = request.POST['xs_size']
             order_ethenic_size_S = request.POST['s_size']
             order_ethenic_size_M = request.POST['m_size']
