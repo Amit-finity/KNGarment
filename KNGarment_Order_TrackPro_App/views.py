@@ -541,6 +541,21 @@ def paid_order_v2(request):
     return render(request,'KNGarment_Order_TrackPro_App/paid_order_v2.html',data)
 
 #Update View
+class AllOrdersUpdateView(BSModalUpdateView):
+    model = Orders 
+    template_name = 'KNGarment_Order_TrackPro_App/update_order.html'
+    form_class = Update_Orders
+    success_message = 'Success: Entry was updated.'
+    success_url = reverse_lazy('KNGarment_Order_TrackPro_App:all_orders')
+
+#Delete View
+class AllOrdersDeleteView(BSModalDeleteView):
+    model = Orders
+    template_name = 'KNGarment_Order_TrackPro_App/delete_entry.html'
+    success_message = 'Success: Entry was deleted.'
+    success_url = reverse_lazy('KNGarment_Order_TrackPro_App:all_orders')
+
+#Update View
 class RegisteredOrdersUpdateView(BSModalUpdateView):
     model = Orders 
     template_name = 'KNGarment_Order_TrackPro_App/update_order.html'

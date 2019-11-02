@@ -105,6 +105,12 @@ path('add_new_finishing_order_form_submit/', views.add_new_finishing_order_form_
 
 path('add_new_dispatch_order_form_submit/', views.add_new_dispatch_order_form_submit, name='add_new_dispatch_order_form_submit'),
 
+#All Orders - Update
+path('all_order_update/<int:pk>',views.AllOrdersUpdateView.as_view(), name='all_order_update'),
+
+#All Orders - Delete
+path('all_order_delete/<int:pk>',views.AllOrdersDeleteView.as_view(),name='all_order_delete'),
+
 #Registered Orders - Update
 path('registered_order_update/<int:pk>',views.RegisteredOrdersUpdateView.as_view(), name='registered_order_update'),
 
