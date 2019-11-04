@@ -81,6 +81,12 @@
                         <li>
                             <a href="{% url 'KNGarment_Order_TrackPro_App:delivered_order' %}">Dispatch Ready</a>
                         </li>
+                         {% if user_role == 2 or user_role == 1 %}
+                        <li>
+                            <a href="{% url 'KNGarment_Order_TrackPro_App:track_order_dispatched_order' %}">Dispatched</a>
+                        </li>
+                   
+                    {% endif %}  
                     </ul>
                 </li>
                 {% endif %}
@@ -115,12 +121,6 @@
                         <li>
                             <a href="{% url 'KNGarment_Order_TrackPro_App:track_order_finishing_order' %}">Finishing</a>
                         </li>
-                    {% endif %}  
-                    {% if user_role == 2 or user_role == 1 %}
-                        <li>
-                            <a href="{% url 'KNGarment_Order_TrackPro_App:track_order_dispatched_order' %}">Dispatched</a>
-                        </li>
-                   
                     {% endif %}  
                      </ul>
                 </li>

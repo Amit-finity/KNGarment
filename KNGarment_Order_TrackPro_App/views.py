@@ -76,7 +76,7 @@ def add_processes(request,pk):
     user_role = request.user.user_role
     order_data = {}
     one_object_of_model_order = Orders.objects.get(pk=pk)
-    order_data['orders']
+    #order_data['orders']
     if Order_Mens_Or_Ladies.objects.filter(order_mens_or_ladies_order_id=pk).exists():
         order_data['order_mens_or_ladies']=Order_Mens_Or_Ladies.objects.filter(order_mens_or_ladies_order_id=pk)
     if Order_Ethenic.objects.filter(order_ethenic_order_id=pk).exists():
@@ -311,7 +311,7 @@ def add_new_order_form_submit(request):
                                         order_client_id = Client.objects.latest('pk'))
         orders_latest_object = Orders.objects.latest('order_order_date_of_entry') 
 
-        if request.POST.get('mens_or_ladies_checkbox', False) == 'mens_or_ladies_checkbox':            
+        if request.POST.get('mens_or_ladies_checkbox', False) == 'mens_or_ladies_checkbox':
             quantity_26 = request.POST['quantity_26']
             quantity_28 = request.POST['quantity_28']
             quantity_30 = request.POST['quantity_30']
