@@ -1,0 +1,450 @@
+<html>
+
+<head>
+    <title></title>
+    <style>
+        th,
+        td {
+            text-align: center;
+            border: 1px solid;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!--Summary Page Heading Project Name-->
+    <table border="1px">
+        <tr>
+            <th style="width:1400px">KN Garments</th>
+        </tr>
+    </table><br>
+    <!--Summary Page Heading Project Name-->   
+
+
+
+
+    <!--Mens & Ladies-->
+    {% if order_mens_or_ladies %}
+    <table style="width: 40%;float: right" border="1px">
+        <tr>
+            <th>Order Number</th>
+            <td>{{orders.order_order_number}}</td>
+        </tr>
+        <tr>
+            <th colspan="2">Mens & Ladies</th>
+        </tr>
+        <tr>
+            <th>Size</th>
+            <th>Quantity</th>
+        </tr>
+        <tr>
+            <th>Order Mens or Ladies Size(26)</th>
+            <td>{{order_mens_or_ladies.order_mens_or_ladies_size_26_quantity}}</td>
+        </tr>
+        <tr>
+            <th>Order Mens or Ladies Size(28)</th>
+            <td>{{order_mens_or_ladies.order_mens_or_ladies_size_28_quantity}}</td>
+        </tr>
+        <tr>
+            <th>Order Mens or Ladies Size(30)</th>
+            <td>{{order_mens_or_ladies.order_mens_or_ladies_size_30_quantity}}</td>
+        </tr>
+        <tr>
+            <th>Order Mens or Ladies Size(32)</th>
+            <td>{{order_mens_or_ladies.order_mens_or_ladies_size_32_quantity}}</td>
+        </tr>
+        <tr>
+            <th>Order Mens or Ladies Size(34)</th>
+            <td>{{order_mens_or_ladies.order_mens_or_ladies_size_34_quantity}}</td>
+        </tr>
+        <tr>
+            <th>Order Mens or Ladies Size(36)</th>
+            <td>{{order_mens_or_ladies.order_mens_or_ladies_size_36_quantity}}</td>
+        </tr>
+        <tr>
+            <th>Order Mens or Ladies Size(38)</th>
+            <td>{{order_mens_or_ladies.order_mens_or_ladies_size_38_quantity}}</td>
+        </tr>
+        <tr>
+            <th>Order Mens or Ladies Size(40)</th>
+            <td>{{order_mens_or_ladies.order_mens_or_ladies_size_40_quantity}}</td>
+        </tr>
+        <tr>
+            <th>Order Mens or Ladies Size(42)</th>
+            <td>{{order_mens_or_ladies.order_mens_or_ladies_size_42_quantity}}</td>
+        </tr>
+        <tr>
+            <th>Order Mens or Ladies Size(44)</th>
+            <td>{{order_mens_or_ladies.order_mens_or_ladies_size_44_quantity}}</td>
+        </tr>
+    </table>
+
+    <!--Mens & Ladies-->
+{% endif %}
+
+
+
+
+
+    <!--Order Number-->
+    {% if orders %}
+    <table border="1px">
+        <tr>
+            <th>Order Number</th>
+            <td>{{orders.order_order_number}}</td>
+        </tr>
+    </table><br>
+    <!--Order Number-->
+
+
+
+
+    <!--Order Table-->
+    <table style="width: 50%" border="1px">
+        <tr>
+            <th>Order Type</th>
+            <td>{{orders.order_order_type}}</td>
+        </tr>
+        <tr>
+            <th>Order Date</th>
+            <td>{{orders.order_order_date}}</td>
+        </tr>
+        <tr>
+            <th>Brand</th>
+            <td>{{orders.order_order_brands}}</td>
+        </tr>
+        <tr>
+            <th>Style NUmber</th>
+            <td>{{orders.order_order_style_number}}</td>
+        </tr>
+        <tr>
+            <th>Fit</th>
+            <td>{{orders.order_order_fit}}</td>
+        </tr>
+        <tr>
+            <th>Quantity</th>
+            <td>{{orders.order_order_quantity}}</td>
+        </tr>
+        <tr>
+            <th>Delivery Date</th>
+            <td>{{orders.order_delivery_date}}</td>
+        </tr>
+        <tr>
+            <th>Category</th>
+            <td>{{orders.order_order_category}}</td>
+        </tr>
+        <tr>
+            <th>Notes</th>
+            <td>{{orders.order_order_remark}}</td>
+        </tr>
+    </table>
+
+    <!--Order Table-->
+{% endif %}
+
+
+
+
+
+    <!--Kids Order-->
+{% if order_kids_order %}
+    <table style="width: 40%;float: right" border="1px">
+        <br><br><br><br>
+        <tr>
+            <th>Order Number</th>
+            <td>{{orders.order_order_number}}</td>
+        </tr>
+        <tr>
+            <th colspan="2">Kids</th>
+        </tr>
+        <tr>
+            <th>Age</th>
+            <th>Quantity</th>
+        </tr>
+        <tr>
+            <th>Order Kids Age(2)</th>
+            <td>{{order_kids_order.order_kids_age_2_years}}</td>
+        </tr>
+        <tr>
+            <th>Order Kids Age(3-4)</th>
+            <td>{{order_kids_order.order_kids_age_3to4_years}}</td>
+        </tr>
+        <tr>
+            <th>Order Kids Age(5-6)</th>
+            <td>{{order_kids_order.order_kids_age_5to6_years}}</td>
+        </tr>
+        <tr>
+            <th>Order Kids Age(7-8)</th>
+            <td>{{order_kids_order.order_kids_age_7to8_years}}</td>
+        </tr>
+        <tr>
+            <th>Order Kids Age(9-10)</th>
+            <td>{{order_kids_order.order_kids_age_9to10_years}}</td>
+        </tr>
+        <tr>
+            <th>Order Kids Age(11-12)</th>
+            <td>{{order_kids_order.order_kids_age_11to12_years}}</td>
+        </tr>
+        <tr>
+            <th>Order Kids Age(13-14)</th>
+            <td>{{order_kids_order.order_kids_age_13to14_years}}</td>
+        </tr>
+        <tr>
+            <th>Order Kids Age(15-16)</th>
+            <td>{{order_kids_order.order_kids_age_15to16_years}}</td>
+        </tr>
+        <tr>
+            <th>Order Kids Age(2-3)</th>
+            <td>{{order_kids_order.order_kids_age_2to3_years}}</td>
+        </tr>
+        <tr>
+            <th>Order Kids Age(4-5))</th>
+            <td>{{order_kids_order.order_kids_age_4to5_years}}</td>
+        </tr>
+        <tr>
+            <th>Order Kids Age(6-7)</th>
+            <td>{{order_kids_order.order_kids_age_6to7_years}}</td>
+        </tr>
+        <tr>
+            <th>Order Kids Age(8-9)</th>
+            <td>{{order_kids_order.order_kids_age_8to9_years}}</td>
+        </tr>
+        <tr>
+            <th>Order Kids Age(10-11)</th>
+            <td>{{order_kids_order.order_kids_age_10to11_years}}</td>
+        </tr>
+    </table>
+
+    <!--Kids Order-->
+{% endif %}
+
+
+
+
+{% if order_ethenic %}
+    <!--Ethenics Order-->
+
+    <table style="width: 40%;float: right" border="1px">
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <tr>
+            <th>Order Number</th>
+            <td>{{orders.order_order_number}}</td>
+        </tr>
+        <tr>
+            <th colspan="2">Ethenics</th>
+        </tr>
+        <tr>
+            <th>Size</th>
+            <th>Quantity</th>
+        </tr>
+        <tr>
+            <th>Order Ethenic Size(XS)</th>
+            <td>{{order_ethenic.order_ethenic_size_XS}}</td>
+        </tr>
+        <tr>
+            <th>Order Ethenic Size(S)</th>
+            <td>{{order_ethenic.order_ethenic_size_S}}</td>
+        </tr>
+        <tr>
+            <th>Order Ethenic Size(M)</th>
+            <td>{{order_ethenic.order_ethenic_size_M}}</td>
+        </tr>
+        <tr>
+            <th>Order Ethenic Size(L)</th>
+            <td>{{order_ethenic.order_ethenic_size_L}}</td>
+        </tr>
+        <tr>
+            <th>Order Ethenic Size(XL)</th>
+            <td>{{order_ethenic.order_ethenic_size_XL}}</td>
+        </tr>
+        <tr>
+            <th>Order Ethenic Size(XXL)</th>
+            <td>{{order_ethenic.order_ethenic_size_XXL}}</td>
+        </tr>
+        <tr>
+            <th>Order Ethenic Size(XXXL)</th>
+            <td>{{order_ethenic.order_ethenic_size_XXXL}}</td>
+        </tr>
+    </table>
+    <!--Ethenics Order-->
+{% endif %}
+
+
+
+
+    <!--Fabric Order-->
+{% if fabric %}
+    <table style="width: 100%;" border="1px">
+        <br><br><br>
+        <tr>
+            <th colspan="3">Order Number: {{orders.order_order_number}}</th>
+            <th colspan="3">Fabric Order</th>
+        </tr>
+        <tr>
+            <th>Order Process ID</th>
+            <th>Sort Number</th>
+            <th>Fabric Supplier</th>
+            <th>Order Quantity</th>
+            <th>Delivery Date</th>
+            <th>Status</th>
+        </tr>
+        <tr>
+            <td>{{fabric.process_order_id}}</td>
+            <td>{{fabric.fabric_order_sort_number}}</td>
+            <td>{{fabric.process_vendor_name}}</td>
+            <td>{{fabric.fabric_order_quantity}}</td>
+            <td>{{fabric.process_delivery_date}}</td>
+            <td>{{fabric.process_payment_status}}</td>
+        </tr>
+    </table>
+
+    <!--Fabric Order-->
+{% endif %}
+
+{% if stiching %}
+     <!--Stictching Order-->
+
+    <table style="width: 100%;" border="1px">
+        <br><br><br>
+        <tr>
+            <th colspan="11">Order Number: {{orders.order_order_number}}</th>
+            <th colspan="11">Stitching Order</th>
+        </tr>
+        <tr>
+            <th rowspan="2">Order Process ID</th>
+            <th rowspan="2">Job Worker Name</th>
+            <th rowspan="2">Job Worker Location</th>
+            <th colspan="3">Average</th>
+            <th colspan="3">Rate</th>
+            <th rowspan="2">Delivery Date</th>
+            <th rowspan="2">Openig Fabric Stock</th>
+            <th rowspan="2">Opening Stock Date</th>
+            <th rowspan="2">Fabric Received Date</th>
+            <th rowspan="2">Fabric Bill No</th>
+            <th rowspan="2">Fabric Bill Date</th>
+            <th rowspan="2">Fabric Quantity Received</th>
+            <th rowspan="2">Fabric Used</th>
+            <th rowspan="2">Bill Number</th>
+            <th rowspan="2">Bill File</th>
+            <th rowspan="2">Status</th>
+        </tr>
+        <tr>
+            <td>Avg 1</td>
+            <td>Avg 2</td>
+            <td>Avg 3</td>
+            <td>Rate 1</td>
+            <td>Rate 2</td>
+            <td>Rate 3</td>
+        </tr>
+         <tr>
+            <td>{{stiching.process_order_id}}</td>
+            <td>{{stiching.process_vendor_name}}</td>
+            <td>{{stiching.process_vendor_location}}</td>
+            <td>{{stiching.stiching_average_one}}</td>
+            <td>{{stiching.stiching_average_two}}</td>
+            <td>{{stiching.stiching_average_three}}}</td>
+            <td>{{stiching.stiching_rate_one}}</td>
+            <td>{{stiching.stiching_rate_two}}</td>
+            <td>{{stiching.stiching_rate_three}}}</td>
+            <td>{{stiching.process_delivery_date}}</td>
+            <td>{{stiching.stiching_opening_fabric_stock}}</td>
+            <td>{{stiching.stiching_opening_stock_date}}</td>
+            <td>{{stiching.process_received_date}}</td>
+            <td>{{stiching.process_bill_number}}</td>
+            <td>{{stiching.stiching_fabric_bill_date}}</td>
+            <td>{{stiching.process_received_quantity}}</td>
+            <td>{{stiching.stiching_fabric_used}}</td>
+            <td>{{stiching.stiching_fabric_bill_number}}</td>
+            <td>{{stiching.process_bill_file}}</td>
+            <td>{{stiching.process_payment_status}}</td>
+        </tr>
+    </table>
+
+    <!--Stictching Order-->
+{% endif %}
+
+{% if washing %}
+      <!--Washing Order-->
+
+    <table style="width: 100%;" border="1px">
+        <br><br><br>
+        <tr>
+            <th colspan="5">Order Number: {{orders.order_order_number}}</th>
+            <th colspan="6">Washing Order</th>
+        </tr>
+        <tr>
+            <th>Order Process ID</th>
+            <th>Washer Name</th>
+            <th>Washer Locaion</th>
+            <th>Received Quantity</th>
+            <th>Received Date</th>
+            <th>Process</th>
+            <th>Rate</th>
+            <th>Delivery Date</th>
+            <th>Bill No</th>
+            <th>Bill File</th>
+            <th>Status</th>
+        </tr>
+        <tr>
+            <td>{{washing.process_order_id}}</td>
+            <td>{{washing.process_vendor_name}}</td>
+            <td>{{washing.process_vendor_location}}</td>
+            <td>{{washing.process_received_quantity}}</td>
+            <td>{{washing.process_received_date}}</td>
+            <td>{{washing.washing_process_name}}</td>
+            <td>{{washing.washing_rate}}</td>
+            <td>{{washing.process_delivery_date}}</td>
+            <td>{{washing.process_bill_number}}</td>
+            <td>{{washing.process_bill_file}}</td>
+            <td>{{washing.process_payment_status}}</td>
+            
+        </tr>
+    </table>
+
+    <!--Washing Order-->
+    {% endif %}
+
+    {% if finishing %}
+      <!--Finishing Order-->
+
+    <table style="width: 100%;" border="1px">
+        <br><br><br>
+        <tr>
+            <th colspan="5">Order Number: {{orders.order_order_number}}</th>
+            <th colspan="6">Finishing Order</th>
+        </tr>
+        <tr>
+            <th>Order Process ID</th>
+            <th>Finishing Name</th>
+            <th>Finishing  Locaion</th>
+            <th>Received Quantity</th>
+            <th>Received Date</th>
+            <th>Rate</th>
+            <th>Delivery Date</th>
+            <th>Delivery Quantity</th>
+            <th>Bill No</th>
+            <th>Bill File</th>
+            <th>Status</th>
+        </tr>
+        <tr>
+            <td>{{finishing.process_order_id}}</td>
+            <td>{{finishing.process_vendor_name}}</td>
+            <td>{{finishing.process_vendor_location}}</td>
+            <td>{{finishing.process_received_quantity}}</td>
+            <td>{{finishing.process_received_date}}</td>
+            <td>{{finishing.finishing_rate}}</td>
+            <td>{{finishing.process_delivery_date}}</td>
+            <td>{{finishing.finishing_delivery_quantity}}</td>
+            <td>{{finishing.process_bill_number}}</td>
+            <td>{{finishing.process_bill_file}}</td>
+            <td>{{finishing.process_payment_status}}</td>
+        </tr>
+    </table>
+
+    <!--Finishing Order-->
+    {% endif %}
+    
+    
+</body>
+</html>

@@ -163,6 +163,8 @@ path('pending_order_update/<int:pk>',views.PendingOrderUpdateView.as_view(), nam
 # Paid Order - Update
 path('paid_order_update/<int:pk>',views.PaidOrderUpdateView.as_view(), name='paid_order_update'),
 
+# Summary Page
+path('order_summary/<int:pk>', views.order_summary, name='order_summary'),
 
 # ------- Portal Users URls ---------
 #< -----Users list Urls ------>

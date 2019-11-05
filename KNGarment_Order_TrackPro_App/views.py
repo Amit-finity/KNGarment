@@ -555,6 +555,27 @@ def paid_order_v2(request):
     data = {'user_role':user_role}
     return render(request,'KNGarment_Order_TrackPro_App/paid_order_v2.html',data)
 
+#Summary View
+def order_summary(request,pk):
+    order_data = {}
+    one_object_of_model_order = Orders.objects.get(pk=pk)
+    order_data['orders'] = one_object_of_model_order
+    if Order_Mens_Or_Ladies.objects.filter(order_mens_or_ladies_order_id=pk).exists():
+        order_data['order_mens_or_ladies']=Order_Mens_Or_Ladies.objects.get(order_mens_or_ladies_order_id=pk)
+    if Order_Ethenic.objects.filter(order_ethenic_order_id=pk).exists():
+        order_data['order_ethenic']=Order_Ethenic.objects.get(order_ethenic_order_id=pk)
+    if Order_Kids.objects.filter(order_kids_order_id=pk).exists():
+        order_data['order_kids_order']=Order_Kids.objects.get(order_kids_order_id=pk)
+    if Fabric_Order.objects.filter(process_order_id=pk).exists():
+        order_data['fabric']=Fabric_Order.objects.get(process_order_id=pk)
+    if Stiching.objects.filter(process_order_id=pk).exists():
+        order_data['stiching']=Stiching.objects.get(process_order_id=pk)
+    if Washing.objects.filter(process_order_id=pk).exists():
+        order_data['washing']=Washing.objects.get(process_order_id=pk)
+    if Finishing.objects.filter(process_order_id=pk).exists():
+        order_data['finishing']=Finishing.objects.get(process_order_id=pk)
+    return render(request,'KNGarment_Order_TrackPro_App/summary.html',order_data)
+
 #Update View
 class AllOrdersUpdateView(BSModalUpdateView):
     model = Orders 
