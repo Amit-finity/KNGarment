@@ -12,7 +12,7 @@ from bootstrap_modal_forms.generic import (BSModalCreateView,BSModalUpdateView,B
 
 #Project Imports
 from KNGarment_Order_TrackPro_App.models import Client,Vendor,Orders,Process,Fabric_Order,Stiching,Washing,Finishing,Dispatch,Order_Mens_Or_Ladies,Order_Kids,Order_Ethenic,CustomUser
-from KNGarment_Order_TrackPro_App.forms import Update_Orders,Update_FabricOrder,Update_StichingOrder,Update_WashingOrder,Update_FinishingOrder,Update_DispatchOrder,Update_Process_payment_status,CustomUserForm,Update_FabricOrderProcess 
+from KNGarment_Order_TrackPro_App.forms import Update_Orders,Update_FabricOrder,Update_StichingOrder,Update_WashingOrder,Update_FinishingOrder,Update_DispatchOrder,Update_Process_payment_status,CustomUserForm,Update_FabricOrderProcess,Update_StichingOrderProcess,Update_WashingOrderProcess,Update_FinishingOrderProcess 
 
 # Create your views here.
 # ------ Authentication Views -----
@@ -717,4 +717,34 @@ class FabricOrderProcessUpdateView(BSModalUpdateView):
         fabric_object = Fabric_Order.objects.get(pk=self.kwargs['pk'])
         pk = fabric_object.process_order_id
         return reverse_lazy('KNGarment_Order_TrackPro_App:add_processes', kwargs={'pk': pk })
+
+class StichingOrderProcessUpdateView(BSModalUpdateView):
+    model = Stiching
+    template_name = 'KNGarment_Order_TrackPro_App/update_order.html'
+    form_class = Update_StichingOrderProcess
+    success_message = 'Success: Entry was updated.'
+    def get_success_url(self,**kwargs):
+        stiching_object = Stiching.objects.get(pk=self.kwargs['pk'])
+        pk = stiching_object.process_order_id
+        return reverse_lazy('KNGarment_Order_TrackPro_App:add_processes', kwargs={'pk': pk })        
+
+class WashingOrderProcessUpdateView(BSModalUpdateView):
+    model = Washing
+    template_name = 'KNGarment_Order_TrackPro_App/update_order.html'
+    form_class = Update_WashingOrderProcess
+    success_message = 'Success: Entry was updated.'
+    def get_success_url(self,**kwargs):
+        washing_object = Washing.objects.get(pk=self.kwargs['pk'])
+        pk = washing_object.process_order_id
+        return reverse_lazy('KNGarment_Order_TrackPro_App:add_processes', kwargs={'pk': pk })  
+          
+class FinishingOrderProcessUpdateView(BSModalUpdateView):
+    model = Finishing
+    template_name = 'KNGarment_Order_TrackPro_App/update_order.html'
+    form_class = Update_FinishingOrderProcess
+    success_message = 'Success: Entry was updated.'
+    def get_success_url(self,**kwargs):
+        finishing_object = Finishing.objects.get(pk=self.kwargs['pk'])
+        pk = finishing_object.process_order_id
+        return reverse_lazy('KNGarment_Order_TrackPro_App:add_processes', kwargs={'pk': pk })  
 #</-----Add Users Views ------>    

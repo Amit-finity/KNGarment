@@ -247,7 +247,7 @@
             {% endif %}
 
             {% if fabric %}
-            <h2>Fabric Details<span><button type="button" style="background-color: #87c241;color: white" class="update-order btn btn-sm btn-primary" data-id="{% url 'KNGarment_Order_TrackPro_App:fabric_order_process_update' pk=fabric.pk  %}">
+            <h2>Fabric Details<span><button type="button" style="background-color: #87c241;color: white" class="update-fabric-order btn btn-sm btn-primary" data-id="{% url 'KNGarment_Order_TrackPro_App:fabric_order_process_update' pk=fabric.pk  %}">
 							Edit Fabric Details	
 							</button></span></h2>
 
@@ -310,8 +310,10 @@
             </form>
             {% endif %}
             {% if stiching %}
-             <h2>Stiching Details<span><button class="btn" style="background-color: #87c241;color: white">Edit Stiching Details</button></span></h2>
-
+            <h2>Stiching Details<span><button type="button" style="background-color: #87c241;color: white" class="update-stiching-order btn btn-sm btn-primary" data-id="{% url 'KNGarment_Order_TrackPro_App:stiching_order_process_update' pk=stiching.pk  %}">
+							Edit Stiching Details
+							</button></span></h2>
+             
                 <table class="table" style="text-align: center">
                     <tbody>
                         <tr>
@@ -523,8 +525,10 @@
             </form>
             {% endif %}
             {% if washing %}
-             <h2>Washing Details<span><button class="btn" style="background-color: #87c241;color: white">Edit Washing Details</button></span></h2>
-
+             <h2>Washing Details<span><button type="button" style="background-color: #87c241;color: white" class="update-washing-order btn btn-sm btn-primary" data-id="{% url 'KNGarment_Order_TrackPro_App:washing_order_process_update' pk=washing.pk  %}">
+							Edit Washing Details
+							</button></span></h2>
+             
                 <table class="table" style="text-align: center">
                     <tbody>
                         <tr>
@@ -648,7 +652,10 @@
             {% endif %}
 
             {% if finishing %}
-             <h2>Finishing Details<span><button class="btn" style="background-color: #87c241;color: white">Edit Finishing Details</button></span></h2>
+             <h2>Finishing Details<span><button type="button" style="background-color: #87c241;color: white" class="update-finishing-order btn btn-sm btn-primary" data-id="{% url 'KNGarment_Order_TrackPro_App:finishing_order_process_update' pk=finishing.pk  %}">
+							Edit Finishing Details
+							</button></span></h2>
+            
 
                 <table class="table" style="text-align: center">
                     <tbody>
@@ -841,7 +848,22 @@
 {% block extrascript %}
 <script type="text/javascript">
     $(function() {
-        $(".update-order").each(function() {
+        $(".update-fabric-order").each(function() {
+            $(this).modalForm({
+                formURL: $(this).data('id')
+            });
+        });
+        $(".update-stiching-order").each(function() {
+            $(this).modalForm({
+                formURL: $(this).data('id')
+            });
+        });
+        $(".update-washing-order").each(function() {
+            $(this).modalForm({
+                formURL: $(this).data('id')
+            });
+        });
+        $(".update-finishing-order").each(function() {
             $(this).modalForm({
                 formURL: $(this).data('id')
             });

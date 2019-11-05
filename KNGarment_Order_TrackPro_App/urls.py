@@ -109,6 +109,14 @@ path('add_new_dispatch_order_form_submit/', views.add_new_dispatch_order_form_su
 #Fabric Order Process Update
 path('fabric_order_process_update/<int:pk>',views.FabricOrderProcessUpdateView.as_view(), name='fabric_order_process_update'),
 
+#Stiching Order Process Update
+path('stiching_order_process_update/<int:pk>',views.StichingOrderProcessUpdateView.as_view(), name='stiching_order_process_update'),
+
+#Washing Order Process Update
+path('washing_order_process_update/<int:pk>',views.WashingOrderProcessUpdateView.as_view(), name='washing_order_process_update'),
+
+#Finishing Order Process Update
+path('finishing_order_process_update/<int:pk>',views.FinishingOrderProcessUpdateView.as_view(), name='finishing_order_process_update'),
 
 #All Orders - Update
 path('all_order_update/<int:pk>',views.AllOrdersUpdateView.as_view(), name='all_order_update'),
