@@ -22,6 +22,16 @@ class Update_Orders(BSModalForm):
         'order_fit_sample_submitted_date',
         'order_pps_sample_submitted_date',
         'order_order_remark')
+        
+class Update_FabricOrderProcess(BSModalForm):
+    class Meta:
+        model = Fabric_Order
+        fields = ('fabric_order_sort_number',
+        'fabric_order_quantity',
+        'process_delivery_date',
+        'process_bill_number',
+        'process_bill_file',
+        'process_payment_status')
 
 class Update_FabricOrder(BSModalForm):
     class Meta:

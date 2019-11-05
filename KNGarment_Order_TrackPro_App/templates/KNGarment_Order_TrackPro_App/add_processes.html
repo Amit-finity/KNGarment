@@ -12,7 +12,12 @@
 {% endblock stylesheets %}
 
 {% block content %}
-
+<!-- Modal for CURD Operation -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content"></div>
+    </div>
+</div>
         <!-- PAGE CONTENT  -->
         <div id="content">
             <div class="container-fluid">
@@ -242,7 +247,9 @@
             {% endif %}
 
             {% if fabric %}
-            <h2>Fabric Details<span><button class="btn" style="background-color: #87c241;color: white">Edit Fabric Details</button></span></h2>
+            <h2>Fabric Details<span><button type="button" style="background-color: #87c241;color: white" class="update-order btn btn-sm btn-primary" data-id="{% url 'KNGarment_Order_TrackPro_App:fabric_order_process_update' pk=fabric.pk  %}">
+							Edit Fabric Details	
+							</button></span></h2>
 
                 <table class="table" style="text-align: center">
                     <tbody>
@@ -820,10 +827,35 @@
 {% endblock content %}
 
 {% block script %}
+<script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
 
         
 {% endblock %}
 {% block extrascript %}
-
+<script type="text/javascript">
+    $(function() {
+        $(".update-order").each(function() {
+            $(this).modalForm({
+                formURL: $(this).data('id')
+            });
+        });
+         $(".delete-order").each(function() {
+			$(this).modalForm({
+				formURL: $(this).data('id')
+			});
+		});
+        
+      $(".read-order").each(function () {
+        $(this).modalForm({formURL: $(this).data('id')});
+      });
+    });
+</script>
 
 {% endblock %}

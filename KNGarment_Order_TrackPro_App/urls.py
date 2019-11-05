@@ -105,6 +105,11 @@ path('add_new_finishing_order_form_submit/', views.add_new_finishing_order_form_
 
 path('add_new_dispatch_order_form_submit/', views.add_new_dispatch_order_form_submit, name='add_new_dispatch_order_form_submit'),
 
+#AddProcesses Page
+#Fabric Order Process Update
+path('fabric_order_process_update/<int:pk>',views.FabricOrderProcessUpdateView.as_view(), name='fabric_order_process_update'),
+
+
 #All Orders - Update
 path('all_order_update/<int:pk>',views.AllOrdersUpdateView.as_view(), name='all_order_update'),
 

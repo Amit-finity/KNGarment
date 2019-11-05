@@ -12,7 +12,7 @@ from bootstrap_modal_forms.generic import (BSModalCreateView,BSModalUpdateView,B
 
 #Project Imports
 from KNGarment_Order_TrackPro_App.models import Client,Vendor,Orders,Process,Fabric_Order,Stiching,Washing,Finishing,Dispatch,Order_Mens_Or_Ladies,Order_Kids,Order_Ethenic,CustomUser
-from KNGarment_Order_TrackPro_App.forms import Update_Orders,Update_FabricOrder,Update_StichingOrder,Update_WashingOrder,Update_FinishingOrder,Update_DispatchOrder,Update_Process_payment_status,CustomUserForm 
+from KNGarment_Order_TrackPro_App.forms import Update_Orders,Update_FabricOrder,Update_StichingOrder,Update_WashingOrder,Update_FinishingOrder,Update_DispatchOrder,Update_Process_payment_status,CustomUserForm,Update_FabricOrderProcess 
 
 # Create your views here.
 # ------ Authentication Views -----
@@ -707,4 +707,14 @@ class Add_UsersView(BSModalCreateView):
     form_class = CustomUserForm
     success_message = 'Success: User was added.'
     success_url = reverse_lazy('KNGarment_Order_TrackPro_App:userlist')
+
+class FabricOrderProcessUpdateView(BSModalUpdateView):
+    model = Fabric_Order
+    template_name = 'KNGarment_Order_TrackPro_App/update_order.html'
+    form_class = Update_FabricOrderProcess
+    success_message = 'Success: Entry was updated.'
+    def get_success_url(self,**kwargs):
+        fabric_object = Fabric_Order.objects.get(pk=self.kwargs['pk'])
+        pk = fabric_object.process_order_id
+        return reverse_lazy('KNGarment_Order_TrackPro_App:add_processes', kwargs={'pk': pk })
 #</-----Add Users Views ------>    
