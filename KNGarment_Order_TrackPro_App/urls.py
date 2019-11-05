@@ -52,7 +52,7 @@ path('delivered_order/', views.delivered_order, name = 'delivered_order'),
 path('track_order_registered_order/', views.track_order_registered_order, name = 'track_order_registered_order'),
 
 #track_order_details URL
-path('track_order_details/<int:pk>', views.track_order_details, name = 'track_order_details'),
+#path('track_order_details/<int:pk>', views.track_order_details, name = 'track_order_details'),
 
 #track_order_fabric_order URL
 path('track_order_fabric_order/', views.track_order_fabric_order, name = 'track_order_fabric_order'),

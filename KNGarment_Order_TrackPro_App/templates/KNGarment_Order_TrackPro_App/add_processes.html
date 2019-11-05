@@ -74,6 +74,7 @@
                 </table>
                 <br>
                 <hr>
+                {% if order_mens_or_ladies %}
                 <h2>Order Mens or Ladies</h2>
                 <table class="table" style="text-align: center">
                     <tbody>
@@ -126,8 +127,10 @@
                         </tr>
                     </tbody>
                 </table>
+                {% endif %}
                 <br>
                 <hr>
+                {% if order_kids_order %}
                 <h2>Order Kids</h2>
                 <table class="table" style="text-align: center">
                     <tbody>
@@ -192,8 +195,10 @@
                         </tr>
                     </tbody>
                 </table>
+                {% endif %}
                 <br>
                 <hr>
+                {% if order_ethenic %}
                 <h2>Order Ethenic</h2>
                 <table class="table" style="text-align: center">
                     <tbody>
@@ -234,10 +239,37 @@
                         </tr>
                     </tbody>
                 </table>
+            {% endif %}
 
+            {% if fabric %}
+            <h2>Fabric Details<span><button class="btn" style="background-color: #87c241;color: white">Edit Fabric Details</button></span></h2>
 
-                
+                <table class="table" style="text-align: center">
+                    <tbody>
+                        <tr>
+                            <td class="heading_bold">Sort Number</td>
+                            <td>{{fabric.fabric_order_sort_number}}</td>
+
+                        </tr>
+                        <tr>
+                            <td class="heading_bold">Fabric Supplier</td>
+                            <td>{{fabric.process_vendor_name}}</td>
+
+                        </tr>
+                        <tr>
+                            <td class="heading_bold">Order Quantity</td>
+                            <td>{{fabric.fabric_order_quantity}}</td>
+
+                        </tr>
+                        <tr>
+                            <td class="heading_bold">Delivery Date</td>
+                            <td>{{fabric.process_delivery_date}}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
             <hr>
+            {% else %}
             <h2>Fabric Details</h2>
             <hr>
             <form action={% url 'KNGarment_Order_TrackPro_App:add_new_fabric_order_form_submit' %} method="post">
@@ -269,10 +301,105 @@
                     </div>
                 </div>
             </form>
+            {% endif %}
+            {% if stiching %}
+             <h2>Stiching Details<span><button class="btn" style="background-color: #87c241;color: white">Edit Stiching Details</button></span></h2>
 
+                <table class="table" style="text-align: center">
+                    <tbody>
+                        <tr>
+                            <td class="heading_bold">Job Worker Name</td>
+                            <td>{{stiching.process_vendor_name}}</td>
+
+                        </tr>
+                        <tr>
+                            <td class="heading_bold">Job Worker Location</td>
+                            <td>{{stiching.process_vendor_location}}</td>
+
+                        </tr>
+                        <tr>
+                            <td class="heading_bold">Average1</td>
+                            <td>{{stiching.stiching_average_one}}</td>
+
+                        </tr>
+                        <tr>
+                            <td class="heading_bold">Quantity1</td>
+                            <td>{{stiching.stiching_rate_one}}</td>
+
+                        </tr> 
+                        <tr>
+                            <td class="heading_bold">Average2</td>
+                            <td>{{stiching.stiching_average_two}}</td>
+
+                        </tr>
+                        <tr>
+                            <td class="heading_bold">Quantity2</td>
+                            <td>{{stiching.stiching_rate_two}}</td>
+
+                        </tr> 
+                        <tr>
+                            <td class="heading_bold">Average3</td>
+                            <td>{{stiching.stiching_average_three}}</td>
+
+                        </tr>
+                        <tr>
+                            <td class="heading_bold">Quantity3</td>
+                            <td>{{stiching.stiching_rate_three}}</td>
+
+                        </tr> 
+                        <tr>
+                            <td class="heading_bold">Delivery Date</td>
+                            <td>{{stiching.process_delivery_date}}</td>
+
+                        </tr> 
+                        <tr>
+                            <td class="heading_bold">Opening Fabric Stock</td>
+                            <td>{{stiching.stiching_opening_fabric_stock}}</td>
+
+                        </tr>
+                        <tr>
+                            <td class="heading_bold">Opening Stock Date</td>
+                            <td>{{stiching.stiching_opening_stock_date}}</td>
+
+                        </tr>
+                        <tr>
+                            <td class="heading_bold">Fabric Received Date</td>
+                            <td>{{stiching.process_received_date}}</td>
+
+                        </tr>
+                        <tr>
+                            <td class="heading_bold">Bill Number</td>
+                            <td>{{stiching.process_bill_number}}</td>
+
+                        </tr>
+                        <tr>
+                            <td class="heading_bold">Fabric Bill Date</td>
+                            <td>{{stiching.stiching_fabric_bill_date}}</td>
+
+                        </tr>
+                        <tr>
+                            <td class="heading_bold">Fabric Quantity Received </td>
+                            <td>{{stiching.process_received_quantity}}</td>
+
+                        </tr><tr>
+                            <td class="heading_bold">Fabric Used </td>
+                            <td>{{stiching.stiching_fabric_used}}</td>
+
+                        </tr><tr>
+                            <td class="heading_bold">Stiching Fabric Bill Number </td>
+                            <td>{{stiching.stiching_fabric_bill_number}}</td>
+
+                        </tr><tr>
+                            <td class="heading_bold">Bill File </td>
+                            <td class="red">{{stiching.process_bill_file}}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
 
             <br>
             <hr>
+            {% else %}
             <h2>Stiching Details</h2>
             <hr>
              <form action={% url 'KNGarment_Order_TrackPro_App:add_new_stiching_form_submit' %} method="post">
@@ -387,13 +514,66 @@
                     </div>
                 </div>
             </form>
+            {% endif %}
+            {% if washing %}
+             <h2>Washing Details<span><button class="btn" style="background-color: #87c241;color: white">Edit Washing Details</button></span></h2>
 
+                <table class="table" style="text-align: center">
+                    <tbody>
+                        <tr>
+                            <td class="heading_bold">Washer Name</td>
+                            <td>{{washing.process_vendor_name}}</td>
 
+                        </tr>
+                        <tr>
+                            <td class="heading_bold">Washer Location</td>
+                            <td>{{washing.process_vendor_location}}</td>
 
+                        </tr>
+                        <tr>
+                            <td class="heading_bold">Received Quantity</td>
+                            <td>{{washing.process_received_quantity}}</td>
 
+                        </tr>
+                        <tr>
+                            <td class="heading_bold">Received Date</td>
+                            <td>{{washing.process_received_date}}</td>
 
-            <br>
+                        </tr> 
+                        <tr>
+                            <td class="heading_bold">Process</td>
+                            <td>{{washing.washing_process_name}}</td>
+
+                        </tr> 
+                        <tr>
+                            <td class="heading_bold">Rate</td>
+                            <td>{{washing.washing_rate}}</td>
+
+                        </tr>
+                        <tr>
+                            <td class="heading_bold">Delivery Date</td>
+                            <td>{{washing.process_delivery_date}}</td>
+
+                        </tr> 
+                        <tr>
+                            <td class="heading_bold">Delivery Quantity</td>
+                            <td>{{washing.washing_delivery_quantity}}</td>
+
+                        </tr>
+                        <tr>
+                            <td class="heading_bold">Bill Number</td>
+                            <td>{{washing.process_bill_number}}</td>
+
+                        </tr> 
+                        <tr>
+                            <td class="heading_bold">Bill File</td>
+                            <td class="red">{{washing.process_bill_file}}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
             <hr>
+            {% else %}
             <h2>Washing Details</h2>
             <hr>
              <form action={% url 'KNGarment_Order_TrackPro_App:add_new_washing_order_form_submit' %} method="post">
@@ -458,10 +638,61 @@
                     </div>
                 </div>
             </form>
+            {% endif %}
 
+            {% if finishing %}
+             <h2>Finishing Details<span><button class="btn" style="background-color: #87c241;color: white">Edit Finishing Details</button></span></h2>
 
-            <br>
-            <hr>
+                <table class="table" style="text-align: center">
+                    <tbody>
+                        <tr>
+                            <td class="heading_bold">Finishing Name</td>
+                            <td>{{finishing.process_vendor_name}}</td>
+
+                        </tr>
+                        <tr>
+                            <td class="heading_bold">Finishing Location</td>
+                            <td>{{finishing.process_vendor_location}}</td>
+
+                        </tr>
+                        <tr>
+                            <td class="heading_bold">Received Quantity</td>
+                            <td>{{finishing.process_received_quantity}}</td>
+
+                        </tr>
+                        <tr>
+                            <td class="heading_bold">Received Date</td>
+                            <td>{{finishing.process_received_date}}</td>
+
+                        </tr> 
+                        <tr>
+                            <td class="heading_bold">Rate</td>
+                            <td>{{finishing.finishing_rate}}</td>
+
+                        </tr>
+                        <tr>
+                            <td class="heading_bold">Delivery Date</td>
+                            <td>{{finishing.process_delivery_date}}</td>
+
+                        </tr> 
+                        <tr>
+                            <td class="heading_bold">Delivery Quantity</td>
+                            <td>{{finishing.finishing_delivery_quantity}}</td>
+
+                        </tr>
+                        <tr>
+                            <td class="heading_bold">Bill Number</td>
+                            <td>{{finishing.process_bill_number}}</td>
+
+                        </tr> 
+                        <tr>
+                            <td class="heading_bold">Bill File</td>
+                            <td class="red">{{finishing.process_bill_file}}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+                {% else %}
             <h2>Finishing Details</h2>
             <hr>
             <form action={% url 'KNGarment_Order_TrackPro_App:add_new_finishing_order_form_submit' %} method="post">
@@ -523,7 +754,7 @@
                     </div>
                 </div>
             </form>
-
+            {% endif %}
 
 
 

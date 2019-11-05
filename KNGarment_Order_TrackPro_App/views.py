@@ -77,16 +77,31 @@ def add_processes(request,pk):
     order_data = {}
     one_object_of_model_order = Orders.objects.get(pk=pk)
     #order_data['orders']
+    order_data['orders'] = one_object_of_model_order
+    order_data['user_role'] = user_role
     if Order_Mens_Or_Ladies.objects.filter(order_mens_or_ladies_order_id=pk).exists():
-        order_data['order_mens_or_ladies']=Order_Mens_Or_Ladies.objects.filter(order_mens_or_ladies_order_id=pk)
+        order_data['order_mens_or_ladies']=Order_Mens_Or_Ladies.objects.get(order_mens_or_ladies_order_id=pk)
     if Order_Ethenic.objects.filter(order_ethenic_order_id=pk).exists():
-        order_data['order_ethenic']=Order_Ethenic.objects.filter(order_ethenic_order_id=pk)
+        order_data['order_ethenic']=Order_Ethenic.objects.get(order_ethenic_order_id=pk)
     if Order_Kids.objects.filter(order_kids_order_id=pk).exists():
-        order_data['order_kids_order']=Order_Kids.objects.get(order_ethenic_order_id=pk)
-    order_kids_object = Order_Kids.objects.filter(order_kids_order_id=pk)
-    order_ethenic_object = Order_Ethenic.objects.filter(order_ethenic_order_id=pk)
+        order_data['order_kids_order']=Order_Kids.objects.get(order_kids_order_id=pk)
+    if Fabric_Order.objects.filter(process_order_id=pk).exists():
+        order_data['fabric']=Fabric_Order.objects.get(process_order_id=pk)
+    if Stiching.objects.filter(process_order_id=pk).exists():
+        order_data['stiching']=Stiching.objects.get(process_order_id=pk)
+    if Washing.objects.filter(process_order_id=pk).exists():
+        order_data['washing']=Washing.objects.get(process_order_id=pk)
+    if Finishing.objects.filter(process_order_id=pk).exists():
+        order_data['finishing']=Finishing.objects.get(process_order_id=pk)
+    #order_kids_object = Order_Kids.objects.filter(order_kids_order_id=pk)
+    #order_ethenic_object = Order_Ethenic.objects.filter(order_ethenic_order_id=pk)
+    """ fabric_flag
+    stitching_flag
+    washing_flag
+    finishing_flag
+    dispatch_flag """
     data = {'order_data':order_data,'user_role':user_role}
-    return render(request,'KNGarment_Order_TrackPro_App/add_processes.html',data)
+    return render(request,'KNGarment_Order_TrackPro_App/add_processes.html',order_data)
 
 @login_required(login_url='/user_login')
 def all_orders(request):
@@ -178,7 +193,7 @@ def track_order_registered_order(request):
     data = {'registered_order':registered_order_objects,'user_role':user_role}
     return render(request,'KNGarment_Order_TrackPro_App/Order_registered.html',data)
 
-@login_required(login_url='/user_login')
+""" @login_required(login_url='/user_login')
 def track_order_details(request,pk):
     user_role = request.user.user_role
     fabric_bill_numbers = Fabric_Order.objects.all()
@@ -202,7 +217,7 @@ def track_order_details(request,pk):
             'finishing':finishing_object,
             'dispatch':dispatch_object,
             'user_role':user_role}
-    return render(request,'KNGarment_Order_TrackPro_App/Order_Details_2.html',data)
+    return render(request,'KNGarment_Order_TrackPro_App/Order_Details_2.html',data) """
 
 @login_required(login_url='/user_login')
 def track_order_fabric_order(request):
@@ -401,7 +416,7 @@ def add_new_fabric_order_form_submit(request):
                                         process_order_id=Orders.objects.latest('pk'))
         Order_object = Orders.objects.latest('order_order_date_of_entry')
         
-        return HttpResponseRedirect(reverse('KNGarment_Order_TrackPro_App:track_order_details',kwargs={'pk': Order_object.pk}))
+        return HttpResponseRedirect(reverse('KNGarment_Order_TrackPro_App:add_processes',kwargs={'pk': Order_object.pk}))
 
 @login_required(login_url='/user_login')
 def add_new_stiching_form_submit(request):
@@ -446,7 +461,7 @@ def add_new_stiching_form_submit(request):
                                         process_order_id=Orders.objects.latest('pk'))
         Order_object = Orders.objects.latest('order_order_date_of_entry')
         
-        return HttpResponseRedirect(reverse('KNGarment_Order_TrackPro_App:track_order_details',kwargs={'pk': Order_object.pk}))
+        return HttpResponseRedirect(reverse('KNGarment_Order_TrackPro_App:add_processes',kwargs={'pk': Order_object.pk}))
 
 @login_required(login_url='/user_login')
 def add_new_washing_order_form_submit(request):
@@ -476,7 +491,7 @@ def add_new_washing_order_form_submit(request):
                                         process_order_id=Orders.objects.latest('pk'))
         Order_object = Orders.objects.latest('order_order_date_of_entry')
         
-        return HttpResponseRedirect(reverse('KNGarment_Order_TrackPro_App:track_order_details',kwargs={'pk': Order_object.pk}))
+        return HttpResponseRedirect(reverse('KNGarment_Order_TrackPro_App:add_processes',kwargs={'pk': Order_object.pk}))
 
 @login_required(login_url='/user_login')
 def add_new_finishing_order_form_submit(request):
@@ -504,7 +519,7 @@ def add_new_finishing_order_form_submit(request):
                                         process_order_id=Orders.objects.latest('pk'))
         Order_object = Orders.objects.latest('order_order_date_of_entry')
         
-        return HttpResponseRedirect(reverse('KNGarment_Order_TrackPro_App:track_order_details',kwargs={'pk': Order_object.pk}))
+        return HttpResponseRedirect(reverse('KNGarment_Order_TrackPro_App:add_processes',kwargs={'pk': Order_object.pk}))
 
 @login_required(login_url='/user_login')
 def add_new_dispatch_order_form_submit(request):
@@ -526,7 +541,7 @@ def add_new_dispatch_order_form_submit(request):
                                         dispatch_bill_file = dispatch_bill_file)
         dispatch_object = Dispatch.objects.latest('dispatch_order_date_of_entry') 
         
-        return HttpResponseRedirect(reverse('KNGarment_Order_TrackPro_App:track_order_details',kwargs={'pk': dispatch_object.pk}))
+        return HttpResponseRedirect(reverse('KNGarment_Order_TrackPro_App:add_processes',kwargs={'pk': dispatch_object.pk}))
 
 #pending_order_v2 view
 def pending_order_v2(request):
