@@ -129,22 +129,22 @@
                     <ul class="collapse list-unstyled" id="paymentSubmenuforvendor">
                     {% if user_role == 3 or user_role == 1 %}
                         <li>
-                            <a href="{% url 'KNGarment_Order_TrackPro_App:paid_order_v2' %}"> Fabric Payments</a>
+                            <a href="{% url 'KNGarment_Order_TrackPro_App:fabric_order_vendor_payment' %}"> Fabric Payments</a>
                         </li>
                     {% endif %}
                     {% if user_role == 4 or user_role == 1 %}
                         <li>
-                            <a href="{% url 'KNGarment_Order_TrackPro_App:paid_order_v2' %}"> Stitching Payments</a>
+                            <a href="{% url 'KNGarment_Order_TrackPro_App:stiching_order_vendor_payment' %}"> Stitching Payments</a>
                         </li>
                     {% endif %}
                     {% if user_role == 5 or user_role == 1 %}
                         <li>
-                            <a href="{% url 'KNGarment_Order_TrackPro_App:paid_order_v2' %}"> Washing Payments</a>
+                            <a href="{% url 'KNGarment_Order_TrackPro_App:washing_order_vendor_payment' %}"> Washing Payments</a>
                         </li>
                     {% endif %}
                     {% if user_role == 6 or user_role == 1 %}
                         <li>
-                            <a href="{% url 'KNGarment_Order_TrackPro_App:paid_order_v2' %}"> Finishing Payments</a>
+                            <a href="{% url 'KNGarment_Order_TrackPro_App:finishing_order_vendor_payment' %}"> Finishing Payments</a>
                         </li>
                     {% endif %}
                     </ul>                                                                                                                                                                                                           

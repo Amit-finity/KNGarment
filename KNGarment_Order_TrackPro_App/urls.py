@@ -75,11 +75,17 @@ path('payment_pending/', views.payment_pending, name = 'payment_pending'),
 #payment_paid URL
 path('payment_paid/', views.payment_paid, name = 'payment_paid'),
 
-#pending_order_v2 URL
-path('pending_order_v2/',views.pending_order_v2,name='pending_order_v2'),
+#fabric order vendor payment URL
+path('fabric_order_vendor_payment/',views.fabric_order_vendor_payment,name='fabric_order_vendor_payment'),
 
-#paid_order_v2 URL
-path('paid_order_v2/',views.paid_order_v2,name='paid_order_v2'),
+#stiching order vendor payment URL
+path('stiching_order_vendor_payment/',views.stiching_order_vendor_payment,name='stiching_order_vendor_payment'),
+
+#washing order vendor payment URL
+path('washing_order_vendor_payment/',views.washing_order_vendor_payment,name='washing_order_vendor_payment'),
+
+#finishing order vendor payment URL
+path('finishing_order_vendor_payment/',views.finishing_order_vendor_payment,name='finishing_order_vendor_payment'),
 
 #reports_job_worker_balancereport URL
 path('reports_job_worker_balancereport/', views.reports_job_worker_balancereport, name = 'reports_job_worker_balancereport'),

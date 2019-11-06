@@ -14,6 +14,7 @@ from bootstrap_modal_forms.generic import (BSModalCreateView,BSModalUpdateView,B
 from KNGarment_Order_TrackPro_App.models import Client,Vendor,Orders,Process,Fabric_Order,Stiching,Washing,Finishing,Dispatch,Order_Mens_Or_Ladies,Order_Kids,Order_Ethenic,CustomUser
 from KNGarment_Order_TrackPro_App.forms import Update_Orders,Update_FabricOrder,Update_StichingOrder,Update_WashingOrder,Update_FinishingOrder,Update_DispatchOrder,Update_Process_payment_status,CustomUserForm,Update_FabricOrderProcess,Update_StichingOrderProcess,Update_WashingOrderProcess,Update_FinishingOrderProcess 
 
+from KNGarment_Order_TrackPro_App import functions
 # Create your views here.
 # ------ Authentication Views -----
 # Login
@@ -593,17 +594,33 @@ def add_new_dispatch_order_form_submit(request):
         
         return HttpResponseRedirect(reverse('KNGarment_Order_TrackPro_App:add_processes',kwargs={'pk': dispatch_object.pk}))
 
-#pending_order_v2 view
-def pending_order_v2(request):
+#fabric_order_vendor_payment view
+def fabric_order_vendor_payment(request):
+    fabric_list=functions.filtering_vendors(1)
     user_role = request.user.user_role
-    data = {'user_role':user_role}
-    return render(request,'KNGarment_Order_TrackPro_App/pending_order_v2.html',data)
+    data = {'fabric_list':fabric_list,'user_role':user_role}
+    return render(request,'KNGarment_Order_TrackPro_App/fabric_order_vendor_payment.html',data)
 
-#paid_order_v2 view
-def paid_order_v2(request):
+#stiching_order_vendor_payment view
+def stiching_order_vendor_payment(request):
+    stiching_list=functions.filtering_vendors(2)
     user_role = request.user.user_role
-    data = {'user_role':user_role}
-    return render(request,'KNGarment_Order_TrackPro_App/paid_order_v2.html',data)
+    data = {'stiching_list':stiching_list,'user_role':user_role}
+    return render(request,'KNGarment_Order_TrackPro_App/stiching_order_vendor_payment.html',data)
+
+#washing_order_vendor_payment view
+def washing_order_vendor_payment(request):
+    washing_list=functions.filtering_vendors(3)
+    user_role = request.user.user_role
+    data = {'washing_list':washing_list,'user_role':user_role}
+    return render(request,'KNGarment_Order_TrackPro_App/washing_order_vendor_payment.html',data)
+
+#finishing_order_vendor_payment view
+def finishing_order_vendor_payment(request):
+    finishing_list=functions.filtering_vendors(4)
+    user_role = request.user.user_role
+    data = {'finishing_list':finishing_list,'user_role':user_role}
+    return render(request,'KNGarment_Order_TrackPro_App/finishing_order_vendor_payment.html',data)
 
 #Summary View
 def order_summary(request,pk):
