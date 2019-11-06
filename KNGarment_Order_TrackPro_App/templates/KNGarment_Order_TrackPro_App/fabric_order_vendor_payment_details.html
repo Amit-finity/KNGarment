@@ -1,0 +1,132 @@
+{% extends 'KNGarment_Order_TrackPro_App/base.html' %}
+
+{% load static %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+{% endblock stylesheets %}
+
+{% block content %}
+<!-- Modal for CURD Operation -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content"></div>
+    </div>
+</div>
+<!-- Page Content -->
+<div id="content">
+	 <div class="container-fluid">
+                <button type="button" id="sidebarCollapse" class="btn" style="background-color: #87c241;color: white">
+                    <i class="fas fa-align-left"></i>
+                </button>
+        <hr>
+
+               <h2>Fabric Vendor Details</h2>
+
+                <hr>
+                         <div>
+                       {% if fabric_objects %}
+                       <table id="test_table" class="display" style="width:100%; text-align: center">
+                       <thead style="font-size:12px">
+                                <tr>
+                                    <th class="text-center" scope="col">Sr. No.</th>
+                                    <th class="text-center" scope="col">Vendor Name</th>
+                                    <th class="text-center" scope="col">Vendor Location</th>
+                                    <th class="text-center" scope="col">Received Quantity</th>
+                                    <th class="text-center" scope="col">Received Date</th>
+                                    <th class="text-center" scope="col">Delivery Date</th>
+                                    <th class="text-center" scope="col">Bill Number</th>
+                                    <th class="text-center" scope="col">Bill File</th>
+                                    <th class="text-center" scope="col">Payment Status</th>
+                                    <th class="text-center" scope="col">Update</th>
+                                  
+                                    <th class="text-center" scope="col">Delete</th>
+                                   
+                                </tr>
+                            </thead>
+                             <tbody style="font-size:11px">
+                                
+                                   {% for fabric in fabric_objects %}
+                                <tr>
+                                    <td class="text-center" scope="row" >{{ forloop.counter }}</td>
+                                    <td class="text-center">{{ fabric.process_vendor_name }}</td>
+                                    <td class="text-center">{{ fabric.process_vendor_location }}</td>
+                                    <td class="text-center">{{ fabric.process_received_quantity }}</td>
+                                    <td class="text-center">{{ fabric.process_received_date }}</td>
+                                    <td class="text-center">{{ fabric.process_delivery_date }}</td>
+                                    <td class="text-center">{{ fabric.process_bill_number }}</td>
+                                    <td class="text-center">{{ fabric.process_bill_file }}</td>
+                                    <td class="text-center">{{ fabric.process_payment_status }}</td>
+                                    <td>
+                            <button type="button" class="update_fabric btn btn-sm btn-primary" data-id="">
+                                <span class="fa fa-edit"></span>
+                            </button>
+                        </td>
+                        
+                        <td>
+                            <button type="button" class="delete_fabric btn btn-sm btn-danger" data-id="">
+                                <span class="fa fa-trash"></span>
+                            </button>
+                        </td>  
+                       
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                             </table>
+                             {% else %}
+			<p class="no-leads text-primary">No entry added yet.</p>
+			{% endif %}
+
+                </div>
+            </div>
+            </div>
+{% endblock %}
+{% block script %}
+<script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+
+{% endblock %}
+
+{% block extrascript %}
+<script type="text/javascript">
+ $(document).ready(function() {
+$('#test_table').DataTable({
+	orderCellsTop: true,
+    fixedHeader: false,
+    "lengthMenu": [ [-1], ["All"] ],
+ dom: 'Bfrtip',
+  buttons: [
+    'excelHtml5', 'csvHtml5'
+  ]
+});
+});
+</script>
+<script type="text/javascript">
+    $(function() {
+        $(".update_fabric").each(function() {
+            $(this).modalForm({
+                formURL: $(this).data('id')
+            });
+        });
+        $(".delete_fabric").each(function() {
+            $(this).modalForm({
+                formURL: $(this).data('id')
+            });
+        });
+
+        $(".read_fabric").each(function() {
+            $(this).modalForm({
+                formURL: $(this).data('id')
+            });
+        });
+    });
+</script>
+{% endblock %}

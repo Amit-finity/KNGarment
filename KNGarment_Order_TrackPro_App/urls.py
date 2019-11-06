@@ -78,6 +78,9 @@ path('payment_paid/', views.payment_paid, name = 'payment_paid'),
 #fabric order vendor payment URL
 path('fabric_order_vendor_payment/',views.fabric_order_vendor_payment,name='fabric_order_vendor_payment'),
 
+#fabric order vendor payment details URL
+re_path(r'^vendor/details/fabric_vendor/(?P<vendor_id>[\w\-\s\(\)]+)/(?P<payment_status>\w+)/$',views.fabric_order_vendor_payment_details,name='fabric_order_vendor_payment_details'),
+
 #stiching order vendor payment URL
 path('stiching_order_vendor_payment/',views.stiching_order_vendor_payment,name='stiching_order_vendor_payment'),
 

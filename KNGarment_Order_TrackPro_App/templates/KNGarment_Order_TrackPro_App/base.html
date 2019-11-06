@@ -63,12 +63,12 @@
             </div>
 
             <ul class="list-unstyled components">
-             {% if user_role == 1 %}
+             {% if user_role == 100 %}
                 <li>
                     <a href="{% url 'KNGarment_Order_TrackPro_App:add_new_order_form' %}">Add a New Order</a>
                 </li>
             {% endif %}
-            {% if user_role == 1 %}
+            {% if user_role == 100 %}
                  <li class="active">
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Track Orders</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
@@ -81,7 +81,7 @@
                         <li>
                             <a href="{% url 'KNGarment_Order_TrackPro_App:delivered_order' %}">Dispatch Ready</a>
                         </li>
-                         {% if user_role == 2 or user_role == 1 %}
+                         {% if user_role == 108 or user_role == 100 %}
                         <li>
                             <a href="{% url 'KNGarment_Order_TrackPro_App:track_order_dispatched_order' %}">Dispatched</a>
                         </li>
@@ -90,7 +90,7 @@
                     </ul>
                 </li>
                 {% endif %}
-                {% if user_role == 1 %}
+                {% if user_role == 100 %}
                 <li>
                     <a href="{% url 'KNGarment_Order_TrackPro_App:all_orders' %}">All Orders</a>
                 </li>
@@ -102,22 +102,22 @@
                 <li class="active">
                     <a href="#ongoingSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">On Going Orders</a>
                     <ul class="collapse list-unstyled" id="ongoingSubmenu">
-                    {% if user_role == 3 or user_role == 1 %}
+                    {% if user_role == 1 or user_role == 100 %}
                         <li>
                             <a href="{% url 'KNGarment_Order_TrackPro_App:track_order_fabric_order' %}">Fabric</a>
                         </li>
                     {% endif %}
-                    {% if user_role == 4 or user_role == 1 %}
+                    {% if user_role == 2 or user_role == 100 %}
                         <li>
                             <a href="{% url 'KNGarment_Order_TrackPro_App:track_order_stiching_order' %}">Stiching</a>
                         </li>
                     {% endif %}  
-                    {% if user_role == 5 or user_role == 1 %}
+                    {% if user_role == 3 or user_role == 100 %}
                         <li>
                             <a href="{% url 'KNGarment_Order_TrackPro_App:track_order_washing_order' %}">Washing</a>
                         </li>
                     {% endif %}  
-                    {% if user_role == 6 or user_role == 1 %}
+                    {% if user_role == 4 or user_role == 100 %}
                         <li>
                             <a href="{% url 'KNGarment_Order_TrackPro_App:track_order_finishing_order' %}">Finishing</a>
                         </li>
@@ -127,22 +127,22 @@
                 <li class="active">
                     <a href="#paymentSubmenuforvendor" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Vendor Payments</a>
                     <ul class="collapse list-unstyled" id="paymentSubmenuforvendor">
-                    {% if user_role == 3 or user_role == 1 %}
+                    {% if user_role == 1 or user_role == 100 %}
                         <li>
                             <a href="{% url 'KNGarment_Order_TrackPro_App:fabric_order_vendor_payment' %}"> Fabric Payments</a>
                         </li>
                     {% endif %}
-                    {% if user_role == 4 or user_role == 1 %}
+                    {% if user_role == 2 or user_role == 100 %}
                         <li>
                             <a href="{% url 'KNGarment_Order_TrackPro_App:stiching_order_vendor_payment' %}"> Stitching Payments</a>
                         </li>
                     {% endif %}
-                    {% if user_role == 5 or user_role == 1 %}
+                    {% if user_role == 3 or user_role == 100 %}
                         <li>
                             <a href="{% url 'KNGarment_Order_TrackPro_App:washing_order_vendor_payment' %}"> Washing Payments</a>
                         </li>
                     {% endif %}
-                    {% if user_role == 6 or user_role == 1 %}
+                    {% if user_role == 4 or user_role == 100 %}
                         <li>
                             <a href="{% url 'KNGarment_Order_TrackPro_App:finishing_order_vendor_payment' %}"> Finishing Payments</a>
                         </li>
@@ -152,7 +152,7 @@
                 <li>
                     <a href="">My Profile</a>
                 </li>
-                {% if user_role == 1 %}
+                {% if user_role == 100 %}
                 <li class="active">
                     <a href="#paymentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Client Payments</a>
                     <ul class="collapse list-unstyled" id="paymentSubmenu">
@@ -166,12 +166,12 @@
                     </ul>                                                                                                                                                                                                           
                 </li>
                 {% endif %}
-                {% if user_role == 1 %}
+                {% if user_role == 100 %}
                 <li>
                     <a href="{% url 'KNGarment_Order_TrackPro_App:userlist' %}">Portal Users</a>
                 </li>
                 {% endif %}
-                {% if user_role == 1 %}
+                {% if user_role == 100 %}
                 <li class="active">
                     <a href="#homeSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Reports</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu2">

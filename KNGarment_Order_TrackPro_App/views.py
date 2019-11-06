@@ -601,6 +601,13 @@ def fabric_order_vendor_payment(request):
     data = {'fabric_list':fabric_list,'user_role':user_role}
     return render(request,'KNGarment_Order_TrackPro_App/fabric_order_vendor_payment.html',data)
 
+#fabric_order_vendor_payment_details view
+def fabric_order_vendor_payment_details(request,vendor_id,payment_status):
+    userrole = request.user.user_role
+    fabric_objects = Fabric_Order.objects.filter(process_customuser_id=vendor_id,process_payment_status=payment_status).all()
+    data = {"userrole":userrole, "fabric_objects": fabric_objects }
+    return render(request,'KNGarment_Order_TrackPro_App/fabric_order_vendor_payment_details.html',data)
+
 #stiching_order_vendor_payment view
 def stiching_order_vendor_payment(request):
     stiching_list=functions.filtering_vendors(2)
