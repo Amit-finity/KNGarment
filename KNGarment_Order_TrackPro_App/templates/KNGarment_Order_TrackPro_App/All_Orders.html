@@ -48,26 +48,26 @@
                             </tr>
                         </thead>
                        <tbody>
-                    {% for order in orders %}
+                       {% for key,value in order_status_map_dict.items %}
                     <tr>
-                        <td>{{order.order_order_number}}</td>
-                        <td>{{order.order_order_type}}</td>
-                        <td>{{order.order_order_brands}}</td>
-                        <td>{{order.order_order_style_number}}</td>
-                        <td>{{order.order_order_fit}}</td>
-                        <td>{{order.order_order_quantity}}</td>
-                        <td>{{order.order_order_date}}</td>
-                        <td>{{order.order_delivery_date}}</td>
-                        <td>{{order.order_order_category}}</td>
-                        <td>{{order.order_fit_sample_status}}</td>
+                        <td>{{key.order_order_number}}</td>
+                        <td>{{key.order_order_type}}</td>
+                        <td>{{key.order_order_brands}}</td>
+                        <td>{{key.order_order_style_number}}</td>
+                        <td>{{key.order_order_fit}}</td>
+                        <td>{{key.order_order_quantity}}</td>
+                        <td>{{key.order_order_date}}</td>
+                        <td>{{key.order_delivery_date}}</td>
+                        <td>{{key.order_order_category}}</td>
+                        <td>{{value}}</td>
                         <td>
-                            <button type="button" class="update-order btn btn-sm btn-primary" data-id="{% url 'KNGarment_Order_TrackPro_App:all_order_update' pk=order.pk  %}">
+                            <button type="button" class="update-order btn btn-sm btn-primary" data-id="{% url 'KNGarment_Order_TrackPro_App:all_order_update' pk=key.pk  %}">
                                 <span class="fa fa-edit"></span>
                             </button>
                         </td>
                          {% if user_role == 1 %}
                         <td>
-                            <button type="button" class="delete-order btn btn-sm btn-danger" data-id="{% url 'KNGarment_Order_TrackPro_App:all_order_delete' pk=order.pk  %}">
+                            <button type="button" class="delete-order btn btn-sm btn-danger" data-id="{% url 'KNGarment_Order_TrackPro_App:all_order_delete' pk=key.pk  %}">
                                 <span class="fa fa-trash"></span>
                             </button>
                         </td>

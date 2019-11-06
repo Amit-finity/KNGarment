@@ -107,7 +107,35 @@ def add_processes(request,pk):
 def all_orders(request):
     user_role = request.user.user_role
     all_orders = Orders.objects.all()
-    data = {'orders':all_orders,'user_role':user_role}
+    order_status_map_dict = {}
+    for order in all_orders:
+        length = 0
+        status = ""
+        process_in_one_order = []
+        values1 = Fabric_Order.objects.filter(process_order_id=order.pk)
+        values2 = Stiching.objects.filter(process_order_id=order.pk)
+        values3 = Washing.objects.filter(process_order_id=order.pk)
+        values4 = Finishing.objects.filter(process_order_id=order.pk)
+        if values1.exists():
+            process_in_one_order.append(1)
+        if values2.exists():
+            process_in_one_order.append(2)
+        if values3.exists():
+            process_in_one_order.append(3)
+        if values4.exists():
+            process_in_one_order.append(4)
+        length = len(process_in_one_order)
+        #for Current Order
+        if length > 0 and length < 4:
+            status = "Current"
+        #for delivered Order
+        if length == 4:
+            status = "Delivered"
+        #for Registered Order 
+        if length == 0:
+            status = "Registered"
+        order_status_map_dict[order]=status
+    data = {'orders':all_orders,'user_role':user_role,'status':status,'order_status_map_dict':order_status_map_dict}
     return render(request,'KNGarment_Order_TrackPro_App/All_Orders.html',data)
 
 @login_required(login_url='/user_login')
