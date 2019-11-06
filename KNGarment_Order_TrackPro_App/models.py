@@ -13,12 +13,12 @@ from model_utils.managers import InheritanceManager
 class CustomUser(AbstractUser):
     '''Overrides the custom django user model'''
     # Datafields
-    SUPER_ADMIN = 1
-    ADMIN = 2
-    FABRIC_VENDOR = 3
-    STITCHING_VENDOR = 4
-    WASHING_VENDOR = 5
-    FINISHING_VENDOR = 6
+    SUPER_ADMIN = 108
+    ADMIN = 100
+    FABRIC_VENDOR = 1
+    STITCHING_VENDOR = 2
+    WASHING_VENDOR = 3
+    FINISHING_VENDOR = 4
     ROLE_CHOICES = (
       (ADMIN,'admin'),
       (SUPER_ADMIN,'super_admin'),
@@ -89,6 +89,7 @@ class Process(models.Model):
     process_date_of_entry = models.DateTimeField(default=timezone.now)
     process_vendor_id = models.ForeignKey(Vendor, on_delete = models.CASCADE,blank=True)
     process_order_id = models.ForeignKey(Orders, on_delete=models.CASCADE,blank=True)
+    process_customuser_id = models.ForeignKey(CustomUser,on_delete=models.CASCADE,default=1)
     objects = InheritanceManager()
 
     def __str__(self):

@@ -68,7 +68,29 @@ def add_new_order_form(request):
 def update_order_detail(request):
     user_role = request.user.user_role
     orders = Orders.objects.all()
-    data = {'orders':orders,'user_role':user_role}
+    #logged_in_vendor_order_list = []
+    for order in orders:
+        logged_in_vendor_order_list = []
+        #vendor_in_one_order = []
+        values1 = Fabric_Order.objects.filter(process_type=user_role)
+        values2 = Stiching.objects.filter(process_type=user_role)
+        values3 = Washing.objects.filter(process_type=user_role)
+        values4 = Finishing.objects.filter(process_type=user_role)
+        if values1.exists():
+            #vendor_in_one_order.append(1)
+            logged_in_vendor_order_list.append(order.pk)
+        if values2.exists():
+            #vendor_in_one_order.append(2)
+            logged_in_vendor_order_list.append(order.pk)
+        if values3.exists():
+            #vendor_in_one_order.append(3)
+            logged_in_vendor_order_list.append(order.pk)
+        if values4.exists():
+            #vendor_in_one_order.append(4)
+            logged_in_vendor_order_list.append(order.pk)
+    order_objects = Orders.objects.filter(pk__in=logged_in_vendor_order_list)
+    #orders = Orders.objects.all()
+    data = {'orders':order_objects,'user_role':user_role}
     return render(request,'KNGarment_Order_TrackPro_App/update_orders_detail.html',data)
 
 @login_required(login_url='/user_login')
