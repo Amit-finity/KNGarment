@@ -46,8 +46,8 @@
                        <th class="text-center" scope="row">{{ forloop.counter }}</th>
                         <td class="text-center">{{ key.0 }}</td>
                         <td class="text-center">{{ key.1 }}</td>
-                        <td class="text-center">{{value.0}}</td>
-                       <td class="text-center">{{value.1}}</td>  
+                         <td class="text-center"><a href="{% url 'KNGarment_Order_TrackPro_App:stiching_order_vendor_payment_details'  vendor_id=key.0 payment_status=2 %}"> {{value.0}}</a></td>
+                       <td class="text-center"><a href="{% url 'KNGarment_Order_TrackPro_App:stiching_order_vendor_payment_details'  vendor_id=key.0 payment_status=1 %}">{{value.1}}</a></td>  
                           <td>
 							<button type="button" class="update-book btn btn-sm btn-primary" data-id="">
 								<span class="fa fa-edit"></span>

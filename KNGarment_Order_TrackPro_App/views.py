@@ -603,9 +603,9 @@ def fabric_order_vendor_payment(request):
 
 #fabric_order_vendor_payment_details view
 def fabric_order_vendor_payment_details(request,vendor_id,payment_status):
-    userrole = request.user.user_role
+    user_role = request.user.user_role
     fabric_objects = Fabric_Order.objects.filter(process_customuser_id=vendor_id,process_payment_status=payment_status).all()
-    data = {"userrole":userrole, "fabric_objects": fabric_objects }
+    data = {"user_role":user_role, "fabric_objects": fabric_objects }
     return render(request,'KNGarment_Order_TrackPro_App/fabric_order_vendor_payment_details.html',data)
 
 #stiching_order_vendor_payment view
@@ -615,6 +615,13 @@ def stiching_order_vendor_payment(request):
     data = {'stiching_list':stiching_list,'user_role':user_role}
     return render(request,'KNGarment_Order_TrackPro_App/stiching_order_vendor_payment.html',data)
 
+#stiching_order_vendor_payment_details view
+def stiching_order_vendor_payment_details(request,vendor_id,payment_status):
+    user_role = request.user.user_role
+    stiching_objects = Stiching.objects.filter(process_customuser_id=vendor_id,process_payment_status=payment_status).all()
+    data = {"user_role":user_role, "stiching_objects": stiching_objects }
+    return render(request,'KNGarment_Order_TrackPro_App/stiching_order_vendor_payment_details.html',data)
+
 #washing_order_vendor_payment view
 def washing_order_vendor_payment(request):
     washing_list=functions.filtering_vendors(3)
@@ -622,12 +629,26 @@ def washing_order_vendor_payment(request):
     data = {'washing_list':washing_list,'user_role':user_role}
     return render(request,'KNGarment_Order_TrackPro_App/washing_order_vendor_payment.html',data)
 
+#washing_order_vendor_payment_details view
+def washing_order_vendor_payment_details(request,vendor_id,payment_status):
+    user_role = request.user.user_role
+    washing_objects = Washing.objects.filter(process_customuser_id=vendor_id,process_payment_status=payment_status).all()
+    data = {"user_role":user_role, "washing_objects": washing_objects }
+    return render(request,'KNGarment_Order_TrackPro_App/washing_order_vendor_payment_details.html',data)
+
 #finishing_order_vendor_payment view
 def finishing_order_vendor_payment(request):
     finishing_list=functions.filtering_vendors(4)
     user_role = request.user.user_role
     data = {'finishing_list':finishing_list,'user_role':user_role}
     return render(request,'KNGarment_Order_TrackPro_App/finishing_order_vendor_payment.html',data)
+
+#finishing_order_vendor_payment_details view
+def finishing_order_vendor_payment_details(request,vendor_id,payment_status):
+    user_role = request.user.user_role
+    finishing_objects = Finishing.objects.filter(process_customuser_id=vendor_id,process_payment_status=payment_status).all()
+    data = {"user_role":user_role, "finishing_objects": finishing_objects }
+    return render(request,'KNGarment_Order_TrackPro_App/finishing_order_vendor_payment_details.html',data)
 
 #Summary View
 def order_summary(request,pk):

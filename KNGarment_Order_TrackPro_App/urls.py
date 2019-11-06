@@ -84,11 +84,20 @@ re_path(r'^vendor/details/fabric_vendor/(?P<vendor_id>[\w\-\s\(\)]+)/(?P<payment
 #stiching order vendor payment URL
 path('stiching_order_vendor_payment/',views.stiching_order_vendor_payment,name='stiching_order_vendor_payment'),
 
+#stiching order vendor payment details URL
+re_path(r'^vendor/details/stiching_vendor/(?P<vendor_id>[\w\-\s\(\)]+)/(?P<payment_status>\w+)/$',views.stiching_order_vendor_payment_details,name='stiching_order_vendor_payment_details'),
+
 #washing order vendor payment URL
 path('washing_order_vendor_payment/',views.washing_order_vendor_payment,name='washing_order_vendor_payment'),
 
+#washing order vendor payment details URL
+re_path(r'^vendor/details/washing_vendor/(?P<vendor_id>[\w\-\s\(\)]+)/(?P<payment_status>\w+)/$',views.washing_order_vendor_payment_details,name='washing_order_vendor_payment_details'),
+
 #finishing order vendor payment URL
 path('finishing_order_vendor_payment/',views.finishing_order_vendor_payment,name='finishing_order_vendor_payment'),
+
+#finishing order vendor payment details URL
+re_path(r'^vendor/details/finishing_vendor/(?P<vendor_id>[\w\-\s\(\)]+)/(?P<payment_status>\w+)/$',views.finishing_order_vendor_payment_details,name='finishing_order_vendor_payment_details'),
 
 #reports_job_worker_balancereport URL
 path('reports_job_worker_balancereport/', views.reports_job_worker_balancereport, name = 'reports_job_worker_balancereport'),
