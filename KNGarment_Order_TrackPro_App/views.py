@@ -12,7 +12,7 @@ from bootstrap_modal_forms.generic import (BSModalCreateView,BSModalUpdateView,B
 
 #Project Imports
 from KNGarment_Order_TrackPro_App.models import Client,Vendor,Orders,Process,Fabric_Order,Stiching,Washing,Finishing,Dispatch,Order_Mens_Or_Ladies,Order_Kids,Order_Ethenic,CustomUser
-from KNGarment_Order_TrackPro_App.forms import Update_Orders,Update_FabricOrder,Update_StichingOrder,Update_WashingOrder,Update_FinishingOrder,Update_DispatchOrder,Update_Process_payment_status,CustomUserForm,Update_FabricOrderProcess,Update_StichingOrderProcess,Update_WashingOrderProcess,Update_FinishingOrderProcess 
+from KNGarment_Order_TrackPro_App.forms import Update_Orders,Update_FabricOrder,Update_StichingOrder,Update_WashingOrder,Update_FinishingOrder,Update_DispatchOrder,Update_Process_payment_status,CustomUserForm,Update_FabricOrderProcess,Update_StichingOrderProcess,Update_WashingOrderProcess,Update_FinishingOrderProcess,CustomUserCreationForm 
 
 from KNGarment_Order_TrackPro_App import functions
 # Create your views here.
@@ -70,26 +70,29 @@ def update_order_detail(request):
     user_role = request.user.user_role
     orders = Orders.objects.all()
     #logged_in_vendor_order_list = []
-    for order in orders:
-        logged_in_vendor_order_list = []
-        #vendor_in_one_order = []
-        values1 = Fabric_Order.objects.filter(process_type=user_role)
-        values2 = Stiching.objects.filter(process_type=user_role)
-        values3 = Washing.objects.filter(process_type=user_role)
-        values4 = Finishing.objects.filter(process_type=user_role)
-        if values1.exists():
-            #vendor_in_one_order.append(1)
-            logged_in_vendor_order_list.append(order.pk)
-        if values2.exists():
-            #vendor_in_one_order.append(2)
-            logged_in_vendor_order_list.append(order.pk)
-        if values3.exists():
-            #vendor_in_one_order.append(3)
-            logged_in_vendor_order_list.append(order.pk)
-        if values4.exists():
-            #vendor_in_one_order.append(4)
-            logged_in_vendor_order_list.append(order.pk)
-    order_objects = Orders.objects.filter(pk__in=logged_in_vendor_order_list)
+    if user_role == 100:
+        order_objects = orders
+    else:
+        for order in orders:
+            logged_in_vendor_order_list = []
+            #vendor_in_one_order = []
+            values1 = Fabric_Order.objects.all().filter(process_type=user_role)
+            values2 = Stiching.objects.all().filter(process_type=user_role)
+            values3 = Washing.objects.all().filter(process_type=user_role)
+            values4 = Finishing.objects.all().filter(process_type=user_role)
+            if values1.exists():
+                #vendor_in_one_order.append(1)
+                logged_in_vendor_order_list.append(order.pk)
+            elif values2.exists():
+                #vendor_in_one_order.append(2)
+                logged_in_vendor_order_list.append(order.pk)
+            elif values3.exists():
+                #vendor_in_one_order.append(3)
+                logged_in_vendor_order_list.append(order.pk)
+            elif values4.exists():
+                #vendor_in_one_order.append(4)
+                logged_in_vendor_order_list.append(order.pk)
+        order_objects = Orders.objects.all().filter(pk__in=logged_in_vendor_order_list)
     #orders = Orders.objects.all()
     data = {'orders':order_objects,'user_role':user_role}
     return render(request,'KNGarment_Order_TrackPro_App/update_orders_detail.html',data)
@@ -97,10 +100,12 @@ def update_order_detail(request):
 @login_required(login_url='/user_login')
 def add_processes(request,pk):
     user_role = request.user.user_role
+    fabric_bill_numbers = Fabric_Order.objects.all()
     order_data = {}
     one_object_of_model_order = Orders.objects.get(pk=pk)
     #order_data['orders']
     order_data['orders'] = one_object_of_model_order
+    order_data['fabric_bill_numbers']= fabric_bill_numbers
     order_data['user_role'] = user_role
     if Order_Mens_Or_Ladies.objects.filter(order_mens_or_ladies_order_id=pk).exists():
         order_data['order_mens_or_ladies']=Order_Mens_Or_Ladies.objects.get(order_mens_or_ladies_order_id=pk)
@@ -153,7 +158,7 @@ def all_orders(request):
             status = "Current"
         #for delivered Order
         if length == 4:
-            status = "Delivered"
+            status = "Dispatch Ready"
         #for Registered Order 
         if length == 0:
             status = "Registered"
@@ -670,6 +675,15 @@ def order_summary(request,pk):
     if Finishing.objects.filter(process_order_id=pk).exists():
         order_data['finishing']=Finishing.objects.get(process_order_id=pk)
     return render(request,'KNGarment_Order_TrackPro_App/summary.html',order_data)
+
+
+
+class SignUpView(BSModalCreateView):
+    form_class = CustomUserCreationForm
+    template_name = 'KNGarment_Order_TrackPro_App/sign_up.html'
+    success_message = 'Success: Sign up succeeded. You can now Log in.'
+    success_url = reverse_lazy('KNGarment_Order_TrackPro_App:userlist')
+
 
 #Update View
 class AllOrdersUpdateView(BSModalUpdateView):

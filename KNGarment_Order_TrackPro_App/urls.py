@@ -187,6 +187,9 @@ path('order_summary/<int:pk>', views.order_summary, name='order_summary'),
 # ------- Portal Users URls ---------
 #< -----Users list Urls ------>
 path('users/', views.user_list, name='userlist'),
+
+path('user_signup/', views.SignUpView.as_view(), name='user_signup'),
+
 #</-----Users list Urls------>
 
 

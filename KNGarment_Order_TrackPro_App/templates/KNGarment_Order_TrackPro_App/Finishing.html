@@ -59,7 +59,13 @@
                         <td>{{finishing.finishing_delivery_quantity}}</td>
                         <td>{{finishing.process_bill_number}}</td>
                         <td>{{finishing.process_bill_file}}</td>
-                        <td>{{finishing.process_payment_status}}</td>
+                        <td>
+                        {% if finishing.process_payment_status == 1 %}
+                        Paid
+                        {% else %}
+                        Pending
+                        {% endif %}                                
+                        </td>
                         <td>
                             <button type="button" class="update-order btn btn-sm btn-primary" data-id="{% url 'KNGarment_Order_TrackPro_App:finishing_order_update' pk=finishing.pk  %}">
                                 <span class="fa fa-edit"></span>

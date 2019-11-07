@@ -48,7 +48,14 @@
                                 <td>{{fabric.process_vendor_name}}</td>
                                 <td>{{fabric.fabric_order_quantity}}</td>
                                 <td>{{fabric.process_delivery_date}}</td>
-                                <td>{{fabric.process_payment_status}}</td>
+
+                                <td>
+                                {% if fabric.process_payment_status == 1 %}
+                                Paid
+                                {% else %}
+                                Pending
+                                {% endif %}                                
+                                </td>
                                 
                             <td>
 							<button type="button" class="update-order btn btn-sm btn-primary" data-id="{% url 'KNGarment_Order_TrackPro_App:fabric_order_update' pk=fabric.pk  %}">

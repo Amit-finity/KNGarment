@@ -1,6 +1,9 @@
 from django import forms
 from KNGarment_Order_TrackPro_App.models import Client,Vendor,Orders,Process,Fabric_Order,Stiching,Washing,Finishing,Dispatch,Order_Mens_Or_Ladies,Order_Kids,Order_Ethenic,CustomUser
 from bootstrap_modal_forms.forms import BSModalForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from bootstrap_modal_forms.mixins import PopRequestMixin, CreateUpdateAjaxMixin
 
 class CustomUserForm(BSModalForm):
     class Meta:
@@ -128,3 +131,9 @@ class Update_Process_payment_status(BSModalForm):
     class Meta:
         model= Process
         fields= ('process_payment_status',)
+
+class CustomUserCreationForm(PopRequestMixin, CreateUpdateAjaxMixin,
+                             UserCreationForm):
+    class Meta:
+        model = CustomUser
+        fields = ['user_role','email','username', 'password1', 'password2']
