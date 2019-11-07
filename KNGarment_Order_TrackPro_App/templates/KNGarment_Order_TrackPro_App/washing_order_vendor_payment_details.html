@@ -58,9 +58,15 @@
                                     <td class="text-center">{{ washing.process_delivery_date }}</td>
                                     <td class="text-center">{{ washing.process_bill_number }}</td>
                                     <td class="text-center">{{ washing.process_bill_file }}</td>
-                                    <td class="text-center">{{ washing.process_payment_status }}</td>
+                                    <td class="text-center">
+                                    {% if washing.process_payment_status == 1 %}
+                                    Paid
+                                    {% else %}
+                                    Pending
+                                    {% endif %}                                
+                                    </td>
                                     <td>
-                            <button type="button" class="update_washing btn btn-sm btn-primary" data-id="">
+                            <button type="button" class="update_washing btn btn-sm btn-primary" data-id="{% url 'KNGarment_Order_TrackPro_App:washing_process_details_update' pk=washing.pk  %}">
                                 <span class="fa fa-edit"></span>
                             </button>
                         </td>

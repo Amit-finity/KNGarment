@@ -132,6 +132,74 @@ class Update_Process_payment_status(BSModalForm):
         model= Process
         fields= ('process_payment_status',)
 
+class Update_fabric_process_details(BSModalForm):
+    class Meta:
+        model = Fabric_Order
+        fields = ('process_vendor_name',
+        'process_vendor_location',
+        'process_received_quantity',
+        'process_received_date',
+        'process_delivery_date',
+        'process_bill_number',
+        'process_bill_file',
+        'process_payment_status',
+        'fabric_order_sort_number',
+        'fabric_order_quantity')
+
+class Update_stiching_process_details(BSModalForm):
+    class Meta:
+        model = Stiching
+        fields = ('process_vendor_name',
+        'process_vendor_location',
+        'process_received_quantity',
+        'process_received_date',
+        'process_delivery_date',
+        'process_bill_number',
+        'process_bill_file',
+        'process_payment_status',
+        'stiching_average_one',
+        'stiching_average_two',
+        'stiching_average_three',
+        'stiching_rate_one',
+        'stiching_rate_two',
+        'stiching_rate_three',
+        'stiching_opening_fabric_stock',
+        'stiching_opening_stock_date',
+        'stiching_fabric_bill_date',
+        'stiching_fabric_used',
+        'stiching_fabric_bill_number')
+
+class Update_washing_process_details(BSModalForm):
+    class Meta:
+        model = Washing
+        fields = ('process_vendor_name',
+        'process_vendor_location',
+        'process_received_quantity',
+        'process_received_date',
+        'process_delivery_date',
+        'process_bill_number',
+        'process_bill_file',
+        'process_payment_status',
+        'washing_process_name',
+        'washing_rate',
+        'washing_order_date',
+        'washing_delivery_quantity')
+
+class Update_finishing_process_details(BSModalForm):
+    class Meta:
+        model = Finishing
+        fields = ('process_vendor_name',
+        'process_vendor_location',
+        'process_received_quantity',
+        'process_received_date',
+        'process_delivery_date',
+        'process_bill_number',
+        'process_bill_file',
+        'process_payment_status',
+        'finishing_rate',
+        'finishing_delivery_quantity')
+
+
 class CustomUserCreationForm(PopRequestMixin, CreateUpdateAjaxMixin,
                              UserCreationForm):
     class Meta:

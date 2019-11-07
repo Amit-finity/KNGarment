@@ -206,5 +206,15 @@ path('userupdate/<int:pk>',views.UserUpdateView.as_view(),name='userupdate'),
 #</-----Update Users Urls ------>
 # </------- Portal Users URls ---------
 
+
+path('fabric_process_details_update/<int:pk>',views.FabricProcessUpdateView.as_view(),name='fabric_process_details_update'),
+
+path('stiching_process_details_update/<int:pk>',views.StichingProcessUpdateView.as_view(),name='stiching_process_details_update'),
+
+path('washing_process_details_update/<int:pk>',views.WashingProcessUpdateView.as_view(),name='washing_process_details_update'),
+
+
+path('finishing_process_details_update/<int:pk>',views.FinishingProcessUpdateView.as_view(),name='finishing_process_details_update'),
+
 ]
 

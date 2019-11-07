@@ -12,7 +12,7 @@ from bootstrap_modal_forms.generic import (BSModalCreateView,BSModalUpdateView,B
 
 #Project Imports
 from KNGarment_Order_TrackPro_App.models import Client,Vendor,Orders,Process,Fabric_Order,Stiching,Washing,Finishing,Dispatch,Order_Mens_Or_Ladies,Order_Kids,Order_Ethenic,CustomUser
-from KNGarment_Order_TrackPro_App.forms import Update_Orders,Update_FabricOrder,Update_StichingOrder,Update_WashingOrder,Update_FinishingOrder,Update_DispatchOrder,Update_Process_payment_status,CustomUserForm,Update_FabricOrderProcess,Update_StichingOrderProcess,Update_WashingOrderProcess,Update_FinishingOrderProcess,CustomUserCreationForm 
+from KNGarment_Order_TrackPro_App.forms import Update_Orders,Update_FabricOrder,Update_StichingOrder,Update_WashingOrder,Update_FinishingOrder,Update_DispatchOrder,Update_Process_payment_status,CustomUserForm,Update_FabricOrderProcess,Update_StichingOrderProcess,Update_WashingOrderProcess,Update_FinishingOrderProcess,CustomUserCreationForm,Update_fabric_process_details,Update_stiching_process_details,Update_washing_process_details,Update_finishing_process_details 
 
 from KNGarment_Order_TrackPro_App import functions
 # Create your views here.
@@ -877,4 +877,53 @@ class FinishingOrderProcessUpdateView(BSModalUpdateView):
         finishing_object = Finishing.objects.get(pk=self.kwargs['pk'])
         pk = finishing_object.process_order_id
         return reverse_lazy('KNGarment_Order_TrackPro_App:add_processes', kwargs={'pk': pk })  
+
+class FabricProcessUpdateView(BSModalUpdateView):
+    model = Fabric_Order
+    template_name = 'KNGarment_Order_TrackPro_App/update_order.html'
+    form_class = Update_fabric_process_details
+    success_message = 'Success: Entry was updated.'
+
+    def get_success_url(self,**kwargs):
+        Fabric_Order_Model_Object = Fabric_Order.objects.get(pk=self.kwargs['pk'])
+        process_customuser_id = Fabric_Order_Model_Object.process_customuser_id.pk
+        payment_status = Fabric_Order_Model_Object.process_payment_status
+        return reverse_lazy('KNGarment_Order_TrackPro_App:fabric_order_vendor_payment_details', kwargs={'vendor_id':process_customuser_id,'payment_status':payment_status })
+
+class StichingProcessUpdateView(BSModalUpdateView):
+    model = Stiching
+    template_name = 'KNGarment_Order_TrackPro_App/update_order.html'
+    form_class = Update_stiching_process_details
+    success_message = 'Success: Entry was updated.'
+    
+    def get_success_url(self,**kwargs):
+        Stiching_Order_Model_Object = Stiching.objects.get(pk=self.kwargs['pk'])
+        process_customuser_id = Stiching_Order_Model_Object.process_customuser_id.pk
+        payment_status = Stiching_Order_Model_Object.process_payment_status
+        return reverse_lazy('KNGarment_Order_TrackPro_App:stiching_order_vendor_payment_details', kwargs={'vendor_id':process_customuser_id,'payment_status':payment_status })
+
+class WashingProcessUpdateView(BSModalUpdateView):
+    model = Washing
+    template_name = 'KNGarment_Order_TrackPro_App/update_order.html'
+    form_class = Update_washing_process_details
+    success_message = 'Success: Entry was updated.'
+    
+    def get_success_url(self,**kwargs):
+        Washing_Order_Model_Object = Washing.objects.get(pk=self.kwargs['pk'])
+        process_customuser_id = Washing_Order_Model_Object.process_customuser_id.pk
+        payment_status = Washing_Order_Model_Object.process_payment_status
+        return reverse_lazy('KNGarment_Order_TrackPro_App:washing_order_vendor_payment_details', kwargs={'vendor_id':process_customuser_id,'payment_status':payment_status })
+
+class FinishingProcessUpdateView(BSModalUpdateView):
+    model = Finishing
+    template_name = 'KNGarment_Order_TrackPro_App/update_order.html'
+    form_class = Update_finishing_process_details
+    success_message = 'Success: Entry was updated.'
+    
+    def get_success_url(self,**kwargs):
+        Finishing_Order_Model_Object = Finishing.objects.get(pk=self.kwargs['pk'])
+        process_customuser_id = Finishing_Order_Model_Object.process_customuser_id.pk
+        payment_status = Finishing_Order_Model_Object.process_payment_status
+        return reverse_lazy('KNGarment_Order_TrackPro_App:finishing_order_vendor_payment_details', kwargs={'vendor_id':process_customuser_id,'payment_status':payment_status })
+
 #</-----Add Users Views ------>    

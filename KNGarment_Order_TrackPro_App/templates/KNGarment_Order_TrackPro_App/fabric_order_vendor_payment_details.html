@@ -40,8 +40,9 @@
                                     <th class="text-center" scope="col">Bill Number</th>
                                     <th class="text-center" scope="col">Bill File</th>
                                     <th class="text-center" scope="col">Payment Status</th>
+                                    <th class="text-center" scope="col">Fabric Order Sort Number</th>
+                                    <th class="text-center" scope="col">Fabric Order Quantity</th>
                                     <th class="text-center" scope="col">Update</th>
-                                  
                                     <th class="text-center" scope="col">Delete</th>
                                    
                                 </tr>
@@ -58,9 +59,17 @@
                                     <td class="text-center">{{ fabric.process_delivery_date }}</td>
                                     <td class="text-center">{{ fabric.process_bill_number }}</td>
                                     <td class="text-center">{{ fabric.process_bill_file }}</td>
-                                    <td class="text-center">{{ fabric.process_payment_status }}</td>
+                                    <td class="text-center">
+                                    {% if fabric.process_payment_status == 1 %}
+                                    Paid
+                                    {% else %}
+                                    Pending
+                                    {% endif %}
+                                    </td>    
+                                    <td class="text-center">{{ fabric.fabric_order_sort_number }}</td>
+                                    <td class="text-center">{{ fabric.fabric_order_quantity }}</td>                          
                                     <td>
-                            <button type="button" class="update_fabric btn btn-sm btn-primary" data-id="">
+                            <button type="button" class="update_fabric btn btn-sm btn-primary" data-id="{% url 'KNGarment_Order_TrackPro_App:fabric_process_details_update' pk=fabric.pk  %}">
                                 <span class="fa fa-edit"></span>
                             </button>
                         </td>
