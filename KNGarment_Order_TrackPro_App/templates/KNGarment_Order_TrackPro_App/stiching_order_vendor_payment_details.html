@@ -74,7 +74,7 @@
                         </td>
                         
                         <td>
-                            <button type="button" class="delete_stiching btn btn-sm btn-danger" data-id="">
+                            <button type="button" class="delete_stiching btn btn-sm btn-danger" data-id="{% url 'KNGarment_Order_TrackPro_App:stiching_process_details_delete' pk=stiching.pk  %}">
                                 <span class="fa fa-trash"></span>
                             </button>
                         </td>  
@@ -129,7 +129,6 @@ $('#test_table').DataTable({
                 formURL: $(this).data('id')
             });
         });
-
         $(".read_stiching").each(function() {
             $(this).modalForm({
                 formURL: $(this).data('id')

@@ -17,11 +17,11 @@
 </div>
 <div id="content">
     <div class="container-fluid">
-        <button type="button" id="sidebarCollapse" class="btn btn-info">
+        <button type="button" id="sidebarCollapse" class="btn" style="background-color: #87c241;color: white">
             <i class="fas fa-align-left"></i>
         </button>
         <hr>
-        <center><button class="signup-btn btn btn-info" type="button" name="button">Click here to Create a New User</button></center>
+        <center><button class="signup-btn btn" style="background-color: #87c241;color: white" type="button" name="button">Click here to Create a New User</button></center>
         <hr>
         <div>
             <table id="test_table">
@@ -31,10 +31,9 @@
                         <th>User Name</th>
                         <th>User Email</th>
                         <th>User Role</th>
+                        <th>Password</th>
                         <th>Edit</th>
-                        
                         <th>Delete</th>
-                       
                     </tr>
                 </thead>
                 <tbody>
@@ -58,6 +57,7 @@
                             finishing vendor
                             {% endif %}
                         </td>
+                        <td class="text">{{ user.password }}</td>
                         <td>
                             <center>
                                 <button type="button" class="update-users-list btn btn-sm btn-primary"  data-id="{% url 'KNGarment_Order_TrackPro_App:userupdate' user.pk %}">

@@ -12,7 +12,7 @@ from bootstrap_modal_forms.generic import (BSModalCreateView,BSModalUpdateView,B
 
 #Project Imports
 from KNGarment_Order_TrackPro_App.models import Client,Vendor,Orders,Process,Fabric_Order,Stiching,Washing,Finishing,Dispatch,Order_Mens_Or_Ladies,Order_Kids,Order_Ethenic,CustomUser
-from KNGarment_Order_TrackPro_App.forms import Update_Orders,Update_FabricOrder,Update_StichingOrder,Update_WashingOrder,Update_FinishingOrder,Update_DispatchOrder,Update_Process_payment_status,CustomUserForm,Update_FabricOrderProcess,Update_StichingOrderProcess,Update_WashingOrderProcess,Update_FinishingOrderProcess,CustomUserCreationForm,Update_fabric_process_details,Update_stiching_process_details,Update_washing_process_details,Update_finishing_process_details 
+from KNGarment_Order_TrackPro_App.forms import Update_Orders,Update_FabricOrder,Update_StichingOrder,Update_WashingOrder,Update_FinishingOrder,Update_DispatchOrder,Update_Process_payment_status,CustomUserForm,Update_FabricOrderProcess,Update_StichingOrderProcess,Update_WashingOrderProcess,Update_FinishingOrderProcess,CustomUserCreationForm,Update_fabric_process_details,Update_stiching_process_details,Update_washing_process_details,Update_finishing_process_details,Update_My_Profile 
 
 from KNGarment_Order_TrackPro_App import functions
 # Create your views here.
@@ -165,6 +165,40 @@ def all_orders(request):
         order_status_map_dict[order]=status
     data = {'orders':all_orders,'user_role':user_role,'status':status,'order_status_map_dict':order_status_map_dict}
     return render(request,'KNGarment_Order_TrackPro_App/All_Orders.html',data)
+
+def OrderPaymentSummaryView(request):
+    user_role = request.user.user_role
+    all_orders = Orders.objects.all()
+    order_status_map_dict = {}
+    for order in all_orders:
+        length = 0
+        status = ""
+        process_in_one_order = []
+        values1 = Fabric_Order.objects.filter(process_order_id=order.pk)
+        values2 = Stiching.objects.filter(process_order_id=order.pk)
+        values3 = Washing.objects.filter(process_order_id=order.pk)
+        values4 = Finishing.objects.filter(process_order_id=order.pk)
+        if values1.exists():
+            process_in_one_order.append(1)
+        if values2.exists():
+            process_in_one_order.append(2)
+        if values3.exists():
+            process_in_one_order.append(3)
+        if values4.exists():
+            process_in_one_order.append(4)
+        length = len(process_in_one_order)
+        #for Current Order
+        if length > 0 and length < 4:
+            status = "Current"
+        #for delivered Order
+        if length == 4:
+            status = "Dispatch Ready"
+        #for Registered Order 
+        if length == 0:
+            status = "Registered"
+        order_status_map_dict[order]=status
+    data = {'orders':all_orders,'user_role':user_role,'status':status,'order_status_map_dict':order_status_map_dict}
+    return render(request,'KNGarment_Order_TrackPro_App/order_payment_summary_list.html',data)
 
 @login_required(login_url='/user_login')
 def current_order(request):
@@ -676,7 +710,12 @@ def order_summary(request,pk):
         order_data['finishing']=Finishing.objects.get(process_order_id=pk)
     return render(request,'KNGarment_Order_TrackPro_App/summary.html',order_data)
 
-
+def my_profile(request,pk):
+    users = CustomUser.objects.get(pk=pk)
+    user_data = {}
+    user_data['users'] = users
+    user_data['user_role'] = users.user_role
+    return render(request,'KNGarment_Order_TrackPro_App/my_profile.html',user_data)
 
 class SignUpView(BSModalCreateView):
     form_class = CustomUserCreationForm
@@ -890,12 +929,34 @@ class FabricProcessUpdateView(BSModalUpdateView):
         payment_status = Fabric_Order_Model_Object.process_payment_status
         return reverse_lazy('KNGarment_Order_TrackPro_App:fabric_order_vendor_payment_details', kwargs={'vendor_id':process_customuser_id,'payment_status':payment_status })
 
+class FabricOrderProcessDeleteView(BSModalDeleteView):
+    model = Fabric_Order
+    template_name = 'KNGarment_Order_TrackPro_App/delete_entry.html'
+    success_message = 'Success: Entry was deleted.'
+    def get_success_url(self,**kwargs):
+        Fabric_Order_Model_Object = Fabric_Order.objects.get(pk=self.kwargs['pk'])
+        process_customuser_id = Fabric_Order_Model_Object.process_customuser_id.pk
+        payment_status = Fabric_Order_Model_Object.process_payment_status
+        return reverse_lazy('KNGarment_Order_TrackPro_App:fabric_order_vendor_payment_details', kwargs={'vendor_id':process_customuser_id,'payment_status':payment_status })
+
+
+
 class StichingProcessUpdateView(BSModalUpdateView):
     model = Stiching
     template_name = 'KNGarment_Order_TrackPro_App/update_order.html'
     form_class = Update_stiching_process_details
     success_message = 'Success: Entry was updated.'
     
+    def get_success_url(self,**kwargs):
+        Stiching_Order_Model_Object = Stiching.objects.get(pk=self.kwargs['pk'])
+        process_customuser_id = Stiching_Order_Model_Object.process_customuser_id.pk
+        payment_status = Stiching_Order_Model_Object.process_payment_status
+        return reverse_lazy('KNGarment_Order_TrackPro_App:stiching_order_vendor_payment_details', kwargs={'vendor_id':process_customuser_id,'payment_status':payment_status })
+
+class StichingProcessDeleteView(BSModalDeleteView):
+    model = Stiching
+    template_name = 'KNGarment_Order_TrackPro_App/delete_entry.html'
+    success_message = 'Success: Entry was deleted.'
     def get_success_url(self,**kwargs):
         Stiching_Order_Model_Object = Stiching.objects.get(pk=self.kwargs['pk'])
         process_customuser_id = Stiching_Order_Model_Object.process_customuser_id.pk
@@ -914,6 +975,17 @@ class WashingProcessUpdateView(BSModalUpdateView):
         payment_status = Washing_Order_Model_Object.process_payment_status
         return reverse_lazy('KNGarment_Order_TrackPro_App:washing_order_vendor_payment_details', kwargs={'vendor_id':process_customuser_id,'payment_status':payment_status })
 
+class WashingProcessDeleteView(BSModalDeleteView):
+    model = Washing
+    template_name = 'KNGarment_Order_TrackPro_App/delete_entry.html'
+    success_message = 'Success: Entry was deleted.'
+    
+    def get_success_url(self,**kwargs):
+        Washing_Order_Model_Object = Washing.objects.get(pk=self.kwargs['pk'])
+        process_customuser_id = Washing_Order_Model_Object.process_customuser_id.pk
+        payment_status = Washing_Order_Model_Object.process_payment_status
+        return reverse_lazy('KNGarment_Order_TrackPro_App:washing_order_vendor_payment_details', kwargs={'vendor_id':process_customuser_id,'payment_status':payment_status })
+
 class FinishingProcessUpdateView(BSModalUpdateView):
     model = Finishing
     template_name = 'KNGarment_Order_TrackPro_App/update_order.html'
@@ -925,5 +997,27 @@ class FinishingProcessUpdateView(BSModalUpdateView):
         process_customuser_id = Finishing_Order_Model_Object.process_customuser_id.pk
         payment_status = Finishing_Order_Model_Object.process_payment_status
         return reverse_lazy('KNGarment_Order_TrackPro_App:finishing_order_vendor_payment_details', kwargs={'vendor_id':process_customuser_id,'payment_status':payment_status })
+
+class FinishingProcessDeleteView(BSModalDeleteView):
+    model = Finishing
+    template_name = 'KNGarment_Order_TrackPro_App/delete_entry.html'
+    success_message = 'Success: Entry was updated.'
+    
+    def get_success_url(self,**kwargs):
+        Finishing_Order_Model_Object = Finishing.objects.get(pk=self.kwargs['pk'])
+        process_customuser_id = Finishing_Order_Model_Object.process_customuser_id.pk
+        payment_status = Finishing_Order_Model_Object.process_payment_status
+        return reverse_lazy('KNGarment_Order_TrackPro_App:finishing_order_vendor_payment_details', kwargs={'vendor_id':process_customuser_id,'payment_status':payment_status })
+
+class MyProfileUpdateView(BSModalUpdateView):
+    model = CustomUser
+    template_name = 'KNGarment_Order_TrackPro_App/update_order.html'
+    form_class = Update_My_Profile
+    success_message = 'Success: Entry was updated.'
+    
+    def get_success_url(self,**kwargs):
+        Customuser_Model_Object = CustomUser.objects.get(pk=self.kwargs['pk'])
+        customuser_pk = Customuser_Model_Object.pk
+        return reverse_lazy('KNGarment_Order_TrackPro_App:my_profile', kwargs={'pk':customuser_pk})
 
 #</-----Add Users Views ------>    

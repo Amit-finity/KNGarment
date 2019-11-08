@@ -130,3 +130,5 @@ AUTH_USER_MODEL = 'KNGarment_Order_TrackPro_App.CustomUser'
 
 LOGIN_URL = '/user_login'
 
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")

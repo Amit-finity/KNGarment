@@ -1,0 +1,83 @@
+{% extends 'KNGarment_Order_TrackPro_App/base.html' %}
+{% load static %}
+
+{% block stylesheets %}
+<style type="text/css">
+    .heading_bold {
+        font-weight: bold;
+        width: 50%;
+        text-align: left;
+    }
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+<!-- Modal for CURD Operation -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content"></div>
+    </div>
+</div>
+<!-- PAGE CONTENT  -->
+<div id="content">
+    <div class="container-fluid">
+        <button type="button" id="sidebarCollapse" class="btn" style="background-color: #87c241;color: white">
+            <i class="fas fa-align-left"></i>
+        </button>
+        <hr>
+        <h2>My Details<span style="float: right"><button type="button" style="background-color: #87c241;color: white" class="update-my-details btn btn-sm btn-primary" data-id="{% url 'KNGarment_Order_TrackPro_App:my_details_update' pk=users.pk  %}">
+							Edit My Details
+							</button></span></h2>
+
+        <table class="table" style="text-align: center">
+            <tbody>
+                <tr>
+                    <td class="heading_bold">User Name</td>
+                    <td class="text-center">{{users.username}}</td>
+
+                </tr>
+                <tr>
+                    <td class="heading_bold">User Email</td>
+                    <td class="text-center">{{users.email}}</td>
+
+                </tr>
+                <tr>
+                    <td class="heading_bold">Date of Joining</td>
+                    <td class="text-center">{{users.date_joined}}</td>
+
+                </tr>
+                <tr>
+                    <td class="heading_bold">Last Logged In</td>
+                    <td class="text-center">{{users.last_login}}</td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+
+
+{% endblock %}
+{% block extrascript %}
+<script type="text/javascript">
+    $(function() {
+        $(".update-my-details").each(function() {
+            $(this).modalForm({
+                formURL: $(this).data('id')
+            });
+        });
+    });
+</script>
+
+{% endblock %}

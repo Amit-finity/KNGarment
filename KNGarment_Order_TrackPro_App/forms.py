@@ -10,6 +10,11 @@ class CustomUserForm(BSModalForm):
         model = CustomUser
         fields = ['user_role','username','email']
 
+class Update_My_Profile(BSModalForm):
+    class Meta:
+        model = CustomUser
+        fields = ('username','email')
+
 class Update_Orders(BSModalForm):
     class Meta:
         model = Orders

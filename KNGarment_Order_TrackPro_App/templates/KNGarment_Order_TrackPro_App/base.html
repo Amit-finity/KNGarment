@@ -6,9 +6,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <title>KN Garments</title>
-
+    <title>{% block title %}KN Garments{% endblock %}</title>
+    
     <!-- Base CSS -->
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -128,6 +127,11 @@
                 <li class="active">
                     <a href="#paymentSubmenuforvendor" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Vendor Payments</a>
                     <ul class="collapse list-unstyled" id="paymentSubmenuforvendor">
+                    {% if user_role == 100 %}
+                        <li>
+                            <a href="{% url 'KNGarment_Order_TrackPro_App:order_payment_summary_list' %}">Order Payments Summary</a>
+                        </li>
+                    {% endif %}
                     {% if user_role == 1 or user_role == 100 %}
                         <li>
                             <a href="{% url 'KNGarment_Order_TrackPro_App:fabric_order_vendor_payment' %}"> Fabric Payments</a>
@@ -150,9 +154,11 @@
                     {% endif %}
                     </ul>                                                                                                                                                                                                           
                 </li>
+                {% if user_role == 108 or user_role == 100 or user_role == 1 or user_role == 2 or user_role == 3 or user_role == 4 %}
                 <li>
-                    <a href="">My Profile</a>
+                    <a href="{% url 'KNGarment_Order_TrackPro_App:my_profile' user.pk %}">My Profile</a>
                 </li>
+                {% endif %}
                 {% if user_role == 100 %}
                 <li class="active">
                     <a href="#paymentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Client Payments</a>

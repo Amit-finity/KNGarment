@@ -25,7 +25,7 @@
                     <i class="fas fa-align-left"></i>
                 </button>
                 <hr>
-                <h2>All Orders</h2>
+                <h2>All Orders Summary</h2>
                 <hr>
                 <div>
                     <table id="test_table" class="display" style="width:100%">
@@ -41,10 +41,7 @@
                                 <th>Delivery Date</th>
                                 <th>Category</th>
                                 <th>Status</th>
-                                <th>Update Order Detail</th>
-                                         {% if user_role == 100 %}
-                        <th class="text-center" scope="col">Delete</th>
-                        {% endif %}
+                                <th>Summary</th>
                             </tr>
                         </thead>
                        <tbody>
@@ -61,17 +58,9 @@
                         <td>{{key.order_order_category}}</td>
                         <td>{{value}}</td>
                         <td>
-                            <button type="button" class="update-order btn btn-sm btn-primary" data-id="{% url 'KNGarment_Order_TrackPro_App:all_order_update' pk=key.pk  %}">
-                                <span class="fa fa-edit"></span>
-                            </button>
+                            <a href="{% url 'KNGarment_Order_TrackPro_App:order_summary' key.pk %}" class="btn btn-primary" style="background-color: #87c241;color: white">Summary</a>
                         </td>
-                         {% if user_role == 100 %}
-                        <td>
-                            <button type="button" class="delete-order btn btn-sm btn-danger" data-id="{% url 'KNGarment_Order_TrackPro_App:all_order_delete' pk=key.pk  %}">
-                                <span class="fa fa-trash"></span>
-                            </button>
-                        </td>
-                        {% endif %}
+                        
                     </tr>
                     {% endfor %}
                 </tbody>

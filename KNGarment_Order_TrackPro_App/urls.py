@@ -206,15 +206,28 @@ path('userupdate/<int:pk>',views.UserUpdateView.as_view(),name='userupdate'),
 #</-----Update Users Urls ------>
 # </------- Portal Users URls ---------
 
+path('order_payment_summary_list/',views.OrderPaymentSummaryView,name='order_payment_summary_list'),
 
 path('fabric_process_details_update/<int:pk>',views.FabricProcessUpdateView.as_view(),name='fabric_process_details_update'),
 
+path('fabric_process_details_delete/<int:pk>',views.FabricOrderProcessDeleteView.as_view(),name='fabric_process_details_delete'),
+
 path('stiching_process_details_update/<int:pk>',views.StichingProcessUpdateView.as_view(),name='stiching_process_details_update'),
+
+path('stiching_process_details_delete/<int:pk>',views.StichingProcessDeleteView.as_view(),name='stiching_process_details_delete'),
 
 path('washing_process_details_update/<int:pk>',views.WashingProcessUpdateView.as_view(),name='washing_process_details_update'),
 
+path('washing_process_details_delete/<int:pk>',views.WashingProcessDeleteView.as_view(),name='washing_process_details_delete'),
 
 path('finishing_process_details_update/<int:pk>',views.FinishingProcessUpdateView.as_view(),name='finishing_process_details_update'),
+
+path('finishing_process_details_delete/<int:pk>',views.FinishingProcessDeleteView.as_view(),name='finishing_process_details_delete'),
+
+# My Profile Page
+path('my_profile/<int:pk>', views.my_profile, name='my_profile'),
+
+path('my_details_update/<int:pk>',views.MyProfileUpdateView.as_view(),name='my_details_update'),
 
 ]
 
