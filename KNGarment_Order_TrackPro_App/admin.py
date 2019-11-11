@@ -70,6 +70,13 @@ class DispatchAdmin(admin.ModelAdmin):
         "dispatch_rejected_quantity",
     ]
 
+class CustomUserAdmin(admin.ModelAdmin):
+    list_display = [
+        "pk",
+        "username",
+        "user_role",
+    ]
+
 
 admin.site.register(Client,ClientAdmin)
 admin.site.register(Vendor,VendorAdmin)
@@ -83,4 +90,4 @@ admin.site.register(Dispatch,DispatchAdmin)
 admin.site.register(Order_Mens_Or_Ladies)
 admin.site.register(Order_Kids)
 admin.site.register(Order_Ethenic)
-admin.site.register(CustomUser)
+admin.site.register(CustomUser,CustomUserAdmin)

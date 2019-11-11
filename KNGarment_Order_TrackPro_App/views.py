@@ -73,26 +73,29 @@ def update_order_detail(request):
     if user_role == 100:
         order_objects = orders
     else:
+        values1 = Fabric_Order.objects.filter(process_type=1).all()
+        values2 = Stiching.objects.filter(process_type=2).all()
+        values3 = Washing.objects.filter(process_type=3).all()
+        values4 = Finishing.objects.filter(process_type=4).all()
         for order in orders:
-            logged_in_vendor_order_list = []
             #vendor_in_one_order = []
-            values1 = Fabric_Order.objects.all().filter(process_type=user_role)
-            values2 = Stiching.objects.all().filter(process_type=user_role)
-            values3 = Washing.objects.all().filter(process_type=user_role)
-            values4 = Finishing.objects.all().filter(process_type=user_role)
             if values1.exists():
                 #vendor_in_one_order.append(1)
+                logged_in_vendor_order_list = []
                 logged_in_vendor_order_list.append(order.pk)
-            elif values2.exists():
+            if values2.exists():
                 #vendor_in_one_order.append(2)
+                logged_in_vendor_order_list = []
                 logged_in_vendor_order_list.append(order.pk)
-            elif values3.exists():
+            if values3.exists():
                 #vendor_in_one_order.append(3)
+                logged_in_vendor_order_list = []
                 logged_in_vendor_order_list.append(order.pk)
-            elif values4.exists():
+            if values4.exists():
                 #vendor_in_one_order.append(4)
+                logged_in_vendor_order_list = []
                 logged_in_vendor_order_list.append(order.pk)
-        order_objects = Orders.objects.all().filter(pk__in=logged_in_vendor_order_list)
+        order_objects = Orders.objects.filter(pk__in=logged_in_vendor_order_list).all()
     #orders = Orders.objects.all()
     data = {'orders':order_objects,'user_role':user_role}
     return render(request,'KNGarment_Order_TrackPro_App/update_orders_detail.html',data)
@@ -312,7 +315,8 @@ def track_order_details(request,pk):
 @login_required(login_url='/user_login')
 def track_order_fabric_order(request):
     user_role = request.user.user_role
-    fabric_order_objects = Fabric_Order.objects.all()
+    pk = request.user.pk
+    fabric_order_objects = Fabric_Order.objects.filter(process_customuser_id=pk).all()
     data = {'fabric_order':fabric_order_objects,'user_role':user_role}
     return render(request,'KNGarment_Order_TrackPro_App/fabric_order.html',data)
 
@@ -320,21 +324,24 @@ def track_order_fabric_order(request):
 @login_required(login_url='/user_login')
 def track_order_stiching_order(request):
     user_role = request.user.user_role
-    stiching_order_objects = Stiching.objects.all()
+    pk = request.user.pk
+    stiching_order_objects = Stiching.objects.filter(process_customuser_id=pk).all()
     data = {'stiching_order':stiching_order_objects,'user_role':user_role}
     return render(request,'KNGarment_Order_TrackPro_App/stiching.html',data)
 
 @login_required(login_url='/user_login')
 def track_order_washing_order(request):
     user_role = request.user.user_role
-    washing_order_objects = Washing.objects.all()
+    pk = request.user.pk
+    washing_order_objects = Washing.objects.filter(process_customuser_id=pk).all()
     data = {'washing_order':washing_order_objects,'user_role':user_role}
     return render(request,'KNGarment_Order_TrackPro_App/Washing.html',data)
 
 @login_required(login_url='/user_login')
 def track_order_finishing_order(request):
     user_role = request.user.user_role
-    finishing_order_objects = Finishing.objects.all()
+    pk = request.user.pk
+    finishing_order_objects = Finishing.objects.filter(process_customuser_id=pk).all()
     data = {'finishing_order':finishing_order_objects,'user_role':user_role}
     return render(request,'KNGarment_Order_TrackPro_App/Finishing.html',data)
 

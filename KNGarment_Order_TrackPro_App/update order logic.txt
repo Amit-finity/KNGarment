@@ -1,0 +1,51 @@
+@login_required(login_url='/user_login')
+def update_order_detail(request):
+    user_role = request.user.user_role
+    orders = Orders.objects.all()
+    #logged_in_vendor_order_list = []
+    if user_role == 100:
+        order_objects = orders
+    else:
+        for order in orders:
+                if user_role == 1:
+                    logged_in_vendor_order_list = []
+                    values1 = Fabric_Order.objects.all()
+                    if values1.exists():
+                        logged_in_vendor_order_list.append(order.pk)
+                        for i in range(len(logged_in_vendor_order_list)):
+                            order_objects = Orders.objects.all().filter(pk=logged_in_vendor_order_list[i])
+                if user_role == 2:
+                    logged_in_vendor_order_list = []
+                    values2 = Stiching.objects.filter(process_customuser_id=2).all()
+                    if values2.exists():
+                        logged_in_vendor_order_list.append(order.pk)
+                        for i in range(len(logged_in_vendor_order_list)):
+                            order_objects = Orders.objects.all().filter(pk=logged_in_vendor_order_list[i])
+                if user_role == 3:
+                    logged_in_vendor_order_list = []
+                    values3 = Washing.objects.filter(process_customuser_id=3).all()
+                    if values3.exists():
+                        logged_in_vendor_order_list.append(order.pk)
+                        for i in range(len(logged_in_vendor_order_list)):
+                            order_objects = Orders.objects.all().filter(pk=logged_in_vendor_order_list[i])
+                if user_role == 4:
+                    logged_in_vendor_order_list = []
+                    values4 = Finishing.objects.filter(process_customuser_id=4).all()
+                    if values4.exists():
+                        logged_in_vendor_order_list.append(order.pk)
+                        for i in range(len(logged_in_vendor_order_list)):
+                            order_objects = Orders.objects.all().filter(pk=logged_in_vendor_order_list[i])
+    #orders = Orders.objects.all()
+    data = {'orders':order_objects,'user_role':user_role}
+    return render(request,'KNGarment_Order_TrackPro_App/update_orders_detail.html',data)
+
+
+def track_order_fabric_order(request):
+    user_role = request.user.user_role
+    customuser = CustomUser.objects.all()
+    for user in customuser:
+        fabric_order_list = []
+        fabric_order_objects = Fabric_Order.objects.filter(process_customuser_id=user.pk).all()
+        fabric_order_list.append(fabric_order_objects)
+    data = {'fabric_order':fabric_order_list,'user_role':user_role}
+    return render(request,'KNGarment_Order_TrackPro_App/fabric_order.html',data)
