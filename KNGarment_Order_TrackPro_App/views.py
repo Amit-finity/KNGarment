@@ -315,8 +315,11 @@ def track_order_details(request,pk):
 @login_required(login_url='/user_login')
 def track_order_fabric_order(request):
     user_role = request.user.user_role
-    pk = request.user.pk
-    fabric_order_objects = Fabric_Order.objects.filter(process_customuser_id=pk).all()
+    if user_role == 100:
+        fabric_order_objects = Fabric_Order.objects.all()
+    else:
+        pk = request.user.pk
+        fabric_order_objects = Fabric_Order.objects.filter(process_customuser_id=pk).all()
     data = {'fabric_order':fabric_order_objects,'user_role':user_role}
     return render(request,'KNGarment_Order_TrackPro_App/fabric_order.html',data)
 
@@ -324,24 +327,33 @@ def track_order_fabric_order(request):
 @login_required(login_url='/user_login')
 def track_order_stiching_order(request):
     user_role = request.user.user_role
-    pk = request.user.pk
-    stiching_order_objects = Stiching.objects.filter(process_customuser_id=pk).all()
+    if user_role == 100:
+        stiching_order_objects = Stiching.objects.all()
+    else:
+        pk = request.user.pk
+        stiching_order_objects = Stiching.objects.filter(process_customuser_id=pk).all()
     data = {'stiching_order':stiching_order_objects,'user_role':user_role}
     return render(request,'KNGarment_Order_TrackPro_App/stiching.html',data)
 
 @login_required(login_url='/user_login')
 def track_order_washing_order(request):
     user_role = request.user.user_role
-    pk = request.user.pk
-    washing_order_objects = Washing.objects.filter(process_customuser_id=pk).all()
+    if user_role == 100:
+        washing_order_objects = Washing.objects.all()
+    else:
+        pk = request.user.pk
+        washing_order_objects = Washing.objects.filter(process_customuser_id=pk).all()
     data = {'washing_order':washing_order_objects,'user_role':user_role}
     return render(request,'KNGarment_Order_TrackPro_App/Washing.html',data)
 
 @login_required(login_url='/user_login')
 def track_order_finishing_order(request):
     user_role = request.user.user_role
-    pk = request.user.pk
-    finishing_order_objects = Finishing.objects.filter(process_customuser_id=pk).all()
+    if user_role == 100:
+        finishing_order_objects = Finishing.objects.all()
+    else:
+        pk = request.user.pk
+        finishing_order_objects = Finishing.objects.filter(process_customuser_id=pk).all()
     data = {'finishing_order':finishing_order_objects,'user_role':user_role}
     return render(request,'KNGarment_Order_TrackPro_App/Finishing.html',data)
 
