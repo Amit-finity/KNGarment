@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'KNGarment_Order_TrackPro_App',
     'bootstrap_modal_forms',
     'widget_tweaks',
+    'sendotp',
 ]
 
 MIDDLEWARE = [
